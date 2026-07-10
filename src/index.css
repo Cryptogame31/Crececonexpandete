@@ -1,0 +1,74 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=Dancing+Script:wght@700&family=Inter:wght@400;700&display=swap');
+
+@theme {
+  --font-display: "Poppins", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+  --font-script: "Dancing Script", cursive;
+  --font-sans: "Inter", sans-serif;
+  
+  --color-tech-cyan: #00f0ff;
+  --color-tech-purple: #7000ff;
+  --color-brand-orange: #f27d26;
+}
+
+@layer base {
+  body {
+    @apply antialiased overflow-x-hidden bg-black;
+  }
+}
+
+/* Efecto de Texto Energético Degradado y Desgastado (Código Líquido) */
+.tech-textured {
+  position: relative;
+  background: linear-gradient(135deg, #00f0ff 0%, #7000ff 50%, #f27d26 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  text-transform: uppercase;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  display: inline-block;
+  animation: energy-flow 4s ease-in-out infinite;
+}
+
+@media (min-width: 768px) {
+  .tech-textured {
+    background-image: url('https://www.transparenttextures.com/patterns/grunge-wall.png'), 
+                      linear-gradient(180deg, #00f0ff 0%, #7000ff 50%, #f27d26 100%);
+    background-size: 100% 200%;
+    line-height: 0.8;
+    letter-spacing: -0.05em;
+    filter: url(#rough-edges) drop-shadow(0 0 8px rgba(112, 0, 255, 0.4));
+  }
+}
+
+@keyframes energy-flow {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 0% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+.text-stroke {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.15);
+}
+
+.grid-bg {
+  background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 2rem;
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  background: #00f0ff;
+  color: #000000;
+  transform: translateY(-5px);
+}
