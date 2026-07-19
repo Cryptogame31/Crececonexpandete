@@ -1,6 +1,6 @@
 import React from 'react';
 import { useMotionValue, useSpring, useTransform, motion } from 'motion/react';
-import { ArrowRight, Flame, Cpu, Database, Smartphone, TrendingUp, Linkedin, Twitter, Facebook, Youtube, X, Send, CheckCircle, Layers, ArrowLeft, Check, DollarSign, ExternalLink, ShieldCheck, Clock, Sparkles } from 'lucide-react';
+import { ArrowRight, Flame, Cpu, Database, Smartphone, TrendingUp, Linkedin, Twitter, Facebook, Youtube, X, Send, CheckCircle, Layers, ArrowLeft, Check, DollarSign, ExternalLink, ShieldCheck, Clock, Sparkles, Briefcase, FolderOpen, Globe } from 'lucide-react';
 
 const SERVICES_DATA = [
   {
@@ -28,6 +28,30 @@ const SERVICES_DATA = [
   },
   {
     id: 2,
+    title: "Landing Pages de Élite",
+    tagline: "Páginas de aterrizaje de ultra-velocidad diseñadas científicamente para capturar clientes.",
+    description: "No creamos simples páginas web informativas que la gente ignora. Diseñamos Landing Pages persuasivas bajo código limpio de alto rendimiento (React / Vite) integradas con copywriting de neuro-ventas y flujos de captura automática de leads directos a tu WhatsApp o CRM. Cargan en milisegundos, tienen una tasa de conversión hasta 3 veces mayor que las agencias comunes y están optimizadas al 100% para tus campañas en Meta y Google Ads.",
+    icon: "Globe",
+    color: "from-tech-cyan to-brand-orange",
+    themeColor: "text-tech-cyan",
+    bgAccent: "bg-tech-cyan/10",
+    borderAccent: "border-tech-cyan/30",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+    badge: "MÁS VENDIDO",
+    realPrice: {
+      range: "Desde $450 USD hasta $1,200 USD",
+      detail: "Nuestra Landing Page 'Aceleradora' estándar con copywriting persuasivo, diseño premium responsivo y sincronización de leads a WhatsApp/Sheets se entrega en solo 5 días hábiles por $450 USD. Estructuras de embudos multipáginas con pasarelas de pago, testimoniales dinámicos y analítica web avanzada oscilan entre $800 y $1,200 USD.",
+      comparison: "Las agencias convencionales te venden sitios pesados en WordPress que cargan lento y no convierten. Nosotros programamos en código limpio, garantizando la máxima velocidad y retorno de inversión en tus anuncios."
+    },
+    benefits: [
+      "Copywriting Científico Persuasivo: Textos diseñados para conectar emocionalmente con tu cliente ideal y motivar la acción inmediata.",
+      "Velocidad de Carga Extrema: Optimización de imágenes y código que resulta en tiempos de carga menores a 0.8 segundos (Rank A en Lighthouse).",
+      "Automatización de Captura Integrada: Los datos de tus prospectos viajan de inmediato a tu correo, Sheets, CRM o WhatsApp.",
+      "Listas para Tráfico (Ad-Ready): Configuración perfecta del Pixel de Meta, Google Analytics y API de conversiones para optimizar el costo por lead."
+    ]
+  },
+  {
+    id: 3,
     title: "Inteligencia Artificial",
     tagline: "Empleados virtuales autónomos operando 24/7 para potenciar tus ventas y soporte.",
     description: "Creamos e integramos agentes de Inteligencia Artificial que automatizan la atención al cliente, califican prospectos en tiempo real, redactan propuestas comerciales personalizadas y analizan grandes volúmenes de datos operativos. No son simples chatbots con respuestas rígidas; son sistemas cognitivos entrenados con los datos específicos de tu empresa.",
@@ -50,7 +74,7 @@ const SERVICES_DATA = [
     ]
   },
   {
-    id: 3,
+    id: 4,
     title: "Automatizaciones",
     tagline: "Flujos de trabajo invisibles que eliminan tareas repetitivas y liberan tiempo útil.",
     description: "Conectamos todas las aplicaciones de software que ya utilizas en tu día a día (CRM, Sheets, Slack, Gmail, Stripe, WhatsApp) en un ecosistema coordinado sin intervención humana. Diseñamos flujos con Make, Zapier y n8n para que la información fluya instantáneamente y tu equipo se enfoque exclusivamente en cerrar negocios.",
@@ -73,7 +97,7 @@ const SERVICES_DATA = [
     ]
   },
   {
-    id: 4,
+    id: 5,
     title: "Marketing Inteligente",
     tagline: "Campañas hiper-segmentadas y embudos de conversión enfocados en el retorno (ROI).",
     description: "Desterramos el marketing intuitivo y los 'likes' superficiales. Diseñamos embudos digitales basados en analítica de datos duros y comportamiento del consumidor. Estructuramos campañas publicitarias en Meta Ads, Google Ads y TikTok Ads coordinadas con páginas de destino de alta velocidad para maximizar el retorno de tu inversión publicitaria.",
@@ -89,14 +113,14 @@ const SERVICES_DATA = [
       comparison: "Agencias tradicionales cobran fees fijos elevados sin compromisos de conversión. Nuestro enfoque es 100% de crecimiento: optimizar tu CAC (Costo de Adquisición) y escalar tus ventas."
     },
     benefits: [
-      "Embudos de Conversión Avanzados: Creación del camino exacto que recorre un usuario desconocido hasta convertirse en un cliente recurrente.",
+      "Embudos de Conversión Avanzados: Creación del camino exacto que recorre un usuario desconocido hasta convertirse en un cliente recurrentrente.",
       "Páginas de Aterrizaje Ultra-Rápidas: Diseñadas bajo código limpio para cargar en menos de un segundo, evitando la fuga del 40% del tráfico.",
       "Estrategias de Retargeting Dinámico: Impactamos nuevamente a los usuarios interesados con el mensaje exacto según su nivel de consideración.",
       "Analítica Web y Atribución Exacta: Paneles interactivos para saber de qué anuncio, plataforma y campaña exacta proviene cada centavo facturado."
     ]
   },
   {
-    id: 5,
+    id: 6,
     title: "Consultoría",
     tagline: "Estrategia técnica y viabilidad de negocio antes de comprometer capital.",
     description: "Te guiamos en la toma de decisiones tecnológicas cruciales para asegurar que cada centavo invertido retorne con creces. Analizamos tu modelo operativo actual, auditamos tus flujos de datos e infraestructura y creamos un roadmap claro de digitalización para evitar licenciamientos de software innecesarios o desarrollos redundantes.",
@@ -119,7 +143,7 @@ const SERVICES_DATA = [
     ]
   },
   {
-    id: 6,
+    id: 7,
     title: "Transformación Digital",
     tagline: "Modernización de raíz para convertir tu empresa tradicional en un líder ágil y tecnológico.",
     description: "Llevamos a cabo la modernización integral de empresas de sectores tradicionales. Reemplazamos procesos obsoletos en papel o planillas aisladas de Excel por plataformas ERP/CRM unificadas en la nube, flujos de trabajo interconectados y herramientas con IA para capacitar a tu personal y lograr que tu organización sea sumamente veloz, eficiente y escalable.",
@@ -131,7 +155,7 @@ const SERVICES_DATA = [
     image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80",
     realPrice: {
       range: "Desde $4,000 USD hasta $25,000+ USD",
-      detail: "Proyectos medianos de unificación de bases de datos, migración de archivos e implementación de CRM/ERP con capacitación del equipo oscilan entre $4,000 y $8,000 USD. Reestructuraciones operativas e integraciones totales para empresas corporativas se cotizan a partir de $12,000 USD en adelante.",
+      detail: "Proyectos medianos de unificación de bases de datos, migración de archivos e implementación de CRM/ERP con capacitación del equipo oscizan entre $4,000 y $8,000 USD. Reestructuraciones operativas e integraciones totales para empresas corporativas se cotizan a partir de $12,000 USD en adelante.",
       comparison: "Las firmas consultoras multinacionales tradicionales ofrecen metodologías burocráticas y cobran tarifas de seis cifras. Nosotros somos ágiles, directos al grano y orientados a resultados inmediatos."
     },
     benefits: [
@@ -143,6 +167,59 @@ const SERVICES_DATA = [
   }
 ];
 
+const PROJECTS_DATA = [
+  {
+    id: 1,
+    title: "Control Banquetes",
+    tagline: "Gestión inteligente de eventos y catering.",
+    solution: "Plataforma en la nube que centraliza cotizaciones dinámicas, control de insumos de cocina, logística de meseros y agenda de salones de eventos en tiempo real.",
+    category: "Desarrollo de Apps",
+    link: "https://controlbanquetes.expandete.cloud/",
+    image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800&q=80",
+    color: "from-amber-600 to-black"
+  },
+  {
+    id: 2,
+    title: "Proveedores y Materias Primas",
+    tagline: "Abastecimiento automatizado y control de insumos.",
+    solution: "Sistema inteligente de control logístico que conecta los consumos de producción con órdenes automáticas a proveedores, tracking de stock de materias primas y reportes históricos.",
+    category: "Transformación Digital",
+    link: "https://sistema-de-provedores-y-materias-primas-5a6iuuqst.vercel.app/",
+    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80",
+    color: "from-teal-500 to-emerald-600"
+  },
+  {
+    id: 3,
+    title: "Corporación Art Sport",
+    tagline: "Campeones de Vida",
+    solution: "Transformamos vidas de primera infancia, jóvenes y adultos mayores en Medellín mediante disciplinas integrales de fútbol sala, ballet, música y artes plásticas.",
+    category: "Landing Page",
+    link: "https://art-sport-nextgen-strategy.ai.studio/",
+    image: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=800&q=80",
+    color: "from-blue-600 to-indigo-900"
+  },
+  {
+    id: 4,
+    title: "CRM Inmobiliario Automatizado",
+    tagline: "Automatización de ventas de propiedades.",
+    solution: "Conecta campañas de Meta Ads directamente con WhatsApp y asigna automáticamente leads calificados a vendedores mediante Round Robin.",
+    category: "Automatizaciones",
+    link: "#",
+    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80",
+    color: "from-tech-cyan to-blue-600"
+  },
+  {
+    id: 5,
+    title: "Agente IA Médico",
+    tagline: "Soporte cognitivo autónomo para clínicas.",
+    solution: "Agente autónomo de Inteligencia Artificial que califica consultas básicas, agenda citas en Google Calendar y asiste a pacientes vía WhatsApp 24/7.",
+    category: "Inteligencia Artificial",
+    link: "#",
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80",
+    color: "from-tech-purple to-pink-600"
+  }
+];
+
 const getIconComponent = (name: string) => {
   switch(name) {
     case "Smartphone": return <Smartphone className="w-7 h-7" />;
@@ -151,6 +228,7 @@ const getIconComponent = (name: string) => {
     case "TrendingUp": return <TrendingUp className="w-7 h-7" />;
     case "Flame": return <Flame className="w-7 h-7" />;
     case "Layers": return <Layers className="w-7 h-7" />;
+    case "Globe": return <Globe className="w-7 h-7" />;
     default: return <Cpu className="w-7 h-7" />;
   }
 };
@@ -163,6 +241,9 @@ export default function App() {
   // Responsive video state for the hero section
   const [heroVideoSrc, setHeroVideoSrc] = React.useState('https://vicflix.expandete.cloud/Videos/hero3.mp4');
   const [selectedService, setSelectedService] = React.useState<number | null>(null);
+  const [consultingFocus, setConsultingFocus] = React.useState('Optimización de Costos');
+  const [showProjectsView, setShowProjectsView] = React.useState(false);
+  const [projectCategoryFilter, setProjectCategoryFilter] = React.useState('Todos');
 
   React.useEffect(() => {
     const checkScreenSize = () => {
@@ -375,8 +456,16 @@ export default function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.08 }}
                 onClick={() => setSelectedService(service.id)}
-                className="glass-card p-8 flex flex-col justify-between min-h-[240px] cursor-pointer group hover:border-tech-cyan/50 hover:shadow-[0_0_30px_rgba(0,240,255,0.15)] hover:-translate-y-1 transition-all duration-300"
+                className={`glass-card p-8 flex flex-col justify-between min-h-[240px] cursor-pointer group hover:border-tech-cyan/50 hover:shadow-[0_0_30px_rgba(0,240,255,0.15)] hover:-translate-y-1 transition-all duration-300 relative ${
+                  service.badge ? 'border-brand-orange/40 shadow-[0_0_20px_rgba(242,125,38,0.1)]' : ''
+                }`}
               >
+                {service.badge && (
+                  <span className="absolute -top-3 right-6 bg-brand-orange text-white font-poppins font-black text-[9px] tracking-[0.15em] uppercase px-3.5 py-1.5 rounded-full border border-white/20 shadow-[0_0_15px_rgba(242,125,38,0.5)] z-20 flex items-center gap-1">
+                    <Sparkles className="w-2.5 h-2.5 animate-pulse" />
+                    {service.badge}
+                  </span>
+                )}
                 <div className="flex flex-col gap-3">
                   <div className={`flex items-center gap-3 ${service.themeColor}`}>
                     {getIconComponent(service.icon)}
@@ -493,6 +582,121 @@ export default function App() {
               </p>
             </motion.div>
 
+          </div>
+        </div>
+      </section>
+
+      {/* 3.5. SECCIÓN NUEVA: CONOCE ALGUNOS DE NUESTROS PROYECTOS */}
+      <section className="snap-start min-h-screen w-full relative overflow-hidden flex items-center p-6 md:p-12 bg-black py-16">
+        {/* Parallax Background Layer */}
+        <div className="absolute inset-0 z-0">
+          <motion.img 
+            src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1920&q=80" 
+            alt="Explorar Proyectos Expándete" 
+            className="w-full h-full object-cover pointer-events-none select-none opacity-20"
+            style={{ x: moveY, y: moveX, scale: 1.12 }}
+            referrerPolicy="no-referrer"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/95 to-black" />
+        </div>
+
+        <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col justify-center h-full">
+          {/* Section Header */}
+          <div className="mb-10 max-w-4xl">
+            <motion.span 
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="font-mono text-xs text-tech-cyan tracking-[0.2em] font-bold uppercase block mb-3"
+            >
+              // SOLUCIONES QUE GENERAN RESULTADOS REALES
+            </motion.span>
+            <motion.h2 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7 }}
+              className="font-poppins text-3xl md:text-6xl font-black text-white leading-tight uppercase tracking-tighter"
+            >
+              Conoce algunos de <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-tech-cyan via-tech-purple to-brand-orange">
+                nuestros proyectos.
+              </span>
+            </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="font-poppins text-base text-white/80 mt-4 leading-relaxed max-w-3xl"
+            >
+              Hemos digitalizado y optimizado operaciones comerciales con automatizaciones de flujo completo, plataformas web de velocidad extrema y agentes con Inteligencia Artificial.
+            </motion.p>
+          </div>
+
+          {/* Quick Preview Grid (3 columns) */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            {PROJECTS_DATA.slice(0, 3).map((project, index) => {
+              const hasLink = project.link && project.link !== "#";
+              const handleCardClick = () => {
+                if (hasLink) {
+                  window.open(project.link, "_blank", "noopener,noreferrer");
+                } else {
+                  setIsLeadFormOpen(true);
+                }
+              };
+
+              return (
+                <motion.div
+                  key={project.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  whileHover={{ y: -6, scale: 1.01 }}
+                  transition={{ duration: 0.4, delay: index * 0.08 }}
+                  onClick={handleCardClick}
+                  className="bg-zinc-950/80 backdrop-blur-md border border-white/10 hover:border-tech-cyan/50 p-6 rounded-3xl flex flex-col justify-between min-h-[250px] group transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,240,255,0.15)] cursor-pointer select-none"
+                >
+                  <div className="flex flex-col gap-4">
+                    <div className="flex justify-between items-center">
+                      <span className="font-mono text-[9px] bg-white/5 border border-white/10 px-2.5 py-1 rounded-full text-white/60 uppercase tracking-widest font-black">
+                        {project.category}
+                      </span>
+                      <span className="w-2 h-2 rounded-full bg-tech-cyan group-hover:animate-ping" />
+                    </div>
+                    <div>
+                      <h3 className="font-poppins font-black text-xl text-white uppercase group-hover:text-tech-cyan transition-colors">
+                        {project.title}
+                      </h3>
+                      <p className="font-poppins text-xs text-tech-purple font-bold tracking-tight mt-1">
+                        {project.tagline}
+                      </p>
+                      <p className="font-sans text-xs text-gray-400 leading-relaxed font-bold mt-3">
+                        {project.solution}
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                    <span className="font-sans text-[10px] text-white/40 group-hover:text-white/80 transition-colors uppercase font-black">
+                      {hasLink ? "Ecosistema Activo" : "Cotizar este Sistema"}
+                    </span>
+                    <div className="p-1.5 rounded-lg bg-white/5 text-white/60 group-hover:bg-tech-cyan/10 group-hover:text-tech-cyan transition-colors">
+                      {hasLink ? <ExternalLink className="w-4 h-4" /> : <Sparkles className="w-4 h-4 text-tech-cyan" />}
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* Action button to direct to full Projects sub-view */}
+          <div className="flex justify-center md:justify-start">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setShowProjectsView(true)}
+              className="group flex items-center gap-3 bg-gradient-to-r from-tech-purple to-tech-cyan px-8 py-4.5 rounded-full text-black font-poppins font-black tracking-widest text-xs uppercase hover:shadow-[0_0_35px_rgba(0,240,255,0.4)] transition-all duration-300 cursor-pointer shadow-lg"
+            >
+              Ver todos los proyectos
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-2" />
+            </motion.button>
           </div>
         </div>
       </section>
@@ -905,6 +1109,157 @@ export default function App() {
         </div>
       </section>
 
+      {/* 8.5. PORTAL DE PROYECTOS COMPLETO (Sustituto de página secundaria) */}
+      {showProjectsView && (
+        <div className="fixed inset-0 z-50 bg-black/98 backdrop-blur-2xl overflow-y-auto p-6 md:p-12 selection:bg-tech-cyan selection:text-black">
+          <div className="w-full max-w-7xl mx-auto flex flex-col gap-8 pb-12">
+            
+            {/* Header: Back navigation */}
+            <div className="flex justify-between items-center">
+              <motion.button 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => setShowProjectsView(false)}
+                className="flex items-center gap-2.5 text-white/70 hover:text-tech-cyan font-mono text-xs uppercase tracking-wider transition-colors duration-300 px-4 py-2.5 rounded-full border border-white/10 hover:border-tech-cyan/30 bg-zinc-950 cursor-pointer shadow-lg"
+              >
+                <ArrowLeft className="w-4 h-4 text-tech-cyan" />
+                Volver a Inicio
+              </motion.button>
+
+              <span className="font-mono text-[10px] text-white/40 tracking-widest uppercase hidden sm:inline-block">
+                PORTAFOLIO DE ESCALA // CRECE CON EXPÁNDETE
+              </span>
+            </div>
+
+            {/* Title & description */}
+            <div className="max-w-4xl">
+              <span className="font-mono text-xs text-tech-purple tracking-[0.25em] font-bold uppercase block mb-3">
+                // CASOS DE ÉLITE Y SOLUCIONES DIGITALES
+              </span>
+              <h1 className="font-poppins text-4xl md:text-7xl font-black text-white leading-tight uppercase tracking-tighter">
+                Nuestros <span className="text-transparent bg-clip-text bg-gradient-to-r from-tech-cyan via-tech-purple to-brand-orange">Proyectos</span>
+              </h1>
+              <p className="font-poppins text-sm md:text-base text-gray-400 mt-4 leading-relaxed font-bold max-w-2xl">
+                Explora las soluciones que hemos diseñado, programado y automatizado para empresas de alto nivel. Filtra por categoría para ver cómo resolvemos cuellos de botella reales con tecnología de vanguardia.
+              </p>
+            </div>
+
+            {/* Filter tags row */}
+            <div className="flex flex-wrap gap-2 md:gap-3 max-w-full flex-shrink-0">
+              {['Todos', 'Landing Page', 'Desarrollo de Apps', 'Inteligencia Artificial', 'Automatizaciones', 'Transformación Digital'].map((category) => {
+                const isActive = projectCategoryFilter === category;
+                return (
+                  <button
+                    key={category}
+                    onClick={() => setProjectCategoryFilter(category)}
+                    className={`px-5 py-2.5 rounded-full font-poppins text-xs font-black tracking-wider uppercase transition-all duration-300 whitespace-nowrap cursor-pointer ${
+                      isActive 
+                        ? 'bg-tech-cyan text-black shadow-[0_0_20px_rgba(0,240,255,0.4)] font-black' 
+                        : 'border border-white/10 text-white/60 hover:text-white hover:border-white/30 bg-zinc-950'
+                    }`}
+                  >
+                    {category}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Projects Bento Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 flex-1 my-4">
+              {PROJECTS_DATA.filter(project => projectCategoryFilter === 'Todos' || project.category === projectCategoryFilter).map((project, index) => (
+                <motion.div
+                  key={project.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  className="bg-zinc-950 border border-white/10 hover:border-tech-cyan/50 rounded-[2rem] overflow-hidden group flex flex-col justify-between transition-all duration-300 hover:shadow-[0_15px_45px_rgba(0,0,0,0.8)]"
+                >
+                  {/* Card Visual Header */}
+                  <div className="h-48 w-full relative overflow-hidden">
+                    <img 
+                      src={project.image} 
+                      alt={project.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-60"
+                      referrerPolicy="no-referrer"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent" />
+                    
+                    {/* Floating Badge */}
+                    <span className="absolute top-4 left-4 font-mono text-[9px] bg-black/60 backdrop-blur-md border border-white/15 px-3 py-1 rounded-full text-white tracking-widest font-black uppercase">
+                      {project.category}
+                    </span>
+                  </div>
+
+                  {/* Card Body */}
+                  <div className="p-8 flex flex-col gap-4 flex-1 justify-between">
+                    <div className="flex flex-col gap-2">
+                      <h3 className="font-poppins font-black text-2xl text-white uppercase tracking-tight group-hover:text-tech-cyan transition-colors">
+                        {project.title}
+                      </h3>
+                      <p className="font-poppins text-xs text-tech-purple uppercase font-bold tracking-wider">
+                        {project.tagline}
+                      </p>
+                      
+                      {/* Solution Description */}
+                      <div className="mt-4 bg-white/[0.02] border border-white/5 p-4 rounded-xl">
+                        <span className="font-mono text-[9px] text-tech-cyan uppercase tracking-widest font-black block mb-1">
+                          // SOLUCIÓN APORTADA:
+                        </span>
+                        <p className="font-sans text-xs text-gray-300 leading-relaxed font-bold">
+                          {project.solution}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* External Landing Link */}
+                    <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between gap-4">
+                      {project.link !== '#' ? (
+                        <a 
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 flex items-center justify-center gap-2 bg-white text-black hover:bg-tech-cyan transition-colors duration-300 py-3 rounded-xl font-poppins text-xs font-black uppercase tracking-wider"
+                        >
+                          Visitar Landing
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      ) : (
+                        <button 
+                          onClick={() => {
+                            setIsLeadFormOpen(true);
+                          }}
+                          className="flex-1 flex items-center justify-center gap-2 bg-zinc-900 border border-white/10 text-white/40 hover:text-white hover:border-tech-cyan/40 hover:bg-zinc-900/60 transition-all duration-300 py-3 rounded-xl font-poppins text-xs font-bold uppercase tracking-wider cursor-pointer"
+                        >
+                          Landing en escala
+                          <Sparkles className="w-3.5 h-3.5 text-tech-cyan" />
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Bottom contact band inside overlay */}
+            <div className="border-t border-white/10 pt-8 pb-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+              <p className="font-sans text-xs text-white/40 font-bold text-center sm:text-left">
+                ¿Tienes un proyecto en mente? Creamos la solución exacta para tu modelo.
+              </p>
+              <button
+                onClick={() => {
+                  setShowProjectsView(false);
+                  setIsLeadFormOpen(true);
+                }}
+                className="text-xs text-tech-cyan hover:text-white font-mono uppercase tracking-wider font-bold cursor-pointer transition-colors"
+              >
+                [ Cotizar mi Proyecto con IA y Código ]
+              </button>
+            </div>
+
+          </div>
+        </div>
+      )}
+
       {/* 9. FORMULARIO MODAL DE CALIFICACIÓN ULTRA-PREMIUM */}
       {isLeadFormOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-xl overflow-y-auto">
@@ -1192,7 +1547,13 @@ export default function App() {
                   </div>
 
                   {/* Título de Impacto */}
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-2 items-start">
+                    {service.badge && (
+                      <span className="bg-brand-orange text-white font-poppins font-black text-[9px] tracking-[0.15em] uppercase px-3 py-1 rounded-md border border-white/20 shadow-[0_0_10px_rgba(242,125,38,0.4)] mb-1 flex items-center gap-1">
+                        <Sparkles className="w-2.5 h-2.5 animate-pulse" />
+                        {service.badge}
+                      </span>
+                    )}
                     <h2 className="tech-textured text-3xl md:text-5xl font-black uppercase leading-tight">
                       {service.title}
                     </h2>
