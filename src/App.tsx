@@ -1,6 +1,7 @@
 import React from 'react';
 import { useMotionValue, useSpring, useTransform, motion } from 'motion/react';
-import { ArrowRight, Flame, Cpu, Database, Smartphone, TrendingUp, Linkedin, Twitter, Facebook, Youtube, X, Send, CheckCircle, Layers, ArrowLeft, Check, DollarSign, ExternalLink, ShieldCheck, Clock, Sparkles, Briefcase, FolderOpen, Globe } from 'lucide-react';
+import { ArrowRight, Flame, Cpu, Database, Smartphone, TrendingUp, Linkedin, Twitter, Facebook, Youtube, X, Send, CheckCircle, Layers, ArrowLeft, Check, DollarSign, ExternalLink, ShieldCheck, Clock, Sparkles, Briefcase, FolderOpen, Globe, MessageCircle } from 'lucide-react';
+import StudioPage from './components/StudioPage';
 
 const SERVICES_DATA = [
   {
@@ -15,15 +16,15 @@ const SERVICES_DATA = [
     borderAccent: "border-brand-orange/30",
     image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1200&q=80",
     realPrice: {
-      range: "Desde $1,500 USD hasta $15,000+ USD",
-      detail: "Proyectos simples o MVPs (Mínimo Producto Viable) se estiman entre $1,500 y $3,500 USD con entrega en 4 semanas. Sistemas SaaS robustos, marketplaces o apps móviles avanzadas con integraciones complejas se cotizan entre $6,000 y $15,000+ USD.",
-      comparison: "Agencias de desarrollo tradicional cobran entre $8,000 y $35,000 USD por el mismo alcance y tardan más del doble de tiempo."
+      range: "Desde $6.000.000 COP hasta $60.000.000+ COP",
+      detail: "Proyectos simples o MVPs (Mínimo Producto Viable) se estiman entre $6.000.000 y $14.000.000 COP con entrega en 4 semanas. Sistemas SaaS robustos, marketplaces o apps móviles avanzadas con integraciones complejas se cotizan entre $24.000.000 y $60.000.000+ COP.",
+      comparison: "Agencias de desarrollo tradicional cobran entre $32.000.000 y $140.000.000 COP por el mismo alcance y tardan más del doble de tiempo."
     },
     benefits: [
       "Multiplataforma Eficiente: Desarrollo híbrido (React Native / Flutter) para iOS y Android con una sola base de código, reduciendo costos de mantenimiento al 50%.",
       "Arquitectura Cloud Escalable: Alojamiento optimizado en la nube para responder sin lentitud ante picos masivos de tráfico.",
       "Diseño UI/UX de Élite: Diseñado bajo altos estándares estéticos para maximizar la conversión y simplificar la navegación.",
-      "Integraciones de Terceros: Sincronización transparente con pasarelas de pago (Stripe, PayPal), CRMs, ERPs y APIs externas."
+      "Integraciones de Terceros: Sincronización transparente con pasarelas de pago (Stripe, Wompi, PayU, Bold), CRMs, ERPs y APIs externas."
     ]
   },
   {
@@ -39,8 +40,8 @@ const SERVICES_DATA = [
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
     badge: "MÁS VENDIDO",
     realPrice: {
-      range: "Desde $450 USD hasta $1,200 USD",
-      detail: "Nuestra Landing Page 'Aceleradora' estándar con copywriting persuasivo, diseño premium responsivo y sincronización de leads a WhatsApp/Sheets se entrega en solo 5 días hábiles por $450 USD. Estructuras de embudos multipáginas con pasarelas de pago, testimoniales dinámicos y analítica web avanzada oscilan entre $800 y $1,200 USD.",
+      range: "Desde $1.800.000 COP hasta $4.800.000 COP",
+      detail: "Nuestra Landing Page 'Aceleradora' estándar con copywriting persuasivo, diseño premium responsivo y sincronización de leads a WhatsApp/Sheets se entrega en solo 5 días hábiles por $1.800.000 COP. Estructuras de embudos multipáginas con pasarelas de pago, testimoniales dinámicos y analítica web avanzada oscilan entre $3.200.000 y $4.800.000 COP.",
       comparison: "Las agencias convencionales te venden sitios pesados en WordPress que cargan lento y no convierten. Nosotros programamos en código limpio, garantizando la máxima velocidad y retorno de inversión en tus anuncios."
     },
     benefits: [
@@ -62,9 +63,9 @@ const SERVICES_DATA = [
     borderAccent: "border-tech-cyan/30",
     image: "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=1200&q=80",
     realPrice: {
-      range: "Desde $800 USD hasta $6,000+ USD",
-      detail: "Agentes inteligentes sencillos integrados a WhatsApp o Web para captación y atención básica parten desde los $800 USD. Soluciones integrales de IA multi-agente con RAG corporativo personalizado (lectura de PDFs, bases de datos internas y toma de decisiones) oscilan entre $2,500 y $6,000 USD.",
-      comparison: "Sustituye la necesidad de contratar y entrenar personal nocturno o agencias de call-center que cuestan más de $15,000 USD anuales, eliminando el margen de error humano."
+      range: "Desde $3.200.000 COP hasta $24.000.000+ COP",
+      detail: "Agentes inteligentes sencillos integrados a WhatsApp o Web para captación y atención básica parten desde los $3.200.000 COP. Soluciones integrales de IA multi-agente con RAG corporativo personalizado (lectura de PDFs, bases de datos internas y toma de decisiones) oscilan entre $10.000.000 y $24.000.000 COP.",
+      comparison: "Sustituye la necesidad de contratar y entrenar personal nocturno o agencias de call-center que cuestan más de $60.000.000 COP anuales, eliminando el margen de error humano."
     },
     benefits: [
       "Atención Instantánea Omnicanal: Respuesta inmediata e idéntica a tus clientes a través de WhatsApp, Instagram, Web y Teléfono.",
@@ -85,8 +86,8 @@ const SERVICES_DATA = [
     borderAccent: "border-tech-purple/30",
     image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=80",
     realPrice: {
-      range: "Desde $500 USD hasta $3,500+ USD",
-      detail: "Automatizaciones de flujos de leads simples (Facebook Ads -> Google Sheets -> WhatsApp) parten desde los $500 USD. Integraciones complejas que conectan ERPs de facturación, pasarelas de pago y sistemas de inventario se estiman entre $1,800 y $3,500 USD.",
+      range: "Desde $2.000.000 COP hasta $14.000.000+ COP",
+      detail: "Automatizaciones de flujos de leads simples (Facebook Ads -> Google Sheets -> WhatsApp) parten desde los $2.000.000 COP. Integraciones complejas que conectan ERPs de facturación, pasarelas de pago y sistemas de inventario se estiman entre $7.200.000 y $14.000.000 COP.",
       comparison: "El ahorro en tiempos de digitación y corrección de errores manuales recupera el 100% de la inversión en los primeros 45 días de funcionamiento."
     },
     benefits: [
@@ -108,12 +109,12 @@ const SERVICES_DATA = [
     borderAccent: "border-brand-orange/30",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
     realPrice: {
-      range: "Desde $1,200 USD / mes (Servicio Mensual)",
-      detail: "Estrategia de embudos de conversión, creación de copys basados en neuro-ventas, diseño de landing pages optimizadas y gestión avanzada de campañas publicitarias parte desde $1,200 USD mensuales, variando según la escala de inversión en pauta.",
+      range: "Desde $4.800.000 COP / mes (Servicio Mensual)",
+      detail: "Estrategia de embudos de conversión, creación de copys basados en neuro-ventas, diseño de landing pages optimizadas y gestión avanzada de campañas publicitarias parte desde $4.800.000 COP mensuales, variando según la escala de inversión en pauta.",
       comparison: "Agencias tradicionales cobran fees fijos elevados sin compromisos de conversión. Nuestro enfoque es 100% de crecimiento: optimizar tu CAC (Costo de Adquisición) y escalar tus ventas."
     },
     benefits: [
-      "Embudos de Conversión Avanzados: Creación del camino exacto que recorre un usuario desconocido hasta convertirse en un cliente recurrentrente.",
+      "Embudos de Conversión Avanzados: Creación del camino exacto que recorre un usuario desconocido hasta convertirse en un cliente recurrente.",
       "Páginas de Aterrizaje Ultra-Rápidas: Diseñadas bajo código limpio para cargar en menos de un segundo, evitando la fuga del 40% del tráfico.",
       "Estrategias de Retargeting Dinámico: Impactamos nuevamente a los usuarios interesados con el mensaje exacto según su nivel de consideración.",
       "Analítica Web y Atribución Exacta: Paneles interactivos para saber de qué anuncio, plataforma y campaña exacta proviene cada centavo facturado."
@@ -131,9 +132,9 @@ const SERVICES_DATA = [
     borderAccent: "border-tech-cyan/30",
     image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80",
     realPrice: {
-      range: "Desde $300 USD (Sesión Única) hasta $2,500 USD (Auditoría e Informe Completo)",
-      detail: "Una sesión estratégica de diagnóstico de 90 minutos con entrega de notas ejecutivas se cotiza en $300 USD. Un servicio de auditoría técnica integral de procesos, diseño de arquitectura de sistemas y entrega de un Roadmap Técnico detallado se tasa entre $1,500 y $2,500 USD.",
-      comparison: "Una mala elección de software o un error en la arquitectura de tu base de datos puede costar más de $12,000 USD en licencias y retrabajo técnico. Prevenirlo es sumamente rentable."
+      range: "Desde $1.200.000 COP (Sesión Única) hasta $10.000.000 COP (Auditoría e Informe Completo)",
+      detail: "Una sesión estratégica de diagnóstico de 90 minutos con entrega de notas ejecutivas se cotiza en $1.200.000 COP. Un servicio de auditoría técnica integral de procesos, diseño de arquitectura de sistemas y entrega de un Roadmap Técnico detallado se tasa entre $6.000.000 y $10.000.000 COP.",
+      comparison: "Una mala elección de software o un error en la arquitectura de tu base de datos puede costar más de $48.000.000 COP en licencias y retrabajo técnico. Prevenirlo es sumamente rentable."
     },
     benefits: [
       "CTO Fraccionado (Chief Technology Officer): Acceso a criterio técnico experto de clase mundial sin los costos de un salario de nómina ejecutivo de tiempo completo.",
@@ -154,8 +155,8 @@ const SERVICES_DATA = [
     borderAccent: "border-tech-purple/30",
     image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80",
     realPrice: {
-      range: "Desde $4,000 USD hasta $25,000+ USD",
-      detail: "Proyectos medianos de unificación de bases de datos, migración de archivos e implementación de CRM/ERP con capacitación del equipo oscizan entre $4,000 y $8,000 USD. Reestructuraciones operativas e integraciones totales para empresas corporativas se cotizan a partir de $12,000 USD en adelante.",
+      range: "Desde $16.000.000 COP hasta $100.000.000+ COP",
+      detail: "Proyectos medianos de unificación de bases de datos, migración de archivos e implementación de CRM/ERP con capacitación del equipo oscilan entre $16.000.000 y $32.000.000 COP. Reestructuraciones operativas e integraciones totales para empresas corporativas se cotizan a partir de $48.000.000 COP en adelante.",
       comparison: "Las firmas consultoras multinacionales tradicionales ofrecen metodologías burocráticas y cobran tarifas de seis cifras. Nosotros somos ágiles, directos al grano y orientados a resultados inmediatos."
     },
     benefits: [
@@ -163,6 +164,31 @@ const SERVICES_DATA = [
       "Unificación de Datos en ERP / CRM: Conexión perfecta entre tus áreas de ventas, compras, almacén y finanzas en un solo tablero.",
       "Cultura Digital & Capacitación: Talleres interactivos y soporte paso a paso para garantizar que tu personal adopte las herramientas con total fluidez.",
       "Ecosistema Automatizado de Control: Alertas automáticas ante caídas de ventas, stock mínimo, o tareas retrasadas para un control directivo absoluto."
+    ]
+  },
+  {
+    id: 8,
+    title: "Expándete Studio (Publicidad IA)",
+    tagline: "Publicidad visual comercial de alta conversión generada con IA desde $34.900 COP.",
+    description: "Unidad especializada en convertir una foto simple de tu producto en una pieza publicitaria profesional de calidad de agencia internacional. Diseñamos flyers comerciales y video spots para Reels y TikTok enfocados 100% en conversión y ventas inmediatas.",
+    icon: "Sparkles",
+    color: "from-amber-400 to-yellow-600",
+    themeColor: "text-amber-400",
+    bgAccent: "bg-amber-500/10",
+    borderAccent: "border-amber-400/40",
+    image: "https://vicflix.expandete.cloud/Expandete_videos/ej3.jpeg",
+    badge: "NUEVA UNIDAD • DESDE $34.900 COP",
+    isStudioEntry: true,
+    realPrice: {
+      range: "Desde $34.900 COP hasta $149.900 COP",
+      detail: "Flyers individuales por $34.900 COP, Video Spots por $69.900 COP y Pack Vendedor completo (3 flyers + 2 videos + copys persuasivos) por solo $149.900 COP.",
+      comparison: "Un estudio fotográfico tradicional y una agencia cobran más de $2.500.000 COP por sesión. En Expándete Studio obtienes creativos listos para vender en 24 a 48 horas."
+    },
+    benefits: [
+      "De foto con celular a Anuncio de Agencia: No requieres producción costosa ni cámaras de cine.",
+      "Flyers Ultra HD & Video Spots Verticales: Formatos listos para Meta Ads, TikTok e Historias.",
+      "Copywriting de Neuro-Ventas Incluido: Textos con ganchos persuasivos listos para pautar.",
+      "Entrega Express en 24 a 48 Horas: Pagos rápidos con Wompi, Nequi y pedidos directos por WhatsApp."
     ]
   }
 ];
@@ -217,6 +243,17 @@ const PROJECTS_DATA = [
     link: "#",
     image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80",
     color: "from-tech-purple to-pink-600"
+  },
+  {
+    id: 6,
+    title: "Expándete Studio",
+    tagline: "Publicidad Visual de Alta Conversión con IA",
+    solution: "Creativos comerciales de nivel de agencia para e-commerce, moda, gastronomía y servicios creados a partir de fotos con celular.",
+    category: "Inteligencia Artificial",
+    link: "/studio",
+    image: "https://vicflix.expandete.cloud/Expandete_videos/ej3.jpeg",
+    color: "from-amber-400 to-yellow-600",
+    isStudioEntry: true
   }
 ];
 
@@ -229,6 +266,7 @@ const getIconComponent = (name: string) => {
     case "Flame": return <Flame className="w-7 h-7" />;
     case "Layers": return <Layers className="w-7 h-7" />;
     case "Globe": return <Globe className="w-7 h-7" />;
+    case "Sparkles": return <Sparkles className="w-7 h-7" />;
     default: return <Cpu className="w-7 h-7" />;
   }
 };
@@ -244,6 +282,39 @@ export default function App() {
   const [consultingFocus, setConsultingFocus] = React.useState('Optimización de Costos');
   const [showProjectsView, setShowProjectsView] = React.useState(false);
   const [projectCategoryFilter, setProjectCategoryFilter] = React.useState('Todos');
+  const [isStudioView, setIsStudioView] = React.useState(false);
+
+  React.useEffect(() => {
+    const checkUrlRoute = () => {
+      const path = window.location.pathname.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+      const search = window.location.search.toLowerCase();
+      if (path.includes('studio') || hash.includes('studio') || search.includes('studio')) {
+        setIsStudioView(true);
+      } else {
+        setIsStudioView(false);
+      }
+    };
+
+    checkUrlRoute();
+    window.addEventListener('popstate', checkUrlRoute);
+    window.addEventListener('hashchange', checkUrlRoute);
+    return () => {
+      window.removeEventListener('popstate', checkUrlRoute);
+      window.removeEventListener('hashchange', checkUrlRoute);
+    };
+  }, []);
+
+  const navigateToStudio = () => {
+    setIsStudioView(true);
+    window.history.pushState({}, '', '/studio');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const navigateToHome = () => {
+    setIsStudioView(false);
+    window.history.pushState({}, '', '/');
+  };
 
   React.useEffect(() => {
     const checkScreenSize = () => {
@@ -329,7 +400,7 @@ export default function App() {
   };
 
   const getWhatsAppLink = () => {
-    const phone = "5215512345678"; // Expándete official direct contact line
+    const phone = "573045751648"; // Expándete official direct contact line: +57 304 575 1648
     const message = `¡Hola Expándete! Acabo de calificar mi empresa en su plataforma:\n\n` +
       `👤 *Nombre:* ${formData.nombre}\n` +
       `🏢 *Empresa:* ${formData.empresa || 'No especificada'}\n` +
@@ -360,11 +431,30 @@ export default function App() {
     mouseY.set(y);
   };
 
+  if (isStudioView) {
+    return <StudioPage onBackToMain={navigateToHome} />;
+  }
+
   return (
     <div 
       onMouseMove={handleMouseMove}
-      className="h-screen w-full overflow-y-scroll snap-y snap-mandatory scroll-smooth bg-black grid-bg selection:bg-tech-cyan selection:text-black"
+      className="h-screen w-full overflow-y-scroll snap-y snap-mandatory scroll-smooth bg-black grid-bg selection:bg-tech-cyan selection:text-black relative"
     >
+      {/* Floating Expándete Studio Launcher Button */}
+      <motion.button
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={navigateToStudio}
+        className="fixed top-5 right-5 z-40 bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 text-black px-4 py-2.5 rounded-full font-poppins font-black text-xs uppercase tracking-wider shadow-[0_0_25px_rgba(245,158,11,0.6)] flex items-center gap-2 border border-amber-200 cursor-pointer backdrop-blur-md transition-all duration-300"
+      >
+        <Sparkles className="w-3.5 h-3.5 animate-pulse" />
+        <span className="hidden sm:inline">Expándete Studio • Anuncios IA ($34.900)</span>
+        <span className="sm:hidden">Studio IA</span>
+        <ArrowRight className="w-3.5 h-3.5" />
+      </motion.button>
+
       {/* 1. SECCIÓN 1: INTRODUCCIÓN CINEMÁTICA CON VIDEO DE FONDO (Pantalla Completa a Todo Color) */}
       <section className="snap-start h-screen w-full relative overflow-hidden flex flex-col justify-between p-6 md:p-12">
         {/* Full screen video background without any dimming opacity masks */}
@@ -455,13 +545,25 @@ export default function App() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.08 }}
-                onClick={() => setSelectedService(service.id)}
+                onClick={() => {
+                  if (service.isStudioEntry) {
+                    navigateToStudio();
+                  } else {
+                    setSelectedService(service.id);
+                  }
+                }}
                 className={`glass-card p-8 flex flex-col justify-between min-h-[240px] cursor-pointer group hover:border-tech-cyan/50 hover:shadow-[0_0_30px_rgba(0,240,255,0.15)] hover:-translate-y-1 transition-all duration-300 relative ${
-                  service.badge ? 'border-brand-orange/40 shadow-[0_0_20px_rgba(242,125,38,0.1)]' : ''
+                  service.isStudioEntry
+                    ? 'border-amber-400/50 shadow-[0_0_25px_rgba(245,158,11,0.2)] bg-gradient-to-b from-amber-500/10 to-zinc-950'
+                    : service.badge ? 'border-brand-orange/40 shadow-[0_0_20px_rgba(242,125,38,0.1)]' : ''
                 }`}
               >
                 {service.badge && (
-                  <span className="absolute -top-3 right-6 bg-brand-orange text-white font-poppins font-black text-[9px] tracking-[0.15em] uppercase px-3.5 py-1.5 rounded-full border border-white/20 shadow-[0_0_15px_rgba(242,125,38,0.5)] z-20 flex items-center gap-1">
+                  <span className={`absolute -top-3 right-6 font-poppins font-black text-[9px] tracking-[0.15em] uppercase px-3.5 py-1.5 rounded-full border shadow-lg z-20 flex items-center gap-1 ${
+                    service.isStudioEntry 
+                      ? 'bg-gradient-to-r from-amber-400 to-yellow-500 text-black border-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.5)]' 
+                      : 'bg-brand-orange text-white border-white/20 shadow-[0_0_15px_rgba(242,125,38,0.5)]'
+                  }`}>
                     <Sparkles className="w-2.5 h-2.5 animate-pulse" />
                     {service.badge}
                   </span>
@@ -475,8 +577,10 @@ export default function App() {
                     {service.tagline}
                   </p>
                 </div>
-                <div className="mt-4 flex items-center gap-1.5 text-white/40 group-hover:text-tech-cyan font-mono text-[10px] uppercase font-bold tracking-wider transition-colors duration-300">
-                  Ver detalles y precios
+                <div className={`mt-4 flex items-center gap-1.5 font-mono text-[10px] uppercase font-bold tracking-wider transition-colors duration-300 ${
+                  service.isStudioEntry ? 'text-amber-300 group-hover:text-yellow-200' : 'text-white/40 group-hover:text-tech-cyan'
+                }`}>
+                  {service.isStudioEntry ? 'Abrir Expándete Studio' : 'Ver detalles y precios'}
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </div>
               </motion.div>
@@ -1080,7 +1184,18 @@ export default function App() {
             {/* Left quick links */}
             <div className="flex gap-4 md:gap-6 items-center">
               <span className="font-sans text-xs text-white/40 font-bold mr-2">Sigue la ruta:</span>
-              <div className="flex gap-4">
+              <div className="flex gap-4 items-center">
+                <a 
+                  href="https://wa.me/573045751648?text=%C2%A1Hola%20Exp%C3%A1ndete!%20Quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios%20tecnol%C3%B3gicos%20y%20publicitarios." 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-emerald-400 hover:text-white transition-colors duration-300 flex items-center gap-1 font-mono text-xs font-bold" 
+                  aria-label="WhatsApp"
+                  title="WhatsApp: +57 304 575 1648"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  <span className="hidden sm:inline">304 575 1648</span>
+                </a>
                 <a href="https://www.linkedin.com/in/vicrivera31/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-tech-cyan transition-colors duration-300" aria-label="LinkedIn"><Linkedin className="w-5 h-5" /></a>
                 <a href="https://x.com/cexpandete" target="_blank" rel="noopener noreferrer" className="text-white hover:text-tech-cyan transition-colors duration-300" aria-label="Twitter"><Twitter className="w-5 h-5" /></a>
                 <a href="https://www.facebook.com/crececonexpandete/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-tech-cyan transition-colors duration-300" aria-label="Facebook"><Facebook className="w-5 h-5" /></a>
@@ -1095,12 +1210,22 @@ export default function App() {
 
             {/* Right quick contact & copyright info */}
             <div className="text-center md:text-right flex flex-col gap-2 font-sans font-black">
-              <button 
-                onClick={() => setIsLeadFormOpen(true)} 
-                className="text-xs text-white/60 hover:text-tech-cyan cursor-pointer uppercase transition-colors duration-300 font-black text-center md:text-right"
-              >
-                Agendar Consultoría: Empezar Diagnóstico
-              </button>
+              <div className="flex flex-col md:flex-row items-center md:justify-end gap-3">
+                <button 
+                  onClick={navigateToStudio}
+                  className="text-xs text-amber-400 hover:text-yellow-300 font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 cursor-pointer transition-colors"
+                >
+                  <Sparkles className="w-3.5 h-3.5" />
+                  Expándete Studio (Publicidad IA)
+                </button>
+                <span className="text-white/20 hidden md:inline">•</span>
+                <button 
+                  onClick={() => setIsLeadFormOpen(true)} 
+                  className="text-xs text-white/60 hover:text-tech-cyan cursor-pointer uppercase transition-colors duration-300 font-black"
+                >
+                  Agendar Consultoría
+                </button>
+              </div>
               <span className="text-[10px] text-white/30 uppercase tracking-widest">
                 © 2026 NextGen Strategy & Expándete. Hecho con fuego digital.
               </span>
@@ -1213,7 +1338,18 @@ export default function App() {
 
                     {/* External Landing Link */}
                     <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between gap-4">
-                      {project.link !== '#' ? (
+                      {project.isStudioEntry ? (
+                        <button
+                          onClick={() => {
+                            setShowProjectsView(false);
+                            navigateToStudio();
+                          }}
+                          className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-amber-400 to-yellow-500 text-black hover:scale-102 transition-all duration-300 py-3 rounded-xl font-poppins text-xs font-black uppercase tracking-wider cursor-pointer shadow-lg"
+                        >
+                          Explorar Expándete Studio
+                          <Sparkles className="w-3.5 h-3.5" />
+                        </button>
+                      ) : project.link !== '#' ? (
                         <a 
                           href={project.link}
                           target="_blank"
@@ -1327,7 +1463,7 @@ export default function App() {
                         required
                         value={formData.whatsapp}
                         onChange={handleInputChange}
-                        placeholder="Ej. +52 1 55 1234 5678"
+                        placeholder="Ej. +57 304 575 1648"
                         className="w-full bg-black/60 border border-white/15 px-4 py-3 rounded-xl text-white font-sans text-sm focus:border-tech-cyan focus:outline-none transition-all duration-300 placeholder:text-white/20 font-bold"
                       />
                     </div>
@@ -1379,10 +1515,10 @@ export default function App() {
                       </span>
                       <div className="grid grid-cols-2 gap-2.5">
                         {[
-                          'Menos de $2k USD / mes',
-                          '$2k a $10k USD / mes',
-                          '$10k a $50k USD / mes',
-                          'Más de $50k USD / mes'
+                          'Menos de $10M COP / mes',
+                          '$10M a $50M COP / mes',
+                          '$50M a $200M COP / mes',
+                          'Más de $200M COP / mes'
                         ].map((option) => (
                           <button
                             key={option}

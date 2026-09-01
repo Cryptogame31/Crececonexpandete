@@ -1,15 +1,20 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=Dancing+Script:wght@700&family=Inter:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Cinzel:wght@700;900&family=Dancing+Script:wght@700&family=Inter:wght@400;500;700&display=swap');
 
 @theme {
   --font-display: "Poppins", sans-serif;
   --font-poppins: "Poppins", sans-serif;
+  --font-luxury: "Cinzel", serif;
   --font-script: "Dancing Script", cursive;
   --font-sans: "Inter", sans-serif;
   
   --color-tech-cyan: #00f0ff;
   --color-tech-purple: #7000ff;
   --color-brand-orange: #f27d26;
+  --color-gold-light: #fef08a;
+  --color-gold-main: #d4af37;
+  --color-gold-dark: #854d0e;
+  --color-gold-rich: #eab308;
 }
 
 @layer base {
@@ -33,6 +38,40 @@
   animation: energy-flow 4s ease-in-out infinite;
 }
 
+/* Efecto Dark Gold Luxury */
+.gold-textured {
+  position: relative;
+  background: linear-gradient(135deg, #fef08a 0%, #d4af37 35%, #f59e0b 70%, #92400e 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  display: inline-block;
+  animation: gold-shimmer 6s ease-in-out infinite;
+}
+
+@keyframes gold-shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.gold-border-glow {
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
+}
+
+.gold-border-glow:hover {
+  border: 1px solid rgba(254, 240, 138, 0.7);
+  box-shadow: 0 0 35px rgba(212, 175, 55, 0.35);
+}
+
+.text-stroke-gold {
+  -webkit-text-stroke: 1px rgba(212, 175, 55, 0.3);
+}
+
 @media (min-width: 768px) {
   .tech-textured {
     background-image: url('https://www.transparenttextures.com/patterns/grunge-wall.png'), 
@@ -46,8 +85,8 @@
 
 @keyframes energy-flow {
   0% { background-position: 0% 0%; }
-  50% { background-position: 0% 100%; }
-  100% { background-position: 0% 0%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .text-stroke {
