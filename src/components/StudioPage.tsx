@@ -109,6 +109,7 @@ const PACKAGE_CARDS = [
     deliveryTime: "Entrega en 24 a 48 horas",
     graphic: "https://vicflix.expandete.cloud/Expandete_videos/p1.jpg",
     highlight: false,
+    wompiUrl: "https://checkout.wompi.co/l/SX6mal",
     description: "Ideal para promocionar un producto específico con calidad de agencia internacional sin gastar fortunas.",
     features: [
       "1 Pieza publicitaria en Ultra Alta Resolución (1:1 o 9:16)",
@@ -131,6 +132,7 @@ const PACKAGE_CARDS = [
     deliveryTime: "Entrega prioritaria en 48 a 72 horas",
     graphic: "https://vicflix.expandete.cloud/Expandete_videos/p2.jpg",
     highlight: true,
+    wompiUrl: "https://checkout.wompi.co/l/DqTsUR",
     description: "El paquete definitivo para lanzar una campaña publicitaria completa con variedad de formatos para testear.",
     features: [
       "3 Flyers Publicitarios Comerciales en Ultra HD",
@@ -152,6 +154,7 @@ const PACKAGE_CARDS = [
     deliveryTime: "Entrega en 48 horas",
     graphic: "https://vicflix.expandete.cloud/Expandete_videos/p3.jpg",
     highlight: false,
+    wompiUrl: "https://checkout.wompi.co/l/1ddQyW",
     description: "Video dinámico de 10 a 15 segundos diseñado para capturar la atención en los primeros 3 segundos.",
     features: [
       "1 Video publicitario vertical (9:16) para Reels / TikTok / Shorts",
@@ -171,6 +174,7 @@ export default function StudioPage({ onBackToMain }: StudioPageProps) {
   const [activeVideoModal, setActiveVideoModal] = useState<string | null>(null);
   const [selectedPackForOrder, setSelectedPackForOrder] = useState<typeof PACKAGE_CARDS[0] | null>(null);
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
+  const [paidPlanNotification, setPaidPlanNotification] = useState<string | null>(null);
 
   // Form state
   const [orderForm, setOrderForm] = useState({
@@ -185,6 +189,27 @@ export default function StudioPage({ onBackToMain }: StudioPageProps) {
   const [paymentMethod, setPaymentMethod] = useState<'whatsapp' | 'wompi'>('whatsapp');
 
   useEffect(() => {
+    // Check if user is redirected back after Wompi payment
+    const checkPaymentParams = () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const status = urlParams.get('status') || urlParams.get('id') || urlParams.get('transaction_id');
+      const plan = urlParams.get('plan');
+      
+      if (status || plan) {
+        if (plan === 'flyer_ia' || plan === 'flyer') {
+          setPaidPlanNotification('Flyer Publicitario IA ($34.900 COP)');
+        } else if (plan === 'pack_vendedor' || plan === 'pack-vendedor') {
+          setPaidPlanNotification('Pack Vendedor ($149.900 COP)');
+        } else if (plan === 'video_spot_ia' || plan === 'video-spot') {
+          setPaidPlanNotification('Video Spot IA ($69.900 COP)');
+        } else {
+          setPaidPlanNotification('tu paquete de Expándete Studio');
+        }
+      }
+    };
+
+    checkPaymentParams();
+
     const handleResize = () => {
       if (window.innerWidth < 768) {
         setHeroVideo('https://vicflix.expandete.cloud/Expandete_videos/hesv.mp4');
@@ -218,6 +243,13 @@ export default function StudioPage({ onBackToMain }: StudioPageProps) {
     e.preventDefault();
     const currentPack = PACKAGE_CARDS.find(p => p.id === orderForm.selectedPack) || PACKAGE_CARDS[1];
     
+    if (paymentMethod === 'wompi' && currentPack.wompiUrl) {
+      // Direct to Wompi checkout link provided by user
+      window.open(currentPack.wompiUrl, '_blank', 'noopener,noreferrer');
+      setIsOrderModalOpen(false);
+      return;
+    }
+
     const message = `🌟 *NUEVO PEDIDO EXPÁNDETE STUDIO*\n\n` +
       `📦 *Paquete:* ${currentPack.title} (${currentPack.price} ${currentPack.unit})\n` +
       `👤 *Cliente:* ${orderForm.nombre}\n` +
@@ -229,11 +261,58 @@ export default function StudioPage({ onBackToMain }: StudioPageProps) {
 
     const waUrl = getDirectWhatsAppUrl(message);
     window.open(waUrl, '_blank', 'noopener,noreferrer');
+    setIsOrderModalOpen(false);
   };
 
   return (
     <div className="min-h-screen w-full bg-[#050505] text-white selection:bg-amber-400 selection:text-black font-sans relative overflow-x-hidden">
       
+      {/* Notification Banner for successful payment via Wompi */}
+      <AnimatePresence>
+        {paidPlanNotification && (
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            className="sticky top-[65px] z-50 bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 text-black px-4 py-3.5 shadow-2xl border-b border-amber-300 flex items-center justify-between gap-4"
+          >
+            <div className="max-w-7xl mx-auto w-full flex flex-col sm:flex-row items-center justify-between gap-3">
+              <div className="flex items-center gap-3 text-center sm:text-left">
+                <span className="p-2 bg-black text-amber-400 rounded-full shrink-0">
+                  <CheckCircle className="w-5 h-5" />
+                </span>
+                <div>
+                  <span className="font-poppins font-black text-sm uppercase block">
+                    ¡Pago Confirmado para {paidPlanNotification}!
+                  </span>
+                  <span className="text-xs font-medium text-black/80">
+                    El siguiente paso es enviar la foto de tu producto para iniciar la producción de inmediato.
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 shrink-0">
+                <a
+                  href={`https://wa.me/573045751648?text=${encodeURIComponent(`¡Hola Expándete Studio! Acabo de pagar ${paidPlanNotification} por Wompi. Adjunto mi comprobante y fotos de mi producto para empezar.`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-black text-amber-400 hover:bg-zinc-900 px-5 py-2 rounded-full font-poppins font-black text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-lg transition-transform hover:scale-105"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  Enviar Fotos por WhatsApp
+                </a>
+                <button
+                  onClick={() => setPaidPlanNotification(null)}
+                  className="p-1.5 hover:bg-black/10 rounded-full transition-colors text-black"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Luxury Golden Top Navigation Bar */}
       <header className="sticky top-0 z-40 bg-[#0a0a0a]/90 backdrop-blur-xl border-b border-amber-500/20 py-3 px-4 md:px-8">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
@@ -680,7 +759,7 @@ export default function StudioPage({ onBackToMain }: StudioPageProps) {
               <div className="flex flex-col gap-2.5 pt-4">
                 <button
                   onClick={() => handleOpenOrder(pack)}
-                  className={`w-full py-4 rounded-xl font-poppins font-black text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${
+                  className={`w-full py-3.5 rounded-xl font-poppins font-black text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${
                     pack.highlight
                       ? 'bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-black shadow-[0_0_25px_rgba(245,158,11,0.5)] hover:shadow-[0_0_35px_rgba(245,158,11,0.8)] hover:scale-102'
                       : 'bg-white/10 hover:bg-amber-400 hover:text-black text-white border border-white/20'
@@ -689,6 +768,18 @@ export default function StudioPage({ onBackToMain }: StudioPageProps) {
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>Ordenar {pack.title}</span>
                 </button>
+
+                {pack.wompiUrl && (
+                  <a
+                    href={pack.wompiUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-2.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-400/40 text-amber-300 font-poppins text-[11px] font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-1.5 shadow-sm"
+                  >
+                    <CreditCard className="w-3.5 h-3.5 text-amber-400" />
+                    <span>Pagar con Wompi ({pack.price})</span>
+                  </a>
+                )}
 
                 <a
                   href={getDirectWhatsAppUrl(pack.whatsappText)}
