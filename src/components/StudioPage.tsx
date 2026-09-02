@@ -234,7 +234,7 @@ export default function StudioPage({ onBackToMain }: StudioPageProps) {
   };
 
   const getDirectWhatsAppUrl = (customMessage?: string) => {
-    const phone = "573045751648"; // Expándete official WhatsApp: +57 304 575 1648
+    const phone = "573177158122"; // Expándete official WhatsApp: +57 317 715 8122
     const text = customMessage || `¡Hola Expándete Studio! Quiero información sobre los servicios de publicidad visual con IA para mi negocio.`;
     return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
   };
@@ -293,7 +293,7 @@ export default function StudioPage({ onBackToMain }: StudioPageProps) {
 
               <div className="flex items-center gap-2 shrink-0">
                 <a
-                  href={`https://wa.me/573045751648?text=${encodeURIComponent(`¡Hola Expándete Studio! Acabo de pagar ${paidPlanNotification} por Wompi. Adjunto mi comprobante y fotos de mi producto para empezar.`)}`}
+                  href={`https://wa.me/573177158122?text=${encodeURIComponent(`¡Hola Expándete Studio! Acabo de pagar ${paidPlanNotification} por Wompi. Adjunto mi comprobante y fotos de mi producto para empezar.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-black text-amber-400 hover:bg-zinc-900 px-5 py-2 rounded-full font-poppins font-black text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-lg transition-transform hover:scale-105"
@@ -364,10 +364,10 @@ export default function StudioPage({ onBackToMain }: StudioPageProps) {
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:flex items-center gap-1.5 px-4 py-2 rounded-full border border-amber-400/30 text-amber-300 hover:bg-amber-400/10 font-poppins text-xs font-bold uppercase tracking-wider transition-all duration-300"
-              title="Chatear por WhatsApp al +57 304 575 1648"
+              title="Chatear por WhatsApp al +57 317 715 8122"
             >
               <MessageCircle className="w-3.5 h-3.5" />
-              <span>WhatsApp (304 575 1648)</span>
+              <span>WhatsApp (317 715 8122)</span>
             </a>
 
             <button 
@@ -989,7 +989,7 @@ export default function StudioPage({ onBackToMain }: StudioPageProps) {
 
           <div className="text-center md:text-right flex flex-col gap-1 text-[11px] font-mono text-gray-500">
             <span>© 2026 Expándete Studio • Todos los derechos reservados</span>
-            <span className="text-amber-400/80 font-bold">WhatsApp Oficial: +57 304 575 1648</span>
+            <span className="text-amber-400/80 font-bold">WhatsApp Oficial: +57 317 715 8122</span>
             <span>Pagos seguros con Wompi • Entrega garantizada</span>
           </div>
 
@@ -1139,7 +1139,7 @@ export default function StudioPage({ onBackToMain }: StudioPageProps) {
                     <input 
                       type="tel" 
                       required
-                      placeholder="Ej. +57 304 575 1648"
+                      placeholder="Ej. +57 317 715 8122"
                       value={orderForm.whatsapp}
                       onChange={(e) => setOrderForm(prev => ({ ...prev, whatsapp: e.target.value }))}
                       className="w-full bg-black/60 border border-white/15 px-3.5 py-2.5 rounded-xl text-white text-xs font-poppins focus:border-amber-400 focus:outline-none"
