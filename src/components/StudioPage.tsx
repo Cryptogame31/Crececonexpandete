@@ -23,7 +23,10 @@ import {
   Eye,
   Send,
   X,
-  PhoneCall
+  PhoneCall,
+  Volume2,
+  Maximize2,
+  Filter
 } from 'lucide-react';
 
 interface StudioPageProps {
@@ -75,27 +78,221 @@ const FLYER_EXAMPLES = [
   }
 ];
 
-const VIDEO_EXAMPLES = [
+const VIDEO_CATEGORIES = [
+  { id: 'todos', label: 'Todos los Spots (11)' },
+  { id: 'mascotas', label: '🐾 Mascotas (2)' },
+  { id: 'gastronomia', label: '🍰 Comida & Eventos (2)' },
+  { id: 'tech', label: '⚡ Tech & SaaS (2)' },
+  { id: 'salud', label: '🌿 Salud & Bienestar (2)' },
+  { id: 'moda', label: '👟 Calzado & Moda (1)' },
+  { id: 'eventos', label: '🎉 Recreación & EdTech (2)' }
+];
+
+export interface VideoSpotExample {
+  id: number;
+  title: string;
+  category: string;
+  categoryFilter: string;
+  badge: string;
+  format: string;
+  src: string;
+  tagline: string;
+  dopamineStructure: {
+    hook: string;
+    body: string;
+    cta: string;
+  };
+  retentionScore: string;
+  whatsappMessage: string;
+}
+
+const VIDEO_EXAMPLES: VideoSpotExample[] = [
   {
     id: 1,
-    title: "Video Spot Cinemático 01",
-    format: "Reels / TikTok / Shorts (9:16)",
-    src: "https://vicflix.expandete.cloud/Expandete_videos/her1.mp4",
-    tagline: "Transiciones dinámicas y movimiento de producto con IA"
+    title: "Veneno de Abeja & Miel • Terapia & Alivio Inmediato",
+    category: "Salud & Cosmética Apícola",
+    categoryFilter: "salud",
+    badge: "🌿 AUTORIDAD & ALIVIO TERAPÉUTICO",
+    format: "Reels / TikTok (9:16)",
+    src: "https://vicflix.expandete.cloud/Expandete_videos/ProductoVenenodeabeja.mp4",
+    tagline: "Explicación visual del principio activo natural apícola con gancho de solución para el dolor muscular y articular. Confianza y venta directa.",
+    dopamineStructure: {
+      hook: "0 - 3s: Expresión de dolor articular cotidiano que conecta con la frustración del cliente.",
+      body: "3 - 8s: Aplicación del ungüento con absorción profunda y sensación de bienestar térmico.",
+      cta: "8 - 14s: Oferta pague 1 y lleve 2 con pago contra entrega en todo el país."
+    },
+    retentionScore: "96% Retención inicial",
+    whatsappMessage: "¡Hola Expándete Studio! Quiero un Video Spot de producto natural/salud como Veneno de Abeja y Miel ($69.900 COP)."
   },
   {
     id: 2,
-    title: "Video Spot Cinemático 02",
-    format: "Reels / TikTok / Shorts (9:16)",
-    src: "https://vicflix.expandete.cloud/Expandete_videos/her2.mp4",
-    tagline: "Efectos de iluminación comercial y ritmo de alto impacto"
+    title: "Óptica Alfavisión • Salud & Estilo Visual",
+    category: "Salud & Bienestar",
+    categoryFilter: "salud",
+    badge: "👓 NITIDEZ & STATUS VISUAL",
+    format: "Reels / TikTok (9:16)",
+    src: "https://vicflix.expandete.cloud/Expandete_videos/Opticaalfavision.mp4",
+    tagline: "Enfoques macro en monturas de diseño y lentes antirreflejo. Convierte una necesidad médica en un accesorio de moda deseable.",
+    dopamineStructure: {
+      hook: "0 - 3s: Contraste visual de desenfoque borroso a nitidez cristalina 4K con montura de lujo.",
+      body: "3 - 8s: Modelos luciendo monturas de temporada, filtro de luz azul y comodidad diaria.",
+      cta: "8 - 13s: Examen computarizado gratis por la compra de tu montura."
+    },
+    retentionScore: "93% Retención inicial",
+    whatsappMessage: "¡Hola Expándete Studio! Me interesa un Video Spot publicitario como el de Óptica Alfavisión ($69.900 COP)."
   },
   {
     id: 3,
-    title: "Video Spot Cinemático 03",
-    format: "Reels / TikTok / Shorts (9:16)",
-    src: "https://vicflix.expandete.cloud/Expandete_videos/her3.mp4",
-    tagline: "Enfoque publicitario para venta directa y retención de usuarios"
+    title: "Pastelería Artesanal • Apetito Dopamínico",
+    category: "Gastronomía & Repostería",
+    categoryFilter: "gastronomia",
+    badge: "🍰 FOOD PORN IRRESISTIBLE",
+    format: "Reels / TikTok (9:16)",
+    src: "https://vicflix.expandete.cloud/Expandete_videos/Productos%20pasteles.mp4",
+    tagline: "Cámara lenta, texturas cremosas y colores apetitosos que activan la salivación en menos de 2 segundos. Ideal para delivery y antojos.",
+    dopamineStructure: {
+      hook: "0 - 3s: Deslizamiento suave de cuchillo o espátula en ganache cremoso con caída de chocolate.",
+      body: "3 - 8s: Muestra de capas esponjosas, frescura de ingredientes y detalles artesanales.",
+      cta: "8 - 14s: Pide tu porción o torta completa con entrega el mismo día."
+    },
+    retentionScore: "99% Retención inicial",
+    whatsappMessage: "¡Hola Expándete Studio! Quiero un Video Spot gastronómico irresistible como el de Pasteles ($69.900 COP)."
+  },
+  {
+    id: 4,
+    title: "Arena para Gatos • Personajes 3D Animados",
+    category: "Mascotas & Animación 3D",
+    categoryFilter: "mascotas",
+    badge: "⚡ GANCHO 3D EMOCIONAL",
+    format: "Reels / TikTok (9:16)",
+    src: "https://vicflix.expandete.cloud/Expandete_videos/Arenagatomu%C3%B1ecosanimados.mp4",
+    tagline: "Animación de personajes en 3D con retención inmediata para pet lovers. Rompe el scroll con ternura y demostración higiénica.",
+    dopamineStructure: {
+      hook: "0 - 3s: Personaje animado 3D interactúa de sorpresa con el producto (ternura + curiosidad inmediata).",
+      body: "3 - 8s: Demostración lúdica de aglomeración compacta y control de olores sin levantar polvo.",
+      cta: "8 - 14s: Oferta con descuento de lanzamiento y botón de pedido directo a domicilio."
+    },
+    retentionScore: "98% Retención inicial",
+    whatsappMessage: "¡Hola Expándete Studio! Me interesa un Video Spot 3D animado como el de Arena para Gatos ($69.900 COP)."
+  },
+  {
+    id: 5,
+    title: "Sneakers Urbanos • Ritmo Deportivo",
+    category: "Moda & Calzado",
+    categoryFilter: "moda",
+    badge: "👟 BEAT DROP URBANO",
+    format: "Reels / TikTok (9:16)",
+    src: "https://vicflix.expandete.cloud/Expandete_videos/Productotenis.mp4",
+    tagline: "Cortes sincrónicos al beat musical, giros 360° y primeros planos de suela y amortiguación. El estándar visual de marcas de moda.",
+    dopamineStructure: {
+      hook: "0 - 3s: Impacto del calzado contra el asfalto con sincronización rítmica enérgica.",
+      body: "3 - 9s: Texturas de cuero, costuras reforzadas, cámara de aire y estilo urbano.",
+      cta: "9 - 15s: Unidades limitadas con envío express y cambio de talla sin costo."
+    },
+    retentionScore: "97% Retención inicial",
+    whatsappMessage: "¡Hola Expándete Studio! Deseo un Video Spot de calzado/moda como Sneakers Urbanos ($69.900 COP)."
+  },
+  {
+    id: 6,
+    title: "Hero Landing • Tech & Conversión SaaS",
+    category: "Tech & Software",
+    categoryFilter: "tech",
+    badge: "🚀 MICRO-INTERACCIONES UI",
+    format: "Reels / TikTok (9:16)",
+    src: "https://vicflix.expandete.cloud/Expandete_videos/herolanding.mp4",
+    tagline: "Recorrido cinemático de interfaz digital con aceleración de ritmo. Muestra el poder y la fluidez de un software en 10 segundos.",
+    dopamineStructure: {
+      hook: "0 - 3s: Cursor cinemático flotante activando herramientas clave con tipografía cinética.",
+      body: "3 - 8s: Transición rápida entre tableros, analíticas y automatizaciones en tiempo real.",
+      cta: "8 - 14s: Llamada a prueba gratuita sin tarjeta de crédito."
+    },
+    retentionScore: "96% Retención inicial",
+    whatsappMessage: "¡Hola Expándete Studio! Me interesa un Video Spot para mi software/web como el de Hero Landing ($69.900 COP)."
+  },
+  {
+    id: 7,
+    title: "Mega Recreación • Euforia & Eventos",
+    category: "Eventos & Entretenimiento",
+    categoryFilter: "eventos",
+    badge: "🎉 EXPLOSIÓN SENSORIAL",
+    format: "Reels / TikTok (9:16)",
+    src: "https://vicflix.expandete.cloud/Expandete_videos/Megarecreacion.mp4",
+    tagline: "Montaje hiper-enérgico con música de pulso alto que transmite adrenalina, risas y la magnitud de experiencias masivas.",
+    dopamineStructure: {
+      hook: "0 - 3s: Lluvia de confeti, grito colectivo y tomas de drones de alta energía.",
+      body: "3 - 9s: Despliegue de inflables gigantes, animadores profesionales y felicidad contagiosa.",
+      cta: "9 - 14s: Reserva tu fecha antes de agotar fines de semana."
+    },
+    retentionScore: "97% Retención inicial",
+    whatsappMessage: "¡Hola Expándete Studio! Quiero un Video Spot para mi negocio de eventos como Mega Recreación ($69.900 COP)."
+  },
+  {
+    id: 8,
+    title: "Arena Sanitaria Piti • Demostración de Choque",
+    category: "Mascotas & Retail",
+    categoryFilter: "mascotas",
+    badge: "🔥 PRUEBA VISUAL DE CHOQUE",
+    format: "Reels / TikTok (9:16)",
+    src: "https://vicflix.expandete.cloud/Expandete_videos/ArnaPiti1.mp4",
+    tagline: "Enfoque dinámico directo al dolor diario: prueba de absorción ultra-rápida y aglomeración instantánea sin filtros.",
+    dopamineStructure: {
+      hook: "0 - 3s: Vertido de líquido a cámara rápida con efecto de absorción en 2 segundos.",
+      body: "3 - 8s: Cero polvo, aglomerado sólido como piedra que se retira fácilmente con la pala.",
+      cta: "8 - 13s: Promoción por bultos con envío gratis contra entrega."
+    },
+    retentionScore: "95% Retención inicial",
+    whatsappMessage: "¡Hola Expándete Studio! Quiero un Video Spot de demostración de producto como el de Arena Piti ($69.900 COP)."
+  },
+  {
+    id: 9,
+    title: "Banquetes Sarahy • Catering & Eventos de Gala",
+    category: "Catering & Eventos",
+    categoryFilter: "gastronomia",
+    badge: "✨ GLAMOUR & ABUNDANCIA",
+    format: "Reels / TikTok (9:16)",
+    src: "https://vicflix.expandete.cloud/Expandete_videos/Banquetessarahy.mp4",
+    tagline: "Tomas cinematográficas de mesas imperiales, platos de autor servidos al detalle y servicio de etiqueta para bodas y recepciones corporativas.",
+    dopamineStructure: {
+      hook: "0 - 3s: Salón iluminado con candelabros, copas tintineando y montaje de ensueño.",
+      body: "3 - 9s: Desfile de platos gourmet de alta cocina, texturas calientes y atención impecable.",
+      cta: "9 - 14s: Agenda tu cata gastronómica y asegura el catering de tu fecha especial."
+    },
+    retentionScore: "95% Retención inicial",
+    whatsappMessage: "¡Hola Expándete Studio! Me interesa un Video Spot de eventos y catering como Banquetes Sarahy ($69.900 COP)."
+  },
+  {
+    id: 10,
+    title: "Hero Landing Pro • Escala Digital B2B",
+    category: "Tech & Software",
+    categoryFilter: "tech",
+    badge: "💎 ESTÉTICA FUTURISTA & ESTATUS",
+    format: "Reels / TikTok (9:16)",
+    src: "https://vicflix.expandete.cloud/Expandete_videos/Herolanding2.mp4",
+    tagline: "Presentación ejecutiva de alta gama con efectos de luz, partículas y transiciones para plataformas digitales y agencias.",
+    dopamineStructure: {
+      hook: "0 - 3s: Zoom cinemático hacia la propuesta de valor con halo dorado y audio inmersivo.",
+      body: "3 - 9s: Métricas de crecimiento empresarial, clientes globales y arquitectura de producto.",
+      cta: "9 - 15s: Agenda tu auditoría técnica o sesión estratégica."
+    },
+    retentionScore: "94% Retención inicial",
+    whatsappMessage: "¡Hola Expándete Studio! Quiero un Video Spot corporativo tecnológico como Hero Landing Pro ($69.900 COP)."
+  },
+  {
+    id: 11,
+    title: "Aprendizaje Animado • EdTech & Gamificación",
+    category: "Educación & Animación",
+    categoryFilter: "eventos",
+    badge: "🎨 GAMIFICACIÓN ADICTIVA",
+    format: "Reels / TikTok (9:16)",
+    src: "https://vicflix.expandete.cloud/Expandete_videos/Aprendizaje%20animado.mp4",
+    tagline: "Colores vibrantes, personajes dinámicos y micro-recompensas para capturar la atención de padres e hijos al instante.",
+    dopamineStructure: {
+      hook: "0 - 3s: Personaje interactivo que reta al niño con un enigma visual sonoro.",
+      body: "3 - 9s: Dinámica interactiva, refuerzo positivo inmediato y avance cognitivo divertido.",
+      cta: "9 - 14s: Prueba la plataforma con 7 días de acceso ilimitado para tu hijo."
+    },
+    retentionScore: "98% Retención inicial",
+    whatsappMessage: "¡Hola Expándete Studio! Quiero un Video Spot infantil/educativo como Aprendizaje Animado ($69.900 COP)."
   }
 ];
 
@@ -172,6 +369,7 @@ export default function StudioPage({ onBackToMain }: StudioPageProps) {
   const [heroVideo, setHeroVideo] = useState('https://vicflix.expandete.cloud/Expandete_videos/hesh.mp4');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [activeVideoModal, setActiveVideoModal] = useState<string | null>(null);
+  const [selectedVideoCategory, setSelectedVideoCategory] = useState<string>('todos');
   const [selectedPackForOrder, setSelectedPackForOrder] = useState<typeof PACKAGE_CARDS[0] | null>(null);
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
   const [paidPlanNotification, setPaidPlanNotification] = useState<string | null>(null);
@@ -234,7 +432,7 @@ export default function StudioPage({ onBackToMain }: StudioPageProps) {
   };
 
   const getDirectWhatsAppUrl = (customMessage?: string) => {
-    const phone = "573177158122"; // Expándete official WhatsApp: +57 317 715 8122
+    const phone = "573045751648"; // Expándete official WhatsApp: +57 304 575 1648
     const text = customMessage || `¡Hola Expándete Studio! Quiero información sobre los servicios de publicidad visual con IA para mi negocio.`;
     return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
   };
@@ -293,7 +491,7 @@ export default function StudioPage({ onBackToMain }: StudioPageProps) {
 
               <div className="flex items-center gap-2 shrink-0">
                 <a
-                  href={`https://wa.me/573177158122?text=${encodeURIComponent(`¡Hola Expándete Studio! Acabo de pagar ${paidPlanNotification} por Wompi. Adjunto mi comprobante y fotos de mi producto para empezar.`)}`}
+                  href={`https://wa.me/573045751648?text=${encodeURIComponent(`¡Hola Expándete Studio! Acabo de pagar ${paidPlanNotification} por Wompi. Adjunto mi comprobante y fotos de mi producto para empezar.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-black text-amber-400 hover:bg-zinc-900 px-5 py-2 rounded-full font-poppins font-black text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-lg transition-transform hover:scale-105"
@@ -364,10 +562,10 @@ export default function StudioPage({ onBackToMain }: StudioPageProps) {
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:flex items-center gap-1.5 px-4 py-2 rounded-full border border-amber-400/30 text-amber-300 hover:bg-amber-400/10 font-poppins text-xs font-bold uppercase tracking-wider transition-all duration-300"
-              title="Chatear por WhatsApp al +57 317 715 8122"
+              title="Chatear por WhatsApp al +57 304 575 1648"
             >
               <MessageCircle className="w-3.5 h-3.5" />
-              <span>WhatsApp (317 715 8122)</span>
+              <span>WhatsApp (304 575 1648)</span>
             </a>
 
             <button 
@@ -851,28 +1049,82 @@ export default function StudioPage({ onBackToMain }: StudioPageProps) {
         </div>
       </section>
 
-      {/* 6. SECCIÓN DE VIDEO SPOTS (REELS / TIKTOK) */}
+      {/* 6. SECCIÓN DE VIDEO SPOTS (REELS / TIKTOK) CON ESTRUCTURA DOPAMÍNICA */}
       <section id="videos" className="py-20 px-4 md:px-8 max-w-7xl mx-auto border-t border-white/10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-12">
           <span className="font-mono text-xs text-amber-400 uppercase tracking-[0.2em] font-bold block mb-2">
-            // FORMATO REELS, TIKTOK & STORIES
+            // NEURO-PUBLICIDAD & RETENCIÓN DE ATENCIÓN
           </span>
           <h2 className="font-poppins font-black text-3xl sm:text-5xl uppercase tracking-tight text-white">
             Video Spots de <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-yellow-500">Alto Engagement</span>
           </h2>
-          <p className="font-poppins text-gray-400 text-sm md:text-base mt-3">
-            El video es el formato rey en pauta digital. Dale vida al movimiento y presencia de tu producto con spots de 10 a 15 segundos diseñados para captar miradas.
+          <p className="font-poppins text-gray-300 text-sm md:text-base mt-3 leading-relaxed">
+            El 80% de los usuarios abandona en los primeros 3 segundos. Diseñamos cada spot aplicando neuro-marketing y patrones de interrupción: gancho de impacto visual, estímulos sensoriales continuos y llamados de alta conversión para Reels, TikTok y Meta Ads.
           </p>
+
+          {/* ESTRUCTURA DOPAMÍNICA EN 3 ETAPAS */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-8 text-left">
+            <div className="bg-black/60 border border-amber-500/30 p-3.5 rounded-2xl backdrop-blur-md">
+              <span className="font-mono text-[10px] text-amber-400 font-bold uppercase tracking-wider block">0 - 3s // EL GANCHO</span>
+              <h4 className="font-poppins font-bold text-xs text-white mt-1">Patrón de Interrupción</h4>
+              <p className="font-sans text-[11px] text-gray-400 mt-1">Frena el scroll del pulgar con movimiento 3D, contrastes y curiosidad.</p>
+            </div>
+            <div className="bg-black/60 border border-amber-500/30 p-3.5 rounded-2xl backdrop-blur-md">
+              <span className="font-mono text-[10px] text-amber-400 font-bold uppercase tracking-wider block">3 - 8s // RETENCIÓN</span>
+              <h4 className="font-poppins font-bold text-xs text-white mt-1">Deseo & Dopamina</h4>
+              <p className="font-sans text-[11px] text-gray-400 mt-1">Estímulos sensoriales cada 1.8s mostrando el beneficio y valor directo.</p>
+            </div>
+            <div className="bg-black/60 border border-amber-500/30 p-3.5 rounded-2xl backdrop-blur-md">
+              <span className="font-mono text-[10px] text-amber-400 font-bold uppercase tracking-wider block">8 - 15s // ACCIÓN</span>
+              <h4 className="font-poppins font-bold text-xs text-white mt-1">Neuro-Conversión</h4>
+              <p className="font-sans text-[11px] text-gray-400 mt-1">Llamado claro sin fricción directo al carrito de compras o WhatsApp.</p>
+            </div>
+          </div>
         </div>
 
-        {/* Video Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {VIDEO_EXAMPLES.map((video) => (
+        {/* FILTROS POR NICHO / CATEGORÍA */}
+        <div className="flex items-center justify-center flex-wrap gap-2 mb-10">
+          {VIDEO_CATEGORIES.map((cat) => (
+            <button
+              key={cat.id}
+              onClick={() => setSelectedVideoCategory(cat.id)}
+              className={`px-4 py-2 rounded-full font-poppins text-xs font-bold transition-all duration-300 ${
+                selectedVideoCategory === cat.id
+                  ? 'bg-gradient-to-r from-amber-400 to-yellow-500 text-black shadow-lg shadow-amber-400/25 scale-105'
+                  : 'bg-zinc-900/80 border border-white/10 text-gray-300 hover:border-amber-400/40 hover:text-white'
+              }`}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Video Grid de 11 Spots */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {VIDEO_EXAMPLES.filter(
+            (v) => selectedVideoCategory === 'todos' || v.categoryFilter === selectedVideoCategory
+          ).map((video) => (
             <motion.div
               key={video.id}
+              layout
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 15 }}
               whileHover={{ y: -6 }}
-              className="bg-zinc-950 rounded-3xl overflow-hidden border border-amber-500/20 hover:border-amber-400/60 p-4 flex flex-col gap-4 shadow-xl group"
+              className="bg-zinc-950 rounded-3xl overflow-hidden border border-amber-500/25 hover:border-amber-400/70 p-4 flex flex-col gap-4 shadow-xl group transition-all duration-300"
             >
+              {/* Header de la Card */}
+              <div className="flex items-center justify-between gap-2 px-1">
+                <span className="px-2.5 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-[10px] font-mono font-bold tracking-wider uppercase">
+                  {video.category}
+                </span>
+                <span className="font-mono text-[10px] text-emerald-400 font-bold flex items-center gap-1">
+                  <Sparkles className="w-3 h-3" />
+                  {video.retentionScore}
+                </span>
+              </div>
+
+              {/* Video Player 9:16 con overlay */}
               <div className="relative aspect-[9/16] rounded-2xl overflow-hidden bg-black flex items-center justify-center">
                 <video 
                   src={video.src}
@@ -880,37 +1132,77 @@ export default function StudioPage({ onBackToMain }: StudioPageProps) {
                   loop
                   muted
                   playsInline
+                  preload="metadata"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
+                <div className="absolute inset-0 bg-black/25 group-hover:bg-transparent transition-colors pointer-events-none" />
+
+                {/* Badge flotante de gancho dopamínico */}
+                <div className="absolute top-3 left-3 bg-black/80 backdrop-blur-md border border-amber-400/40 px-2.5 py-1 rounded-full text-[10px] font-mono text-amber-300 font-bold shadow-md">
+                  {video.badge}
+                </div>
+
+                {/* Botón flotante para ver en grande con audio */}
                 <button 
                   onClick={() => setActiveVideoModal(video.src)}
-                  className="absolute bottom-4 right-4 bg-amber-400 text-black px-3 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1 shadow-lg hover:bg-yellow-300 transition-colors"
+                  className="absolute bottom-4 right-4 bg-amber-400 hover:bg-yellow-300 text-black px-3.5 py-2 rounded-full text-xs font-mono font-black uppercase tracking-wider flex items-center gap-1.5 shadow-xl transition-all duration-300 hover:scale-105"
+                  title="Reproducir video spot con audio"
                 >
-                  <Play className="w-3 h-3 fill-current" />
-                  Ver Spot
+                  <Play className="w-3.5 h-3.5 fill-current" />
+                  <span>Ver con Audio</span>
                 </button>
               </div>
 
-              <div className="flex flex-col gap-1 px-2">
-                <span className="text-[10px] font-mono text-amber-400 uppercase font-bold tracking-wider">
+              {/* Metadatos y Estructura Dopamínica */}
+              <div className="flex flex-col gap-2 px-1 flex-grow">
+                <span className="text-[10px] font-mono text-amber-400/80 uppercase font-bold tracking-wider">
                   {video.format}
                 </span>
-                <h4 className="font-poppins font-bold text-white text-base">
+                <h4 className="font-poppins font-black text-white text-base leading-snug">
                   {video.title}
                 </h4>
-                <p className="text-xs text-gray-400">
+                <p className="text-xs text-gray-300 leading-relaxed font-sans">
                   {video.tagline}
                 </p>
+
+                {/* Desglose Dopamínico */}
+                <div className="mt-2 bg-black/60 border border-white/10 rounded-xl p-3 flex flex-col gap-1.5 text-[11px] font-sans">
+                  <div className="flex items-start gap-1.5">
+                    <span className="text-amber-400 shrink-0 font-mono font-bold text-[10px]">⚡ 0-3s:</span>
+                    <span className="text-gray-300">{video.dopamineStructure.hook}</span>
+                  </div>
+                  <div className="flex items-start gap-1.5">
+                    <span className="text-yellow-400 shrink-0 font-mono font-bold text-[10px]">🧠 3-8s:</span>
+                    <span className="text-gray-300">{video.dopamineStructure.body}</span>
+                  </div>
+                  <div className="flex items-start gap-1.5">
+                    <span className="text-emerald-400 shrink-0 font-mono font-bold text-[10px]">🎯 8-15s:</span>
+                    <span className="text-gray-300">{video.dopamineStructure.cta}</span>
+                  </div>
+                </div>
               </div>
 
-              <button
-                onClick={() => handleOpenOrder(PACKAGE_CARDS[2])}
-                className="w-full py-3 rounded-xl bg-amber-500/10 hover:bg-amber-400 hover:text-black border border-amber-400/30 text-amber-300 font-poppins text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2"
-              >
-                <span>Ordenar Video ($69.900 COP)</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
+              {/* Acciones de Compra y Contacto */}
+              <div className="flex flex-col sm:flex-row gap-2 pt-2 border-t border-white/10">
+                <button
+                  onClick={() => handleOpenOrder(PACKAGE_CARDS[2])}
+                  className="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-yellow-400 hover:to-amber-500 text-black font-poppins text-xs font-black uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-1.5 shadow-md hover:shadow-amber-400/20"
+                >
+                  <span>Ordenar ($69.900 COP)</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+
+                <a
+                  href={`https://wa.me/573045751648?text=${encodeURIComponent(video.whatsappMessage)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-2.5 rounded-xl bg-black/60 hover:bg-emerald-500/20 border border-emerald-400/40 text-emerald-400 font-poppins text-xs font-bold flex items-center justify-center gap-1 transition-all duration-300"
+                  title="Pedir asesoría de este spot en WhatsApp"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  <span className="sm:hidden lg:inline">Pedir por WA</span>
+                </a>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -989,7 +1281,7 @@ export default function StudioPage({ onBackToMain }: StudioPageProps) {
 
           <div className="text-center md:text-right flex flex-col gap-1 text-[11px] font-mono text-gray-500">
             <span>© 2026 Expándete Studio • Todos los derechos reservados</span>
-            <span className="text-amber-400/80 font-bold">WhatsApp Oficial: +57 317 715 8122</span>
+            <span className="text-amber-400/80 font-bold">WhatsApp Oficial: +57 304 575 1648</span>
             <span>Pagos seguros con Wompi • Entrega garantizada</span>
           </div>
 
@@ -1023,35 +1315,127 @@ export default function StudioPage({ onBackToMain }: StudioPageProps) {
         )}
       </AnimatePresence>
 
-      {/* MODAL DE VIDEO SPOT FULL SCREEN */}
+      {/* MODAL DE VIDEO SPOT FULL SCREEN CON ANÁLISIS DOPAMÍNICO */}
       <AnimatePresence>
-        {activeVideoModal && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setActiveVideoModal(null)}
-            className="fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl flex items-center justify-center p-4"
-          >
-            <div className="relative max-w-md w-full flex flex-col items-center" onClick={(e) => e.stopPropagation()}>
-              <button 
-                onClick={() => setActiveVideoModal(null)}
-                className="absolute -top-12 right-0 text-white/70 hover:text-white p-2 rounded-full bg-white/10 backdrop-blur-md"
+        {activeVideoModal && (() => {
+          const currentSpot = VIDEO_EXAMPLES.find(v => v.src === activeVideoModal);
+          return (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setActiveVideoModal(null)}
+              className="fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl flex items-center justify-center p-4 overflow-y-auto"
+            >
+              <div 
+                className="relative max-w-4xl w-full bg-zinc-950/90 border border-amber-400/40 rounded-3xl p-4 sm:p-6 shadow-[0_0_60px_rgba(245,158,11,0.25)] my-auto flex flex-col md:flex-row gap-6 items-center" 
+                onClick={(e) => e.stopPropagation()}
               >
-                <X className="w-6 h-6" />
-              </button>
-              <div className="w-full aspect-[9/16] rounded-3xl overflow-hidden border-2 border-amber-400 shadow-2xl bg-black">
-                <video 
-                  src={activeVideoModal}
-                  autoPlay
-                  controls
-                  playsInline
-                  className="w-full h-full object-cover"
-                />
+                <button 
+                  onClick={() => setActiveVideoModal(null)}
+                  className="absolute top-4 right-4 text-white/70 hover:text-white p-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md transition-colors z-20"
+                  aria-label="Cerrar reproductor"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+
+                {/* Video Player Vertical 9:16 */}
+                <div className="w-full sm:w-[320px] md:w-[340px] shrink-0 aspect-[9/16] rounded-2xl overflow-hidden border border-amber-400/50 shadow-2xl bg-black relative">
+                  <video 
+                    src={activeVideoModal}
+                    autoPlay
+                    controls
+                    playsInline
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                {/* Detalles y Estructura Dopamínica */}
+                <div className="flex flex-col gap-4 text-left w-full">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="px-3 py-1 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-300 text-xs font-mono font-bold tracking-wider uppercase">
+                      {currentSpot?.badge || 'VIDEO SPOT IA'}
+                    </span>
+                    <span className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300 text-xs font-mono">
+                      {currentSpot?.category}
+                    </span>
+                    <span className="text-emerald-400 font-mono text-xs font-bold flex items-center gap-1">
+                      <Sparkles className="w-3.5 h-3.5" />
+                      {currentSpot?.retentionScore}
+                    </span>
+                  </div>
+
+                  <div>
+                    <h3 className="font-poppins font-black text-xl sm:text-2xl text-white">
+                      {currentSpot?.title || 'Video Spot de Alto Engagement'}
+                    </h3>
+                    <p className="font-sans text-xs sm:text-sm text-gray-300 mt-1 leading-relaxed">
+                      {currentSpot?.tagline}
+                    </p>
+                  </div>
+
+                  {/* Radiografía Dopamínica */}
+                  <div className="bg-black/70 border border-amber-500/30 rounded-2xl p-4 flex flex-col gap-3">
+                    <span className="font-mono text-[11px] text-amber-400 font-bold uppercase tracking-widest flex items-center gap-1.5">
+                      <Zap className="w-3.5 h-3.5 text-yellow-400" />
+                      Estructura Dopamínica del Spot
+                    </span>
+
+                    <div className="space-y-2 text-xs font-sans">
+                      <div className="flex items-start gap-2 bg-white/5 p-2.5 rounded-xl border border-white/5">
+                        <span className="text-amber-400 shrink-0 font-mono font-bold text-xs">⚡ 0-3s:</span>
+                        <div className="flex flex-col">
+                          <strong className="text-white text-[11px] uppercase tracking-wider">Gancho / Patrón de Interrupción</strong>
+                          <span className="text-gray-300 text-xs mt-0.5">{currentSpot?.dopamineStructure.hook}</span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-start gap-2 bg-white/5 p-2.5 rounded-xl border border-white/5">
+                        <span className="text-yellow-400 shrink-0 font-mono font-bold text-xs">🧠 3-8s:</span>
+                        <div className="flex flex-col">
+                          <strong className="text-white text-[11px] uppercase tracking-wider">Estímulo & Retención</strong>
+                          <span className="text-gray-300 text-xs mt-0.5">{currentSpot?.dopamineStructure.body}</span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-start gap-2 bg-white/5 p-2.5 rounded-xl border border-white/5">
+                        <span className="text-emerald-400 shrink-0 font-mono font-bold text-xs">🎯 8-15s:</span>
+                        <div className="flex flex-col">
+                          <strong className="text-white text-[11px] uppercase tracking-wider">Neuro-Cierre & Conversión</strong>
+                          <span className="text-gray-300 text-xs mt-0.5">{currentSpot?.dopamineStructure.cta}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Acciones */}
+                  <div className="flex flex-col sm:flex-row gap-3 mt-2">
+                    <button
+                      onClick={() => {
+                        setActiveVideoModal(null);
+                        handleOpenOrder(PACKAGE_CARDS[2]);
+                      }}
+                      className="flex-1 py-3 px-5 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-yellow-400 hover:to-amber-500 text-black font-poppins font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-amber-400/20 transition-transform hover:scale-[1.02]"
+                    >
+                      <ShoppingBag className="w-4 h-4" />
+                      <span>Ordenar este Estilo ($69.900 COP)</span>
+                    </button>
+
+                    <a
+                      href={`https://wa.me/573045751648?text=${encodeURIComponent(currentSpot?.whatsappMessage || '¡Hola Expándete Studio! Me interesa pedir un Video Spot IA.')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="py-3 px-5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/50 text-emerald-300 font-poppins font-bold text-xs flex items-center justify-center gap-2 transition-colors"
+                    >
+                      <MessageCircle className="w-4 h-4" />
+                      <span>Pedir por WhatsApp (+57 304 575 1648)</span>
+                    </a>
+                  </div>
+                </div>
               </div>
-            </div>
-          </motion.div>
-        )}
+            </motion.div>
+          );
+        })()}
       </AnimatePresence>
 
       {/* MODAL INTERACTIVO DE PEDIDO Y PAGO DIRECTO */}
@@ -1139,7 +1523,7 @@ export default function StudioPage({ onBackToMain }: StudioPageProps) {
                     <input 
                       type="tel" 
                       required
-                      placeholder="Ej. +57 317 715 8122"
+                      placeholder="Ej. +57 304 575 1648"
                       value={orderForm.whatsapp}
                       onChange={(e) => setOrderForm(prev => ({ ...prev, whatsapp: e.target.value }))}
                       className="w-full bg-black/60 border border-white/15 px-3.5 py-2.5 rounded-xl text-white text-xs font-poppins focus:border-amber-400 focus:outline-none"

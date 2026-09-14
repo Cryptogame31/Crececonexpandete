@@ -9,7 +9,7 @@ interface FloatingWhatsAppProps {
 export default function FloatingWhatsApp({ pageContext = 'main' }: FloatingWhatsAppProps) {
   const [showTooltip, setShowTooltip] = useState(true);
 
-  const phone = "573177158122"; // Expándete official WhatsApp: +57 317 715 8122
+  const phone = "573045751648"; // Expándete official WhatsApp: +57 304 575 1648
   const defaultMessage = pageContext === 'studio'
     ? '¡Hola Expándete Studio! Quiero información sobre los paquetes de publicidad visual y videos con IA.'
     : '¡Hola Expándete! Deseo información y asesoría sobre sus servicios de software, automatizaciones y tecnología.';
@@ -37,7 +37,7 @@ export default function FloatingWhatsApp({ pageContext = 'main' }: FloatingWhats
                 ¿Tienes preguntas?
               </span>
               <span className="font-mono text-[10px] text-emerald-400 font-semibold">
-                Chatea al +57 317 715 8122
+                Chatea al +57 304 575 1648
               </span>
             </div>
             <button
@@ -60,8 +60,8 @@ export default function FloatingWhatsApp({ pageContext = 'main' }: FloatingWhats
         href={waUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chatear por WhatsApp al +57 317 715 8122"
-        title="Chatear por WhatsApp al +57 317 715 8122"
+        aria-label="Chatear por WhatsApp al +57 304 575 1648"
+        title="Chatear por WhatsApp al +57 304 575 1648"
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.94 }}
         className="relative group flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-tr from-[#128C7E] via-[#25D366] to-[#2bf075] text-white shadow-[0_8px_25px_rgba(37,211,102,0.45)] hover:shadow-[0_10px_35px_rgba(37,211,102,0.7)] transition-shadow duration-300"

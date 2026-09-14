@@ -401,7 +401,7 @@ export default function App() {
   };
 
   const getWhatsAppLink = () => {
-    const phone = "573177158122"; // Expándete official direct contact line: +57 317 715 8122
+    const phone = "573045751648"; // Expándete official direct contact line: +57 304 575 1648
     const message = `¡Hola Expándete! Acabo de calificar mi empresa en su plataforma:\n\n` +
       `👤 *Nombre:* ${formData.nombre}\n` +
       `🏢 *Empresa:* ${formData.empresa || 'No especificada'}\n` +
@@ -1192,15 +1192,15 @@ export default function App() {
               <span className="font-sans text-xs text-white/40 font-bold mr-2">Sigue la ruta:</span>
               <div className="flex gap-4 items-center">
                 <a 
-                  href="https://wa.me/573177158122?text=%C2%A1Hola%20Exp%C3%A1ndete!%20Quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios%20tecnol%C3%B3gicos%20y%20publicitarios." 
+                  href="https://wa.me/573045751648?text=%C2%A1Hola%20Exp%C3%A1ndete!%20Quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios%20tecnol%C3%B3gicos%20y%20publicitarios." 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="text-emerald-400 hover:text-white transition-colors duration-300 flex items-center gap-1 font-mono text-xs font-bold" 
                   aria-label="WhatsApp"
-                  title="WhatsApp: +57 317 715 8122"
+                  title="WhatsApp: +57 304 575 1648"
                 >
                   <MessageCircle className="w-5 h-5" />
-                  <span className="hidden sm:inline">317 715 8122</span>
+                  <span className="hidden sm:inline">304 575 1648</span>
                 </a>
                 <a href="https://www.linkedin.com/in/vicrivera31/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-tech-cyan transition-colors duration-300" aria-label="LinkedIn"><Linkedin className="w-5 h-5" /></a>
                 <a href="https://x.com/cexpandete" target="_blank" rel="noopener noreferrer" className="text-white hover:text-tech-cyan transition-colors duration-300" aria-label="Twitter"><Twitter className="w-5 h-5" /></a>
@@ -1469,7 +1469,7 @@ export default function App() {
                         required
                         value={formData.whatsapp}
                         onChange={handleInputChange}
-                        placeholder="Ej. +57 317 715 8122"
+                        placeholder="Ej. +57 304 575 1648"
                         className="w-full bg-black/60 border border-white/15 px-4 py-3 rounded-xl text-white font-sans text-sm focus:border-tech-cyan focus:outline-none transition-all duration-300 placeholder:text-white/20 font-bold"
                       />
                     </div>
