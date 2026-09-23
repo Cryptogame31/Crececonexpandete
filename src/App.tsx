@@ -2,6 +2,7 @@ import React from 'react';
 import { useMotionValue, useSpring, useTransform, motion } from 'motion/react';
 import { ArrowRight, Flame, Cpu, Database, Smartphone, TrendingUp, Linkedin, Twitter, Facebook, Youtube, X, Send, CheckCircle, Layers, ArrowLeft, Check, DollarSign, ExternalLink, ShieldCheck, Clock, Sparkles, Briefcase, FolderOpen, Globe, MessageCircle } from 'lucide-react';
 import StudioPage from './components/StudioPage';
+import IaImpactoPage from './components/IaImpactoPage';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
 
 const SERVICES_DATA = [
@@ -191,6 +192,31 @@ const SERVICES_DATA = [
       "Copywriting de Neuro-Ventas Incluido: Textos con ganchos persuasivos listos para pautar.",
       "Entrega Express en 24 a 48 Horas: Pagos rápidos con Wompi, Nequi y pedidos directos por WhatsApp."
     ]
+  },
+  {
+    id: 9,
+    title: "IA IMPACTO • Presencial",
+    tagline: "De una idea a algo real • 3 Sesiones Prácticas en Medellín + Comunidad VIP Telegram.",
+    description: "Una experiencia presencial, práctica y transformadora para descubrir cómo utilizar Inteligencia Artificial para crear contenidos, imágenes publicitarias, videos comerciales, landing pages funcionales y prototipos digitales sin ser programador.",
+    icon: "Cpu",
+    color: "from-cyan-400 via-indigo-500 to-purple-600",
+    themeColor: "text-cyan-400",
+    bgAccent: "bg-cyan-500/10",
+    borderAccent: "border-cyan-400/40",
+    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=80",
+    badge: "EVENTO PRESENCIAL • MEDELLÍN • PREVENTA $199.000 COP",
+    isIaImpactoEntry: true,
+    realPrice: {
+      range: "Preventa $199.000 COP | Regular $249.000 COP | Últimos Cupos $299.000 COP",
+      detail: "Incluye las 3 sesiones presenciales de 4 horas cada 15 días con formato rotativo 'Ponte al día en 15 min', acceso permanente a la comunidad privada de Telegram, biblioteca de prompts, prompt maestro y material descargable.",
+      comparison: "No es una clase teórica de diapositivas ni un curso genérico de ChatGPT. Es un laboratorio práctico de creación en vivo donde construyes proyectos reales."
+    },
+    benefits: [
+      "3 Sesiones Presenciales Prácticas: Descubre, Crea y Construye con IA (1 sesión cada 15 días).",
+      "No necesitas ser programador: Diseñado para emprendedores, creadores, profesionales y comerciales.",
+      "Flujo Rotativo 'Ponte al día en 15 min': Puedes sumarte en cualquier momento del ciclo sin perderte.",
+      "Comunidad Privada de Telegram: Avisos, retos, biblioteca de prompts, networking y soporte continuo."
+    ]
   }
 ];
 
@@ -255,6 +281,17 @@ const PROJECTS_DATA = [
     image: "https://vicflix.expandete.cloud/Expandete_videos/ej3.jpeg",
     color: "from-amber-400 to-yellow-600",
     isStudioEntry: true
+  },
+  {
+    id: 7,
+    title: "IA IMPACTO",
+    tagline: "De una idea a algo real • Experiencia Presencial",
+    solution: "3 sesiones prácticas en Medellín cada 15 días: aprende a usar IA para crear contenido, imágenes, videos, landing pages y prototipos funcionales con acceso a comunidad privada de Telegram.",
+    category: "Inteligencia Artificial",
+    link: "/ia-impacto",
+    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80",
+    color: "from-cyan-400 via-indigo-500 to-purple-600",
+    isIaImpactoEntry: true
   }
 ];
 
@@ -284,16 +321,22 @@ export default function App() {
   const [showProjectsView, setShowProjectsView] = React.useState(false);
   const [projectCategoryFilter, setProjectCategoryFilter] = React.useState('Todos');
   const [isStudioView, setIsStudioView] = React.useState(false);
+  const [isIaImpactoView, setIsIaImpactoView] = React.useState(false);
 
   React.useEffect(() => {
     const checkUrlRoute = () => {
       const path = window.location.pathname.toLowerCase();
       const hash = window.location.hash.toLowerCase();
       const search = window.location.search.toLowerCase();
-      if (path.includes('studio') || hash.includes('studio') || search.includes('studio')) {
+      if (path.includes('ia-impacto') || hash.includes('ia-impacto') || search.includes('ia-impacto') || path.includes('impacto') || hash.includes('impacto') || search.includes('impacto')) {
+        setIsIaImpactoView(true);
+        setIsStudioView(false);
+      } else if (path.includes('studio') || hash.includes('studio') || search.includes('studio')) {
         setIsStudioView(true);
+        setIsIaImpactoView(false);
       } else {
         setIsStudioView(false);
+        setIsIaImpactoView(false);
       }
     };
 
@@ -306,14 +349,23 @@ export default function App() {
     };
   }, []);
 
+  const navigateToIaImpacto = () => {
+    setIsIaImpactoView(true);
+    setIsStudioView(false);
+    window.history.pushState({}, '', '/ia-impacto');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const navigateToStudio = () => {
     setIsStudioView(true);
+    setIsIaImpactoView(false);
     window.history.pushState({}, '', '/studio');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const navigateToHome = () => {
     setIsStudioView(false);
+    setIsIaImpactoView(false);
     window.history.pushState({}, '', '/');
   };
 
@@ -432,10 +484,19 @@ export default function App() {
     mouseY.set(y);
   };
 
+  if (isIaImpactoView) {
+    return (
+      <>
+        <IaImpactoPage onBackToMain={navigateToHome} onNavigateToStudio={navigateToStudio} />
+        <FloatingWhatsApp pageContext="ia-impacto" />
+      </>
+    );
+  }
+
   if (isStudioView) {
     return (
       <>
-        <StudioPage onBackToMain={navigateToHome} />
+        <StudioPage onBackToMain={navigateToHome} onNavigateToIaImpacto={navigateToIaImpacto} />
         <FloatingWhatsApp pageContext="studio" />
       </>
     );
@@ -446,20 +507,35 @@ export default function App() {
       onMouseMove={handleMouseMove}
       className="h-screen w-full overflow-y-scroll snap-y snap-mandatory scroll-smooth bg-black grid-bg selection:bg-tech-cyan selection:text-black relative"
     >
-      {/* Floating Expándete Studio Launcher Button */}
-      <motion.button
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        onClick={navigateToStudio}
-        className="fixed top-5 right-5 z-40 bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 text-black px-4 py-2.5 rounded-full font-poppins font-black text-xs uppercase tracking-wider shadow-[0_0_25px_rgba(245,158,11,0.6)] flex items-center gap-2 border border-amber-200 cursor-pointer backdrop-blur-md transition-all duration-300"
-      >
-        <Sparkles className="w-3.5 h-3.5 animate-pulse" />
-        <span className="hidden sm:inline">Expándete Studio • Anuncios IA ($34.900)</span>
-        <span className="sm:hidden">Studio IA</span>
-        <ArrowRight className="w-3.5 h-3.5" />
-      </motion.button>
+      {/* Floating Launchers (IA IMPACTO & Expándete Studio) */}
+      <div className="fixed top-5 right-5 z-40 flex items-center gap-2">
+        <motion.button
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={navigateToIaImpacto}
+          className="bg-gradient-to-r from-cyan-400 via-indigo-500 to-purple-600 text-black px-3.5 py-2.5 rounded-full font-poppins font-black text-xs uppercase tracking-wider shadow-[0_0_25px_rgba(6,182,212,0.6)] flex items-center gap-1.5 border border-cyan-200 cursor-pointer backdrop-blur-md transition-all duration-300"
+        >
+          <Sparkles className="w-3.5 h-3.5 animate-pulse text-black" />
+          <span className="hidden sm:inline">IA IMPACTO • Presencial ($199.000)</span>
+          <span className="sm:hidden">IA Impacto</span>
+          <ArrowRight className="w-3 h-3 text-black" />
+        </motion.button>
+
+        <motion.button
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={navigateToStudio}
+          className="bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 text-black px-3.5 py-2.5 rounded-full font-poppins font-black text-xs uppercase tracking-wider shadow-[0_0_25px_rgba(245,158,11,0.6)] flex items-center gap-1.5 border border-amber-200 cursor-pointer backdrop-blur-md transition-all duration-300"
+        >
+          <span className="hidden sm:inline">Studio ($34.900)</span>
+          <span className="sm:hidden">Studio</span>
+          <ArrowRight className="w-3 h-3" />
+        </motion.button>
+      </div>
 
       {/* 1. SECCIÓN 1: INTRODUCCIÓN CINEMÁTICA CON VIDEO DE FONDO (Pantalla Completa a Todo Color) */}
       <section className="snap-start h-screen w-full relative overflow-hidden flex flex-col justify-between p-6 md:p-12">
@@ -552,21 +628,27 @@ export default function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.08 }}
                 onClick={() => {
-                  if (service.isStudioEntry) {
+                  if (service.isIaImpactoEntry) {
+                    navigateToIaImpacto();
+                  } else if (service.isStudioEntry) {
                     navigateToStudio();
                   } else {
                     setSelectedService(service.id);
                   }
                 }}
                 className={`glass-card p-8 flex flex-col justify-between min-h-[240px] cursor-pointer group hover:border-tech-cyan/50 hover:shadow-[0_0_30px_rgba(0,240,255,0.15)] hover:-translate-y-1 transition-all duration-300 relative ${
-                  service.isStudioEntry
+                  service.isIaImpactoEntry
+                    ? 'border-cyan-400/50 shadow-[0_0_25px_rgba(6,182,212,0.2)] bg-gradient-to-b from-cyan-500/10 via-indigo-500/5 to-zinc-950'
+                    : service.isStudioEntry
                     ? 'border-amber-400/50 shadow-[0_0_25px_rgba(245,158,11,0.2)] bg-gradient-to-b from-amber-500/10 to-zinc-950'
                     : service.badge ? 'border-brand-orange/40 shadow-[0_0_20px_rgba(242,125,38,0.1)]' : ''
                 }`}
               >
                 {service.badge && (
                   <span className={`absolute -top-3 right-6 font-poppins font-black text-[9px] tracking-[0.15em] uppercase px-3.5 py-1.5 rounded-full border shadow-lg z-20 flex items-center gap-1 ${
-                    service.isStudioEntry 
+                    service.isIaImpactoEntry
+                      ? 'bg-gradient-to-r from-cyan-400 via-indigo-500 to-purple-600 text-black border-cyan-300 shadow-[0_0_15px_rgba(6,182,212,0.5)]'
+                      : service.isStudioEntry 
                       ? 'bg-gradient-to-r from-amber-400 to-yellow-500 text-black border-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.5)]' 
                       : 'bg-brand-orange text-white border-white/20 shadow-[0_0_15px_rgba(242,125,38,0.5)]'
                   }`}>
@@ -584,9 +666,9 @@ export default function App() {
                   </p>
                 </div>
                 <div className={`mt-4 flex items-center gap-1.5 font-mono text-[10px] uppercase font-bold tracking-wider transition-colors duration-300 ${
-                  service.isStudioEntry ? 'text-amber-300 group-hover:text-yellow-200' : 'text-white/40 group-hover:text-tech-cyan'
+                  service.isIaImpactoEntry ? 'text-cyan-300 group-hover:text-cyan-200' : service.isStudioEntry ? 'text-amber-300 group-hover:text-yellow-200' : 'text-white/40 group-hover:text-tech-cyan'
                 }`}>
-                  {service.isStudioEntry ? 'Abrir Expándete Studio' : 'Ver detalles y precios'}
+                  {service.isIaImpactoEntry ? 'Ver Experiencia IA IMPACTO' : service.isStudioEntry ? 'Abrir Expándete Studio' : 'Ver detalles y precios'}
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </div>
               </motion.div>
@@ -1344,7 +1426,18 @@ export default function App() {
 
                     {/* External Landing Link */}
                     <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between gap-4">
-                      {project.isStudioEntry ? (
+                      {project.isIaImpactoEntry ? (
+                        <button
+                          onClick={() => {
+                            setShowProjectsView(false);
+                            navigateToIaImpacto();
+                          }}
+                          className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-400 via-indigo-500 to-purple-600 text-black hover:scale-102 transition-all duration-300 py-3 rounded-xl font-poppins text-xs font-black uppercase tracking-wider cursor-pointer shadow-lg"
+                        >
+                          Explorar IA IMPACTO
+                          <Sparkles className="w-3.5 h-3.5 text-black" />
+                        </button>
+                      ) : project.isStudioEntry ? (
                         <button
                           onClick={() => {
                             setShowProjectsView(false);

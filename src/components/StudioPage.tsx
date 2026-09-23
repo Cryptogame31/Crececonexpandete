@@ -31,6 +31,7 @@ import {
 
 interface StudioPageProps {
   onBackToMain: () => void;
+  onNavigateToIaImpacto?: () => void;
 }
 
 const FLYER_EXAMPLES = [
@@ -365,7 +366,7 @@ const PACKAGE_CARDS = [
   }
 ];
 
-export default function StudioPage({ onBackToMain }: StudioPageProps) {
+export default function StudioPage({ onBackToMain, onNavigateToIaImpacto }: StudioPageProps) {
   const [heroVideo, setHeroVideo] = useState('https://vicflix.expandete.cloud/Expandete_videos/hesh.mp4');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [activeVideoModal, setActiveVideoModal] = useState<string | null>(null);
@@ -557,6 +558,17 @@ export default function StudioPage({ onBackToMain }: StudioPageProps) {
 
           {/* Action CTAs */}
           <div className="flex items-center gap-2 md:gap-3">
+            {onNavigateToIaImpacto && (
+              <button
+                onClick={onNavigateToIaImpacto}
+                className="hidden xl:flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 font-poppins text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer"
+                title="Conocer experiencia presencial IA IMPACTO en Medellín"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+                <span>IA IMPACTO ($199.000)</span>
+              </button>
+            )}
+
             <a 
               href={getDirectWhatsAppUrl()}
               target="_blank"

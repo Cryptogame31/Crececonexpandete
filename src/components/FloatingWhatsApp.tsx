@@ -3,14 +3,16 @@ import { motion, AnimatePresence } from 'motion/react';
 import { MessageCircle, X } from 'lucide-react';
 
 interface FloatingWhatsAppProps {
-  pageContext?: 'main' | 'studio';
+  pageContext?: 'main' | 'studio' | 'ia-impacto';
 }
 
 export default function FloatingWhatsApp({ pageContext = 'main' }: FloatingWhatsAppProps) {
   const [showTooltip, setShowTooltip] = useState(true);
 
   const phone = "573045751648"; // Expándete official WhatsApp: +57 304 575 1648
-  const defaultMessage = pageContext === 'studio'
+  const defaultMessage = pageContext === 'ia-impacto'
+    ? '¡Hola Expándete! Deseo información y apartar mi cupo en la experiencia presencial IA IMPACTO en Medellín.'
+    : pageContext === 'studio'
     ? '¡Hola Expándete Studio! Quiero información sobre los paquetes de publicidad visual y videos con IA.'
     : '¡Hola Expándete! Deseo información y asesoría sobre sus servicios de software, automatizaciones y tecnología.';
 
