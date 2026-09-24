@@ -197,7 +197,7 @@ const SERVICES_DATA = [
     id: 9,
     title: "IA IMPACTO • Presencial",
     tagline: "De una idea a algo real • 3 Sesiones Prácticas en Medellín (Prado Colonial) + Comunidad VIP Telegram.",
-    description: "Una experiencia presencial, práctica y transformadora para descubrir cómo utilizar Inteligencia Artificial para crear contenidos, imágenes publicitarias, videos comerciales, landing pages funcionales y prototipos digitales sin ser programador.",
+    description: "Una experiencia presencial, práctica y transformadora para descubrir cómo utilizar Inteligencia Artificial para crear contenidos virales, imágenes publicitarias de estudio, videos de alto impacto, páginas web funcionales, aplicaciones para empresas, optimización y mejoras de sistemas, y prototipos digitales listos para monetizar.",
     icon: "Cpu",
     color: "from-cyan-400 via-indigo-500 to-purple-600",
     themeColor: "text-cyan-400",
@@ -286,7 +286,7 @@ const PROJECTS_DATA = [
     id: 7,
     title: "IA IMPACTO",
     tagline: "De una idea a algo real • Experiencia Presencial",
-    solution: "3 sesiones prácticas de 2 horas en Medellín - Prado Colonial (Martes de 6:30 PM a 8:30 PM): aprende a usar IA para crear contenido, imágenes, videos, landing pages y prototipos funcionales con acceso a comunidad privada de Telegram.",
+    solution: "3 sesiones prácticas de 2 horas en Medellín - Prado Colonial (Martes de 6:30 PM a 8:30 PM): aprende a usar IA para crear contenidos virales, imágenes de estudio, videos comerciales, páginas web, apps para empresas, mejoras de sistemas y prototipos digitales listos para monetizar con acceso a comunidad privada de Telegram.",
     category: "Inteligencia Artificial",
     link: "/ia-impacto",
     image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80",
@@ -328,7 +328,18 @@ export default function App() {
       const path = window.location.pathname.toLowerCase();
       const hash = window.location.hash.toLowerCase();
       const search = window.location.search.toLowerCase();
-      if (path.includes('ia-impacto') || hash.includes('ia-impacto') || search.includes('ia-impacto') || path.includes('impacto') || hash.includes('impacto') || search.includes('impacto')) {
+      if (
+        path.includes('ia-impacto') || 
+        hash.includes('ia-impacto') || 
+        search.includes('ia-impacto') || 
+        path.includes('impacto') || 
+        hash.includes('impacto') || 
+        search.includes('impacto') ||
+        search.includes('pago=exitoso') ||
+        search.includes('evento=ia-impacto') ||
+        search.includes('boleta') ||
+        ((search.includes('id=') || search.includes('status=')) && !search.includes('studio') && !search.includes('flyer') && !search.includes('vendedor'))
+      ) {
         setIsIaImpactoView(true);
         setIsStudioView(false);
       } else if (path.includes('studio') || hash.includes('studio') || search.includes('studio')) {

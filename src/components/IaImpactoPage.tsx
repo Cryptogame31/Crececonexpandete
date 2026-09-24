@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   ArrowRight, 
@@ -35,7 +35,12 @@ import {
   VolumeX,
   Eye,
   Play,
-  Maximize2
+  Maximize2,
+  Mail,
+  Ticket,
+  Link as LinkIcon,
+  Download,
+  Info
 } from 'lucide-react';
 import { 
   IA_IMPACTO_CONFIG, 
@@ -172,6 +177,87 @@ export default function IaImpactoPage({ onBackToMain, onNavigateToStudio }: IaIm
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<'whatsapp' | 'wompi'>('whatsapp');
+
+  // Wompi redirect & payment confirmation state
+  const [wompiConfirmedData, setWompiConfirmedData] = useState<{
+    isOpen: boolean;
+    transactionId: string;
+    reference: string;
+    buyerEmail?: string;
+    amount?: string;
+    isSimulated?: boolean;
+  } | null>(null);
+
+  // Wompi link setup helper modal state (for the organizer/creator)
+  const [isWompiHelperOpen, setIsWompiHelperOpen] = useState(false);
+  const [copiedWompiRedirectUrl, setCopiedWompiRedirectUrl] = useState(false);
+
+  // Detect if user was redirected back from Wompi payment
+  useEffect(() => {
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const hash = window.location.hash || '';
+      const isSuccess = 
+        urlParams.get('pago') === 'exitoso' || 
+        urlParams.get('status') === 'APPROVED' || 
+        urlParams.get('estado') === 'exitoso' ||
+        urlParams.get('confirmacion') === 'wompi' ||
+        urlParams.get('evento') === 'ia-impacto' && urlParams.get('pago') === 'exitoso' ||
+        hash.includes('pago-confirmado') ||
+        (Boolean(urlParams.get('id')) && !urlParams.get('plan') && !urlParams.get('flyer'));
+
+      if (isSuccess) {
+        const txId = urlParams.get('id') || urlParams.get('transaction_id') || `WMP-${Math.floor(100000 + Math.random() * 900000)}`;
+        const ref = urlParams.get('reference') || urlParams.get('ref') || 'IA-IMPACTO-PREVENTA';
+        const email = urlParams.get('customer_email') || urlParams.get('email') || '';
+
+        setWompiConfirmedData({
+          isOpen: true,
+          transactionId: txId,
+          reference: ref,
+          buyerEmail: email,
+          amount: '$199.000 COP',
+          isSimulated: false
+        });
+      }
+    } catch (e) {
+      console.error("Error reading URL params for Wompi:", e);
+    }
+  }, []);
+
+  const getWompiRedirectUrl = () => {
+    if (typeof window !== 'undefined') {
+      return `${window.location.origin}/?evento=ia-impacto&pago=exitoso`;
+    }
+    return 'https://expandete.cloud/?evento=ia-impacto&pago=exitoso';
+  };
+
+  const handleCopyWompiUrl = () => {
+    navigator.clipboard.writeText(getWompiRedirectUrl());
+    setCopiedWompiRedirectUrl(true);
+    setTimeout(() => setCopiedWompiRedirectUrl(false), 3000);
+  };
+
+  const handleSimulateWompiConfirmation = () => {
+    setWompiConfirmedData({
+      isOpen: true,
+      transactionId: `WMP-SIM-${Math.floor(100000 + Math.random() * 900000)}`,
+      reference: 'IA-IMP-PREVENTA-TEST',
+      buyerEmail: formData.email || 'tu-correo@ejemplo.com',
+      amount: '$199.000 COP',
+      isSimulated: true
+    });
+    setIsWompiHelperOpen(false);
+    setIsRegisterModalOpen(false);
+  };
+
+  const handleAddToCalendar = () => {
+    const title = encodeURIComponent("IA IMPACTO • 3 Sesiones Presenciales con IA");
+    const details = encodeURIComponent("3 Sesiones Prácticas Presenciales de 2 horas (Martes 6:30 PM a 8:30 PM) en Medellín - Prado Colonial. Lleva tu portátil con cargador. Soporte WhatsApp: +57 304 575 1648.");
+    const location = encodeURIComponent("Prado Colonial, Medellín, Colombia");
+    const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}&recur=RRULE:FREQ=WEEKLY;BYDAY=TU;COUNT=3`;
+    window.open(gCalUrl, '_blank');
+  };
   
   const [formData, setFormData] = useState({
     nombre: '',
@@ -270,6 +356,54 @@ Genera el prompt final listo para copiar y pegar, junto con una breve explicaci�
         </button>
       </div>
 
+      {/* CONFIRMATION BANNER AFTER WOMPI PAYMENT */}
+      <AnimatePresence>
+        {wompiConfirmedData && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="sticky top-0 z-50 bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 text-white px-4 py-3 shadow-2xl border-b border-emerald-400"
+          >
+            <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+              <div className="flex items-center gap-3 text-center sm:text-left">
+                <span className="p-1.5 bg-black/40 text-emerald-300 rounded-full shrink-0 border border-emerald-300/40">
+                  <CheckCircle className="w-5 h-5" />
+                </span>
+                <div>
+                  <div className="font-poppins font-black text-sm uppercase tracking-wide flex items-center gap-1.5 justify-center sm:justify-start">
+                    <span>¡Pago Procesado con Éxito en Wompi!</span>
+                    {wompiConfirmedData.isSimulated && (
+                      <span className="text-[10px] bg-amber-400 text-black px-1.5 py-0.5 rounded font-mono font-bold">Modo Prueba</span>
+                    )}
+                  </div>
+                  <p className="text-emerald-100 text-xs mt-0.5">
+                    <strong>En las próximas horas te llegará tu boleta oficial de acceso a tu correo electrónico.</strong> Tu cupo presencial en Prado Colonial está reservado.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 shrink-0">
+                <button
+                  onClick={() => setWompiConfirmedData(prev => prev ? { ...prev, isOpen: true } : null)}
+                  className="bg-black hover:bg-zinc-900 text-emerald-300 border border-emerald-400/40 px-3.5 py-1.5 rounded-full font-poppins font-bold text-xs uppercase tracking-wider transition-transform hover:scale-105 cursor-pointer flex items-center gap-1 shadow-md"
+                >
+                  <Ticket className="w-3.5 h-3.5" />
+                  <span>Ver Mi Boleta</span>
+                </button>
+                <button
+                  onClick={() => setWompiConfirmedData(null)}
+                  className="p-1.5 hover:bg-black/20 rounded-full text-white/80 hover:text-white transition-colors cursor-pointer"
+                  title="Cerrar notificación"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* TOP NAVIGATION BAR */}
       <header className="sticky top-0 z-40 bg-[#050608]/85 backdrop-blur-xl border-b border-white/10 px-4 md:px-8 py-3.5 transition-all">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
@@ -312,6 +446,16 @@ Genera el prompt final listo para copiar y pegar, junto con una breve explicaci�
 
           {/* Action Buttons */}
           <div className="flex items-center gap-2.5">
+            {/* Wompi link setup helper button */}
+            <button
+              onClick={() => setIsWompiHelperOpen(true)}
+              className="hidden sm:inline-flex items-center gap-1 text-[11px] font-mono font-bold text-indigo-300 hover:text-white bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-400/30 px-2.5 py-1.5 rounded-full transition-all cursor-pointer"
+              title="Configurar Link de Redireccionamiento en Wompi"
+            >
+              <LinkIcon className="w-3 h-3 text-indigo-400" />
+              <span>Link Wompi</span>
+            </button>
+
             {onNavigateToStudio && (
               <button
                 onClick={onNavigateToStudio}
@@ -431,7 +575,7 @@ Genera el prompt final listo para copiar y pegar, junto con una breve explicaci�
         {/* Value Proposition Description con placa de vidrio oscura y texto destacado */}
         <div className="max-w-3xl mx-auto mt-7 p-5 sm:p-6 rounded-3xl bg-zinc-950/80 backdrop-blur-xl border border-white/20 shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
           <p className="font-sans text-gray-100 text-base sm:text-lg md:text-xl leading-relaxed">
-            Una experiencia <span className="text-cyan-300 font-bold">presencial, práctica y transformadora</span> para descubrir cómo utilizar <strong className="text-white bg-white/10 px-2 py-0.5 rounded border border-white/20">Inteligencia Artificial</strong> para crear contenidos virales, imágenes publicitarias de estudio, videos de alto impacto, páginas web funcionales y prototipos digitales listos para monetizar.
+            Una experiencia <span className="text-cyan-300 font-bold">presencial, práctica y transformadora</span> para descubrir cómo utilizar <strong className="text-white bg-white/10 px-2 py-0.5 rounded border border-white/20">Inteligencia Artificial</strong> para crear contenidos virales, imágenes publicitarias de estudio, videos de alto impacto, páginas web funcionales, <span className="text-cyan-300 font-bold">aplicaciones para empresas, optimización y mejoras de sistemas</span>, y prototipos digitales listos para monetizar.
           </p>
         </div>
 
@@ -1830,6 +1974,41 @@ Genera el prompt final listo para copiar y pegar, junto con una breve explicaci�
             </p>
           </div>
         </div>
+
+        {/* WOMPI PAYMENT GATEWAY & TICKET DELIVERY ASSURANCE */}
+        <div className="mt-8 p-6 sm:p-7 rounded-3xl bg-gradient-to-r from-indigo-950/40 via-zinc-950 to-purple-950/40 border border-indigo-500/40 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="space-y-2 text-center md:text-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 font-mono text-xs font-bold uppercase">
+              <CreditCard className="w-3.5 h-3.5 text-indigo-400" />
+              <span>Pasarela de Pago Wompi & Entrega de Boletas</span>
+            </div>
+            <h4 className="font-poppins font-black text-xl text-white">
+              Pagos 100% Seguros con Bancolombia, Nequi, PSE y Tarjetas de Crédito
+            </h4>
+            <p className="font-sans text-xs text-gray-300 max-w-2xl leading-relaxed">
+              Al realizar tu pago por Wompi, el sistema confirmará tu transacción y <strong className="text-amber-300">en las próximas horas te llegará tu boleta oficial de acceso con código QR y detalles de la sede a tu correo electrónico</strong>.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 w-full md:w-auto">
+            <button
+              onClick={() => handleOpenRegister('Preventa ($199.000 COP)')}
+              className="w-full sm:w-auto px-5 py-3 rounded-2xl bg-gradient-to-r from-indigo-500 to-cyan-500 hover:from-indigo-400 hover:to-cyan-400 text-black font-poppins font-black text-xs uppercase tracking-wider shadow-lg shadow-indigo-500/30 flex items-center justify-center gap-2 cursor-pointer transition-transform hover:scale-105"
+            >
+              <Ticket className="w-4 h-4" />
+              <span>Inscribirme con Wompi ($199.000)</span>
+            </button>
+
+            <button
+              onClick={() => setIsWompiHelperOpen(true)}
+              className="w-full sm:w-auto px-4 py-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/15 text-gray-300 hover:text-white font-mono text-xs font-bold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+              title="Ver enlace de redireccionamiento para configurar en Wompi"
+            >
+              <LinkIcon className="w-3.5 h-3.5 text-cyan-400" />
+              <span>Link Wompi</span>
+            </button>
+          </div>
+        </div>
       </section>
 
       {/* 12. PREGUNTAS FRECUENTES (FAQ) */}
@@ -2089,6 +2268,30 @@ Genera el prompt final listo para copiar y pegar, junto con una breve explicaci�
                         </button>
                       </div>
                     </div>
+
+                    {/* Wompi informational note & redirect reminder */}
+                    {paymentMethod === 'wompi' && (
+                      <div className="mt-3 p-3.5 rounded-2xl bg-indigo-950/60 border border-indigo-400/40 text-[11px] text-gray-200 space-y-2">
+                        <div className="flex items-center gap-2 text-indigo-300 font-bold">
+                          <ShieldCheck className="w-4 h-4 text-indigo-400 shrink-0" />
+                          <span>Pasarela Segura Wompi (Bancolombia, Nequi, PSE, Tarjetas)</span>
+                        </div>
+                        <p className="text-gray-300 leading-relaxed text-[11px]">
+                          Al pagar serás dirigido a Wompi. Una vez completado tu pago, serás devuelto automáticamente aquí y <strong className="text-amber-300 font-bold">en las próximas horas te llegará tu boleta oficial con código de acceso a tu correo electrónico</strong>.
+                        </p>
+                        <div className="pt-1.5 border-t border-indigo-500/20 flex items-center justify-between">
+                          <span className="text-[10px] text-gray-400">¿Eres el organizador?</span>
+                          <button
+                            type="button"
+                            onClick={() => setIsWompiHelperOpen(true)}
+                            className="text-[11px] font-mono text-cyan-300 hover:text-cyan-200 underline flex items-center gap-1 cursor-pointer"
+                          >
+                            <LinkIcon className="w-3 h-3" />
+                            <span>Ver Link de Redirección Wompi</span>
+                          </button>
+                        </div>
+                      </div>
+                    )}
                   </div>
 
                   <button
@@ -2110,11 +2313,13 @@ Genera el prompt final listo para copiar y pegar, junto con una breve explicaci�
                   </div>
 
                   <h3 className="font-poppins font-black text-2xl text-white">
-                    ¡Registro Inicial Recibido!
+                    {paymentMethod === 'wompi' ? '¡Pago Wompi Iniciado!' : '¡Registro Inicial Recibido!'}
                   </h3>
 
                   <p className="font-sans text-xs text-gray-300 max-w-md mx-auto leading-relaxed">
-                    Hemos abierto tu canal de confirmación. Únete ahora mismo al canal informativo de Telegram para recibir las novedades y material previo:
+                    {paymentMethod === 'wompi'
+                      ? 'Te hemos dirigido a la pasarela segura de Wompi. Una vez completado tu pago, en las próximas horas te llegará tu boleta oficial de acceso a tu correo electrónico.'
+                      : 'Hemos abierto tu canal de confirmación. Únete ahora mismo al canal informativo de Telegram para recibir las novedades y material previo:'}
                   </p>
 
                   <div className="pt-2 flex flex-col gap-2.5">
@@ -2140,6 +2345,251 @@ Genera el prompt final listo para copiar y pegar, junto con una breve explicaci�
             </div>
           </motion.div>
         )}
+
+        {/* MODAL DE CONFIRMACIÓN DE PAGO WOMPI Y ENTREGA DE BOLETA */}
+        <AnimatePresence>
+          {wompiConfirmedData?.isOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl p-4 flex items-center justify-center overflow-y-auto"
+              onClick={() => setWompiConfirmedData(prev => prev ? { ...prev, isOpen: false } : null)}
+            >
+              <motion.div
+                initial={{ scale: 0.92, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.92, opacity: 0 }}
+                className="relative max-w-xl w-full my-6 bg-zinc-950 border-2 border-emerald-400/80 rounded-3xl p-6 sm:p-8 shadow-[0_0_80px_rgba(16,185,129,0.35)] text-left space-y-6"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Close Button */}
+                <button
+                  onClick={() => setWompiConfirmedData(prev => prev ? { ...prev, isOpen: false } : null)}
+                  className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 hover:text-white transition-colors cursor-pointer"
+                  aria-label="Cerrar confirmación"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+
+                {/* Top Badge & Header */}
+                <div className="text-center space-y-3">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-400 text-black flex items-center justify-center mx-auto shadow-[0_0_30px_rgba(16,185,129,0.5)]">
+                    <CheckCircle className="w-9 h-9 stroke-[2.5]" />
+                  </div>
+
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/40 text-emerald-300 font-mono text-xs font-bold uppercase tracking-wider">
+                    <Ticket className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>¡Pago Procesado con Éxito en Wompi!</span>
+                  </div>
+
+                  <h3 className="font-poppins font-black text-2xl sm:text-3xl text-white uppercase tracking-tight">
+                    ¡Bienvenido(a) a IA IMPACTO!
+                  </h3>
+                </div>
+
+                {/* PROMINENT USER NOTICE: EN LAS PRÓXIMAS HORAS TE LLEGARÁ TU BOLETA AL CORREO */}
+                <div className="p-5 rounded-2xl bg-gradient-to-r from-emerald-950/70 via-zinc-900 to-cyan-950/70 border border-emerald-400 shadow-lg text-center space-y-2">
+                  <div className="flex items-center justify-center gap-2 text-emerald-300 font-mono text-xs font-black uppercase tracking-wider">
+                    <Mail className="w-4 h-4 text-emerald-400 animate-pulse" />
+                    <span>Confirmación de Boleta Oficial</span>
+                  </div>
+                  <p className="font-poppins font-bold text-base sm:text-lg text-white leading-snug">
+                    En las próximas horas te llegará tu boleta oficial de acceso y confirmación a tu correo electrónico.
+                  </p>
+                  <p className="font-sans text-xs text-emerald-100/90 leading-relaxed">
+                    Hemos reservado tu cupo presencial en la sede de Medellín. Revisa tu bandeja de entrada principal y la carpeta de spam o promociones en las próximas horas.
+                  </p>
+                </div>
+
+                {/* TICKET SUMMARY CARD */}
+                <div className="p-4 rounded-2xl bg-black/60 border border-white/10 space-y-3">
+                  <span className="font-mono text-[10px] text-gray-400 uppercase tracking-wider block font-bold">
+                    Resumen de tu Inscripción:
+                  </span>
+
+                  <div className="grid grid-cols-2 gap-3 text-xs">
+                    <div className="p-2.5 rounded-xl bg-white/5 border border-white/5">
+                      <span className="text-[10px] text-gray-400 block font-mono flex items-center gap-1">
+                        <MapPin className="w-3 h-3 text-cyan-400" /> Sede Presencial
+                      </span>
+                      <strong className="text-white text-xs sm:text-sm font-poppins block mt-0.5">Medellín</strong>
+                      <span className="text-[11px] text-gray-300">Prado Colonial</span>
+                    </div>
+
+                    <div className="p-2.5 rounded-xl bg-white/5 border border-white/5">
+                      <span className="text-[10px] text-gray-400 block font-mono flex items-center gap-1">
+                        <Clock className="w-3 h-3 text-indigo-400" /> Horario Oficial
+                      </span>
+                      <strong className="text-white text-xs sm:text-sm font-poppins block mt-0.5">Martes 6:30 - 8:30 PM</strong>
+                      <span className="text-[11px] text-gray-300">3 Sesiones de 2 horas</span>
+                    </div>
+                  </div>
+
+                  <div className="p-2.5 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between text-xs font-mono">
+                    <span className="text-gray-400">ID Transacción / Ref:</span>
+                    <span className="text-amber-300 font-bold">{wompiConfirmedData.transactionId}</span>
+                  </div>
+
+                  <div className="flex items-center gap-2 text-[11px] text-gray-400 px-1">
+                    <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                    <span>Lleva tu computador portátil con cargador a la primera sesión.</span>
+                  </div>
+                </div>
+
+                {/* ACTION BUTTONS */}
+                <div className="space-y-2.5 pt-1">
+                  <a
+                    href={`https://wa.me/${IA_IMPACTO_CONFIG.officialPhone}?text=${encodeURIComponent(`¡Hola Expándete! Acabo de completar el pago de IA IMPACTO en Wompi (ID Transacción: ${wompiConfirmedData.transactionId}). Quedo atento a la recepción de mi boleta oficial al correo electrónico.`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-black font-poppins font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/25 transition-transform hover:scale-[1.02]"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    <span>Confirmar por WhatsApp con Soporte</span>
+                  </a>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <a
+                      href={IA_IMPACTO_CONFIG.telegramCommunityUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="py-3 px-4 rounded-xl bg-blue-600/30 hover:bg-blue-600/40 border border-blue-500/40 text-blue-200 hover:text-white font-poppins font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors"
+                    >
+                      <Send className="w-3.5 h-3.5" />
+                      <span>Comunidad Telegram</span>
+                    </a>
+
+                    <button
+                      onClick={handleAddToCalendar}
+                      className="py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-white font-poppins font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                    >
+                      <Calendar className="w-3.5 h-3.5 text-cyan-400" />
+                      <span>Agendar Calendario</span>
+                    </button>
+                  </div>
+
+                  <button
+                    onClick={() => setWompiConfirmedData(prev => prev ? { ...prev, isOpen: false } : null)}
+                    className="w-full py-2.5 text-center text-xs font-mono text-gray-400 hover:text-white transition-colors cursor-pointer"
+                  >
+                    Volver a la Página del Evento
+                  </button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* MODAL CONFIGURACIÓN LINK DE REDIRECCIONAMIENTO WOMPI */}
+        <AnimatePresence>
+          {isWompiHelperOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl p-4 flex items-center justify-center overflow-y-auto"
+              onClick={() => setIsWompiHelperOpen(false)}
+            >
+              <motion.div
+                initial={{ scale: 0.95, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.95, opacity: 0 }}
+                className="relative max-w-lg w-full my-6 bg-zinc-950 border border-indigo-500/40 rounded-3xl p-6 sm:p-8 shadow-[0_0_80px_rgba(99,102,241,0.3)] text-left space-y-5"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Header */}
+                <div className="flex items-center justify-between pb-3 border-b border-white/10">
+                  <div className="flex items-center gap-2">
+                    <span className="p-2 rounded-xl bg-indigo-500/20 text-indigo-400">
+                      <LinkIcon className="w-5 h-5" />
+                    </span>
+                    <div>
+                      <h3 className="font-poppins font-black text-lg text-white">
+                        Link de Redireccionamiento Wompi
+                      </h3>
+                      <p className="text-[11px] text-gray-400 font-mono">
+                        Configura tu enlace de pago para retorno automático
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setIsWompiHelperOpen(false)}
+                    className="p-1.5 rounded-full hover:bg-white/10 text-gray-400 hover:text-white transition-colors cursor-pointer"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+
+                <p className="text-xs text-gray-300 leading-relaxed font-sans">
+                  Para que cuando tus compradores paguen en <strong>Wompi</strong> (por Bancolombia, Nequi, PSE o Tarjetas) sean devueltos a tu sitio web y vean automáticamente la pantalla de confirmación que les avisa <em className="text-amber-300 font-medium">"En las próximas horas te llegará tu boleta al correo"</em>, copia y pega este enlace exacto:
+                </p>
+
+                {/* Link Box */}
+                <div className="space-y-2">
+                  <label className="block text-[11px] font-mono text-gray-300 font-bold uppercase">
+                    URL de Redireccionamiento Oficial:
+                  </label>
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="text"
+                      readOnly
+                      value={getWompiRedirectUrl()}
+                      className="w-full bg-black/80 border border-indigo-400/50 rounded-xl px-3.5 py-2.5 text-cyan-300 font-mono text-xs select-all focus:outline-none"
+                    />
+                    <button
+                      onClick={handleCopyWompiUrl}
+                      className="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-poppins font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 shrink-0 transition-all cursor-pointer shadow-md"
+                    >
+                      {copiedWompiRedirectUrl ? (
+                        <>
+                          <Check className="w-4 h-4 text-emerald-300" />
+                          <span>¡Copiado!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-4 h-4" />
+                          <span>Copiar</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Instructions */}
+                <div className="p-4 rounded-2xl bg-black/50 border border-white/10 space-y-2 text-xs">
+                  <span className="font-mono text-indigo-300 font-bold uppercase text-[11px] block">
+                    ¿Cómo configurarlo en Wompi paso a paso?
+                  </span>
+                  <ol className="list-decimal list-inside space-y-1.5 text-gray-300 text-[11px] leading-relaxed">
+                    <li>Ingresa a tu panel en <strong className="text-white">comercios.wompi.co</strong>.</li>
+                    <li>Ve a la pestaña <strong className="text-white">Enlaces de Pago</strong> y selecciona tu enlace de IA IMPACTO.</li>
+                    <li>En la opción <strong className="text-white">"URL de redireccionamiento"</strong>, pega el link copiado.</li>
+                    <li>Guarda los cambios.</li>
+                  </ol>
+                </div>
+
+                {/* Test simulation button */}
+                <div className="pt-2 flex flex-col sm:flex-row items-center gap-2.5">
+                  <button
+                    onClick={handleSimulateWompiConfirmation}
+                    className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-black font-poppins font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-transform hover:scale-[1.02] cursor-pointer shadow-lg"
+                  >
+                    <Eye className="w-4 h-4" />
+                    <span>Probar / Simular Pantalla de Confirmación</span>
+                  </button>
+
+                  <button
+                    onClick={() => setIsWompiHelperOpen(false)}
+                    className="w-full sm:w-auto py-3 px-5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white font-poppins font-bold text-xs uppercase transition-colors cursor-pointer"
+                  >
+                    Cerrar
+                  </button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* LIGHTBOX MODAL FOR 8K HYPERREALISTIC IMAGES */}
         {selectedShowcaseItem && (

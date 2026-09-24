@@ -9,6 +9,8 @@ export interface IaImpactoConfig {
   spotsAvailable: number;
   officialPhone: string;
   telegramCommunityUrl: string;
+  wompiCheckoutUrl: string;
+  description: string;
   prices: {
     preventa: {
       label: string;
@@ -48,6 +50,8 @@ export const IA_IMPACTO_CONFIG: IaImpactoConfig = {
   spotsAvailable: 7,
   officialPhone: "573045751648",
   telegramCommunityUrl: "https://t.me/+expandete_ia_impacto",
+  wompiCheckoutUrl: "https://checkout.wompi.co/l/ia-impacto-preventa?amount=199000",
+  description: "Una experiencia presencial, práctica y transformadora para descubrir cómo utilizar Inteligencia Artificial para crear contenidos virales, imágenes publicitarias de estudio, videos de alto impacto, páginas web funcionales, aplicaciones para empresas, optimización y mejoras de sistemas, y prototipos digitales listos para monetizar.",
   prices: {
     preventa: {
       label: "Fase 1 • Preventa Anticipada",
@@ -216,17 +220,18 @@ export const OFFICIAL_IA_IMPACTO_FLYERS: OfficialFlyer[] = [
   {
     id: "flyer-a4",
     number: "04",
-    title: "Sesión 3: Construye con IA & Creación de App",
-    subtitle: "Flyer de Landing Pages Funcionales, Apps Interactivas & Ecosistema Cloud",
+    title: "Sesión 3: Construye con IA, Apps para Empresas & Sistemas",
+    subtitle: "Flyer de Landing Pages Funcionales, Apps para Empresas & Optimización de Sistemas",
     badge: "SESIÓN 03 PRESENCIAL",
     image: "https://vicflix.expandete.cloud/Expandete_videos/a4.jpg",
-    tag: "MÓDULO SOFTWARE",
+    tag: "MÓDULO SOFTWARE & SISTEMAS",
     sessionRef: "Sesión 03",
-    description: "Pasa de la imagen a una herramienta que tus clientes pueden usar. Programación en lenguaje natural, despliegue web y prototipado sin ser programador.",
+    description: "Pasa de la imagen a herramientas y software que resuelven problemas en tu negocio. Programación en lenguaje natural, apps para empresas, optimización y mejoras de sistemas y prototipos digitales listos para monetizar sin ser programador.",
     keyPoints: [
       "Programación asistida por IA conversando en lenguaje natural",
-      "Diseño y publicación de una Landing Page de alta conversión",
-      "Construcción de una Aplicación Funcional con datos interactivos reales",
+      "Diseño y publicación de páginas web y landing pages de alta conversión",
+      "Construcción de aplicaciones web y móviles para empresas",
+      "Optimización y mejoras de sistemas y flujos de negocio existentes",
       "Manejo claro de créditos, modelos, tokens y nubes computacionales"
     ]
   },
@@ -373,8 +378,8 @@ export const FAQS = [
     a: "Una vez completas tu registro, recibes un enlace exclusivo para unirte al grupo privado de IA IMPACTO en Telegram. Allí compartimos los prompts utilizados, grabaciones de soporte, retos prácticos, novedades de IA y sesiones de preguntas y respuestas continuas."
   },
   {
-    q: "¿Cuáles son los medios de pago disponibles?",
-    a: "Puedes pagar de forma segura a través de Wompi (Bancolombia, Nequi, tarjetas de crédito/débito y PSE) o coordinar tu pago y factura directamente con nuestro equipo por WhatsApp al +57 304 575 1648."
+    q: "¿Cuáles son los medios de pago disponibles y cómo recibo mi boleta?",
+    a: "Puedes pagar de forma 100% segura a través de Wompi (Bancolombia, Nequi, PSE y tarjetas de crédito/débito) o directamente por WhatsApp al +57 304 575 1648. Una vez procesado tu pago en Wompi, el sistema confirmará tu transacción y en las próximas horas te llegará tu boleta oficial de acceso con código QR y confirmación a tu correo electrónico."
   }
 ];
 
@@ -543,10 +548,10 @@ export const EXPANDETE_PACK_CARDS = [
   },
   {
     id: 'pack-p2',
-    title: "Creación de App",
-    badge: "SOFTWARE & PROTOTIPADO IA",
+    title: "Creación de Apps & Mejoras de Sistemas",
+    badge: "SOFTWARE, APPS & SISTEMAS IA",
     image: "https://vicflix.expandete.cloud/Expandete_videos/a4.jpg",
-    desc: "Aprende a diseñar, estructurar y publicar aplicaciones web funcionales y prototipos digitales asistidos por Inteligencia Artificial sin escribir código."
+    desc: "Aprende a diseñar, estructurar y publicar aplicaciones para empresas, optimización y mejoras de sistemas de negocio y prototipos digitales asistidos por IA sin escribir código."
   },
   {
     id: 'pack-p3',
