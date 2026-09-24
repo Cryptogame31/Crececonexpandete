@@ -196,7 +196,7 @@ const SERVICES_DATA = [
   {
     id: 9,
     title: "IA IMPACTO • Presencial",
-    tagline: "De una idea a algo real • 3 Sesiones Prácticas en Medellín + Comunidad VIP Telegram.",
+    tagline: "De una idea a algo real • 3 Sesiones Prácticas en Medellín (Prado Colonial) + Comunidad VIP Telegram.",
     description: "Una experiencia presencial, práctica y transformadora para descubrir cómo utilizar Inteligencia Artificial para crear contenidos, imágenes publicitarias, videos comerciales, landing pages funcionales y prototipos digitales sin ser programador.",
     icon: "Cpu",
     color: "from-cyan-400 via-indigo-500 to-purple-600",
@@ -204,15 +204,15 @@ const SERVICES_DATA = [
     bgAccent: "bg-cyan-500/10",
     borderAccent: "border-cyan-400/40",
     image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=80",
-    badge: "EVENTO PRESENCIAL • MEDELLÍN • PREVENTA $199.000 COP",
+    badge: "EVENTO PRESENCIAL • MEDELLÍN (PRADO COLONIAL) • PREVENTA $199.000 COP",
     isIaImpactoEntry: true,
     realPrice: {
       range: "Preventa $199.000 COP | Regular $249.000 COP | Últimos Cupos $299.000 COP",
-      detail: "Incluye las 3 sesiones presenciales de 4 horas cada 15 días con formato rotativo 'Ponte al día en 15 min', acceso permanente a la comunidad privada de Telegram, biblioteca de prompts, prompt maestro y material descargable.",
+      detail: "Incluye las 3 sesiones presenciales de 2 horas (Martes de 6:30 PM a 8:30 PM) con formato rotativo 'Ponte al día en 15 min', acceso permanente a la comunidad privada de Telegram, biblioteca de prompts, prompt maestro y material descargable.",
       comparison: "No es una clase teórica de diapositivas ni un curso genérico de ChatGPT. Es un laboratorio práctico de creación en vivo donde construyes proyectos reales."
     },
     benefits: [
-      "3 Sesiones Presenciales Prácticas: Descubre, Crea y Construye con IA (1 sesión cada 15 días).",
+      "3 Sesiones Presenciales Prácticas: Descubre, Crea y Construye con IA (Martes de 6:30 PM a 8:30 PM • 2 horas por sesión).",
       "No necesitas ser programador: Diseñado para emprendedores, creadores, profesionales y comerciales.",
       "Flujo Rotativo 'Ponte al día en 15 min': Puedes sumarte en cualquier momento del ciclo sin perderte.",
       "Comunidad Privada de Telegram: Avisos, retos, biblioteca de prompts, networking y soporte continuo."
@@ -286,7 +286,7 @@ const PROJECTS_DATA = [
     id: 7,
     title: "IA IMPACTO",
     tagline: "De una idea a algo real • Experiencia Presencial",
-    solution: "3 sesiones prácticas en Medellín cada 15 días: aprende a usar IA para crear contenido, imágenes, videos, landing pages y prototipos funcionales con acceso a comunidad privada de Telegram.",
+    solution: "3 sesiones prácticas de 2 horas en Medellín - Prado Colonial (Martes de 6:30 PM a 8:30 PM): aprende a usar IA para crear contenido, imágenes, videos, landing pages y prototipos funcionales con acceso a comunidad privada de Telegram.",
     category: "Inteligencia Artificial",
     link: "/ia-impacto",
     image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80",

@@ -41,9 +41,9 @@ export const IA_IMPACTO_CONFIG: IaImpactoConfig = {
   eventName: "IA IMPACTO",
   tagline: "De una idea a algo real.",
   city: "Medellín, Colombia",
-  venue: "Espacio Tecnológico Innovador (El Poblado / Laureles - Notificado a participantes)",
-  schedule: "Sábados de 9:00 AM a 1:00 PM",
-  frequency: "3 Sesiones Presenciales • Una sesión cada 15 días",
+  venue: "Espacio Tecnológico Innovador (Prado Colonial, Medellín - Notificado a participantes)",
+  schedule: "Martes de 6:30 PM a 8:30 PM",
+  frequency: "3 Sesiones Presenciales • 2 Horas por sesión (Martes 6:30 PM - 8:30 PM)",
   spotsTotal: 25,
   spotsAvailable: 7,
   officialPhone: "573045751648",
@@ -239,7 +239,7 @@ export const OFFICIAL_IA_IMPACTO_FLYERS: OfficialFlyer[] = [
     image: "https://vicflix.expandete.cloud/Expandete_videos/a5.jpg",
     tag: "CIERRE & BONOS",
     sessionRef: "Preventa",
-    description: "La propuesta comercial definitiva: 3 sesiones presenciales de 4 horas cada una + Bóveda de 50+ prompts + plantilla de landing + comunidad VIP.",
+    description: "La propuesta comercial definitiva: 3 sesiones presenciales de 2 horas cada una (Martes 6:30 PM - 8:30 PM) + Bóveda de 50+ prompts + plantilla de landing + comunidad VIP.",
     keyPoints: [
       "Precio preferencial de $199.000 COP (ahorras $100.000 COP)",
       "Bóveda secreta con más de 50 prompts comerciales probados",
@@ -307,7 +307,7 @@ export const PROMPT_FORMULA = [
 export const WHAT_IS_INCLUDED = [
   {
     title: "3 Sesiones Presenciales Prácticas",
-    desc: "4 horas por sesión en Medellín (12 horas en total) en un espacio tecnológico cómodo y equipado."
+    desc: "2 horas por sesión en Medellín (Martes de 6:30 PM a 8:30 PM • 6 horas prácticas en total) en un espacio tecnológico cómodo y equipado."
   },
   {
     title: "Formato Rotativo 'Ponte al Día en 15 Min'",
@@ -349,8 +349,8 @@ export const FAQS = [
     a: "No. Comenzamos desde los conceptos esenciales y avanzamos de manera progresiva y práctica. Si ya usas herramientas como ChatGPT, aprenderás a llevarlas a un nivel profesional que no sabías que era posible."
   },
   {
-    q: "¿Por qué son 3 sesiones cada 15 días en lugar de un curso intensivo de un día?",
-    a: "Porque no queremos saturarte de información teórica. El espacio de 15 días entre cada sesión te permite experimentar en tu negocio o proyecto personal, aplicar lo aprendido y llegar a la siguiente sesión con dudas reales y avances concretos."
+    q: "¿Cuáles son los días y horarios de las 3 sesiones presenciales?",
+    a: "Las sesiones se realizan los días martes de 6:30 PM a 8:30 PM en Medellín. Son 3 sesiones de 2 horas (6 horas de inmersión práctica presencial en total), un horario cómodo para después de la jornada laboral donde aplicas cada herramienta paso a paso sin saturarte de teoría."
   },
   {
     q: "¿Cómo funciona el formato rotativo 'Ponte al día en 15 minutos'?",
@@ -362,7 +362,7 @@ export const FAQS = [
   },
   {
     q: "¿Dónde se realizará exactamente en Medellín?",
-    a: "En un auditorio / espacio tecnológico de alta conectividad ubicado en El Poblado / Laureles. La dirección exacta y detalles de acceso se envían directamente por WhatsApp y correo a los participantes confirmados."
+    a: "En un auditorio / espacio tecnológico de alta conectividad ubicado en el tradicional y central sector de Prado Colonial, Medellín. La dirección exacta y detalles de acceso se envían directamente por WhatsApp y correo a los participantes confirmados."
   },
   {
     q: "¿Qué debo llevar a cada sesión?",
