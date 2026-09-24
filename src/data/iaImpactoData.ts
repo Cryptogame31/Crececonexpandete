@@ -50,7 +50,7 @@ export const IA_IMPACTO_CONFIG: IaImpactoConfig = {
   spotsAvailable: 7,
   officialPhone: "573045751648",
   telegramCommunityUrl: "https://t.me/+expandete_ia_impacto",
-  wompiCheckoutUrl: "https://checkout.wompi.co/l/ia-impacto-preventa?amount=199000",
+  wompiCheckoutUrl: "https://checkout.wompi.co/l/ZqqdAD",
   description: "Una experiencia presencial, práctica y transformadora para descubrir cómo utilizar Inteligencia Artificial para crear contenidos virales, imágenes publicitarias de estudio, videos de alto impacto, páginas web funcionales, aplicaciones para empresas, optimización y mejoras de sistemas, y prototipos digitales listos para monetizar.",
   prices: {
     preventa: {
@@ -371,7 +371,7 @@ export const FAQS = [
   },
   {
     q: "¿Qué debo llevar a cada sesión?",
-    a: "Un computador portátil con navegador actualizado y cargador para que puedas seguir los ejercicios prácticos y guardar tus proyectos en tiempo real."
+    a: "Solo necesitas tu libreta de notas y muchas ganas de aprender. Todo el material práctico, demostraciones en vivo y herramientas estarán completamente listos en el espacio tecnológico de Prado Colonial."
   },
   {
     q: "¿Cómo funciona la comunidad privada de Telegram?",

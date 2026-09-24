@@ -253,7 +253,7 @@ export default function IaImpactoPage({ onBackToMain, onNavigateToStudio }: IaIm
 
   const handleAddToCalendar = () => {
     const title = encodeURIComponent("IA IMPACTO • 3 Sesiones Presenciales con IA");
-    const details = encodeURIComponent("3 Sesiones Prácticas Presenciales de 2 horas (Martes 6:30 PM a 8:30 PM) en Medellín - Prado Colonial. Lleva tu portátil con cargador. Soporte WhatsApp: +57 304 575 1648.");
+    const details = encodeURIComponent("3 Sesiones Prácticas Presenciales de 2 horas (Martes 6:30 PM a 8:30 PM) en Medellín - Prado Colonial. Soporte WhatsApp: +57 304 575 1648.");
     const location = encodeURIComponent("Prado Colonial, Medellín, Colombia");
     const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}&recur=RRULE:FREQ=WEEKLY;BYDAY=TU;COUNT=3`;
     window.open(gCalUrl, '_blank');
@@ -315,8 +315,8 @@ Genera el prompt final listo para copiar y pegar, junto con una breve explicaci�
       window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
       setRegistrationSuccess(true);
     } else {
-      // Wompi link
-      window.open(`https://checkout.wompi.co/l/ia-impacto-preventa?amount=199000`, '_blank');
+      // Wompi official checkout link
+      window.open(IA_IMPACTO_CONFIG.wompiCheckoutUrl, '_blank');
       setRegistrationSuccess(true);
     }
   };
@@ -723,7 +723,7 @@ Genera el prompt final listo para copiar y pegar, junto con una breve explicaci�
 
               <div className="mt-8 pt-6 border-t border-white/10 flex flex-wrap items-center gap-4">
                 <span className="font-mono text-xs text-gray-400">
-                  Lleva tu computador portátil para seguir cada paso en tu propio ritmo.
+                  Todo el equipamiento y material práctico está listo en la sala.
                 </span>
                 <button
                   onClick={() => handleOpenRegister()}
@@ -1491,7 +1491,7 @@ Genera el prompt final listo para copiar y pegar, junto con una breve explicaci�
               Entendiendo el consumo en la nube sin complicaciones técnicas
             </h4>
             <p className="font-sans text-xs sm:text-sm text-gray-300 leading-relaxed">
-              Explicaremos qué son los modelos de lenguaje, los créditos de IA, tokens, APIs y por qué trabajar en la nube permite que tu computadora simple desarrolle al nivel de servidores de alta gama.
+              Explicaremos qué son los modelos de lenguaje, los créditos de IA, tokens, APIs y por qué trabajar en la nube permite desarrollar proyectos al nivel de servidores de alta gama.
             </p>
           </div>
 
@@ -1631,7 +1631,7 @@ Genera el prompt final listo para copiar y pegar, junto con una breve explicaci�
             Inversión en tu <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500">Transformación Digital</span>
           </h2>
           <p className="font-sans text-gray-300 text-sm md:text-base mt-3 leading-relaxed">
-            Precios reales y progresivos. La sala presencial en Medellín tiene un límite de <strong className="text-white">25 participantes</strong> para que cada persona reciba acompañamiento paso a paso en su computador.
+            Precios reales y progresivos. La sala presencial en Medellín tiene un límite de <strong className="text-white">25 participantes</strong> para que cada persona reciba acompañamiento cercano paso a paso.
           </p>
         </div>
 
@@ -2433,7 +2433,7 @@ Genera el prompt final listo para copiar y pegar, junto con una breve explicaci�
 
                   <div className="flex items-center gap-2 text-[11px] text-gray-400 px-1">
                     <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>Lleva tu computador portátil con cargador a la primera sesión.</span>
+                    <span>Tu cupo oficial queda confirmado para las 3 sesiones del programa.</span>
                   </div>
                 </div>
 
@@ -2563,7 +2563,7 @@ Genera el prompt final listo para copiar y pegar, junto con una breve explicaci�
                   </span>
                   <ol className="list-decimal list-inside space-y-1.5 text-gray-300 text-[11px] leading-relaxed">
                     <li>Ingresa a tu panel en <strong className="text-white">comercios.wompi.co</strong>.</li>
-                    <li>Ve a la pestaña <strong className="text-white">Enlaces de Pago</strong> y selecciona tu enlace de IA IMPACTO.</li>
+                    <li>Ve a la pestaña <strong className="text-white">Enlaces de Pago</strong> y selecciona tu enlace de IA IMPACTO (<a href={IA_IMPACTO_CONFIG.wompiCheckoutUrl} target="_blank" rel="noopener noreferrer" className="text-cyan-300 font-mono underline">checkout.wompi.co/l/ZqqdAD</a>).</li>
                     <li>En la opción <strong className="text-white">"URL de redireccionamiento"</strong>, pega el link copiado.</li>
                     <li>Guarda los cambios.</li>
                   </ol>
