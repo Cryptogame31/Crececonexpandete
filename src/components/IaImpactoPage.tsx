@@ -40,7 +40,8 @@ import {
   Ticket,
   Link as LinkIcon,
   Download,
-  Info
+  Info,
+  Lock
 } from 'lucide-react';
 import { 
   IA_IMPACTO_CONFIG, 
@@ -192,6 +193,9 @@ export default function IaImpactoPage({ onBackToMain, onNavigateToStudio }: IaIm
   const [isWompiHelperOpen, setIsWompiHelperOpen] = useState(false);
   const [copiedWompiRedirectUrl, setCopiedWompiRedirectUrl] = useState(false);
 
+  // Private Telegram community access modal state
+  const [isTelegramModalOpen, setIsTelegramModalOpen] = useState(false);
+
   // Detect if user was redirected back from Wompi payment
   useEffect(() => {
     try {
@@ -290,8 +294,11 @@ Genera el prompt final listo para copiar y pegar, junto con una breve explicaci�
     setTimeout(() => setCopiedPrompt(false), 3000);
   };
 
-  const handleOpenRegister = (fase = 'Preventa ($199.000 COP)') => {
+  const handleOpenRegister = (fase = 'Preventa ($199.000 COP)', preferredMethod?: 'whatsapp' | 'wompi') => {
     setFormData(prev => ({ ...prev, faseSeleccionada: fase }));
+    if (preferredMethod) {
+      setPaymentMethod(preferredMethod);
+    }
     setIsRegisterModalOpen(true);
     setRegistrationSuccess(false);
   };
@@ -1543,19 +1550,18 @@ Genera el prompt final listo para copiar y pegar, junto con una breve explicaci�
             </div>
 
             <div className="pt-4 flex flex-wrap items-center gap-4">
-              <a
-                href={IA_IMPACTO_CONFIG.telegramCommunityUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-400 hover:to-indigo-500 text-white font-poppins font-bold text-xs uppercase tracking-wider shadow-lg shadow-blue-500/25 flex items-center gap-2 transition-all transform hover:scale-105"
+              <button
+                type="button"
+                onClick={() => setIsTelegramModalOpen(true)}
+                className="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-600 hover:from-blue-400 hover:via-indigo-500 hover:to-purple-500 text-white font-poppins font-bold text-xs uppercase tracking-wider shadow-lg shadow-blue-500/25 flex items-center gap-2 transition-all transform hover:scale-105 cursor-pointer"
               >
-                <Send className="w-4 h-4" />
-                <span>Unirme al Canal Informativo de Telegram</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
+                <Lock className="w-4 h-4 text-blue-300" />
+                <span>Acceder a la Comunidad Privada de Telegram</span>
+                <Send className="w-3.5 h-3.5" />
+              </button>
 
               <span className="font-mono text-xs text-gray-400">
-                * El acceso al grupo VIP de alumnos se entrega al confirmar tu inscripción.
+                * Espacio privado exclusivo para miembros confirmados que ya compraron su cupo.
               </span>
             </div>
           </div>
@@ -1735,13 +1741,25 @@ Genera el prompt final listo para copiar y pegar, junto con una breve explicaci�
               <span className="font-mono text-[11px] text-amber-300 block mb-3 text-center">
                 ⚡ Solo 7 cupos disponibles en Preventa
               </span>
-              <button
-                onClick={() => handleOpenRegister('Preventa ($199.000 COP)')}
-                className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-yellow-400 hover:to-amber-500 text-black font-poppins font-black text-xs uppercase tracking-wider shadow-lg shadow-amber-400/25 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-              >
-                <span>Aprovechar Preventa ($199.000)</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
+              <div className="space-y-2">
+                <a
+                  href={IA_IMPACTO_CONFIG.wompiCheckoutUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-yellow-400 hover:to-amber-500 text-black font-poppins font-black text-xs uppercase tracking-wider shadow-lg shadow-amber-400/25 transition-all flex items-center justify-center gap-1.5 cursor-pointer transform hover:scale-[1.02]"
+                >
+                  <CreditCard className="w-4 h-4 text-black" />
+                  <span>Pagar con Wompi ($199.000)</span>
+                  <ExternalLink className="w-3.5 h-3.5 opacity-75" />
+                </a>
+
+                <button
+                  onClick={() => handleOpenRegister('Preventa ($199.000 COP)')}
+                  className="w-full py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-white font-poppins font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                >
+                  <span>Formulario / Pago Directo WhatsApp</span>
+                </button>
+              </div>
             </div>
           </div>
 
@@ -1991,13 +2009,16 @@ Genera el prompt final listo para copiar y pegar, junto con una breve explicaci�
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 w-full md:w-auto">
-            <button
-              onClick={() => handleOpenRegister('Preventa ($199.000 COP)')}
+            <a
+              href={IA_IMPACTO_CONFIG.wompiCheckoutUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-full sm:w-auto px-5 py-3 rounded-2xl bg-gradient-to-r from-indigo-500 to-cyan-500 hover:from-indigo-400 hover:to-cyan-400 text-black font-poppins font-black text-xs uppercase tracking-wider shadow-lg shadow-indigo-500/30 flex items-center justify-center gap-2 cursor-pointer transition-transform hover:scale-105"
             >
-              <Ticket className="w-4 h-4" />
-              <span>Inscribirme con Wompi ($199.000)</span>
-            </button>
+              <CreditCard className="w-4 h-4 text-black" />
+              <span>Ir a Pagar en Wompi ($199.000)</span>
+              <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+            </a>
 
             <button
               onClick={() => setIsWompiHelperOpen(true)}
@@ -2106,7 +2127,7 @@ Genera el prompt final listo para copiar y pegar, junto con una breve explicaci�
           <p>© {new Date().getFullYear()} Expándete Cloud. Todos los derechos reservados.</p>
           <div className="flex items-center gap-4">
             <a href={`https://wa.me/${IA_IMPACTO_CONFIG.officialPhone}`} className="hover:text-cyan-400 transition-colors">WhatsApp Soporte</a>
-            <a href={IA_IMPACTO_CONFIG.telegramCommunityUrl} target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors">Telegram</a>
+            <button onClick={() => setIsTelegramModalOpen(true)} className="hover:text-blue-400 transition-colors cursor-pointer">Telegram VIP (Privado)</button>
           </div>
         </div>
       </footer>
@@ -2585,6 +2606,143 @@ Genera el prompt final listo para copiar y pegar, junto con una breve explicaci�
                   >
                     Cerrar
                   </button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* MODAL DE ACCESO PRIVADO A LA COMUNIDAD DE TELEGRAM (SOLO MIEMBROS QUE YA COMPRARON) */}
+        <AnimatePresence>
+          {isTelegramModalOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto"
+              onClick={() => setIsTelegramModalOpen(false)}
+            >
+              <motion.div
+                initial={{ scale: 0.95, opacity: 0, y: 20 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.95, opacity: 0, y: 20 }}
+                onClick={(e) => e.stopPropagation()}
+                className="relative w-full max-w-lg rounded-3xl bg-zinc-950 border border-blue-500/40 p-6 sm:p-8 shadow-[0_0_60px_rgba(59,130,246,0.3)] text-left overflow-hidden"
+              >
+                {/* Background ambient glow */}
+                <div className="absolute top-0 right-0 w-48 h-48 bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-48 h-48 bg-indigo-500/15 rounded-full blur-3xl pointer-events-none" />
+
+                {/* Close Button */}
+                <button
+                  onClick={() => setIsTelegramModalOpen(false)}
+                  className="absolute top-5 right-5 p-2 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-colors cursor-pointer"
+                  aria-label="Cerrar ventana"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+
+                {/* Header Icon & Badges */}
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-2xl bg-blue-500/20 border border-blue-400/40 flex items-center justify-center text-blue-400 shrink-0 shadow-lg shadow-blue-500/20">
+                    <Lock className="w-6 h-6 text-blue-300" />
+                  </div>
+                  <div>
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-500/20 border border-blue-500/30 text-blue-300 text-[10px] font-mono font-bold uppercase tracking-wider">
+                      <ShieldCheck className="w-3 h-3 text-blue-400" />
+                      <span>Acceso Privado • Solo Miembros con Boleta</span>
+                    </div>
+                    <h3 className="font-poppins font-black text-xl text-white mt-1">
+                      Comunidad VIP en Telegram
+                    </h3>
+                  </div>
+                </div>
+
+                {/* Body message */}
+                <div className="space-y-3.5 text-xs text-gray-300">
+                  <div className="p-3.5 rounded-2xl bg-blue-950/30 border border-blue-500/30">
+                    <p className="font-sans text-sm font-semibold text-white leading-snug">
+                      Este canal y comunidad de Telegram es un <span className="text-cyan-300">espacio privado y exclusivo para las personas que ya adquirieron su entrada</span> a IA IMPACTO.
+                    </p>
+                  </div>
+
+                  <p className="leading-relaxed text-gray-300">
+                    Para proteger el valor de las sesiones, evitar spam y garantizar networking de primer nivel entre asistentes y mentores, el enlace directo con acceso perpetuo se entrega únicamente tras confirmar tu pago.
+                  </p>
+
+                  <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 space-y-2">
+                    <span className="font-mono text-[11px] text-blue-300 font-bold block uppercase tracking-wider">
+                      Contenido Exclusivo para Asistentes:
+                    </span>
+                    <ul className="space-y-1.5 text-gray-300 text-[11px]">
+                      <li className="flex items-center gap-2">
+                        <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                        <span>Biblioteca de prompts maestros listos para producción y ventas</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                        <span>Grabaciones de soporte paso a paso de lo visto en Medellín</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                        <span>Retos de monetización con Inteligencia Artificial</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                        <span>Resolución de dudas técnicas directamente con el equipo</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-[11px] text-amber-200/90 leading-relaxed">
+                    <strong className="text-amber-300 font-bold">¿Cómo recibir tu acceso oficial?</strong> Al pagar tu inscripción en Wompi o confirmar por WhatsApp, el enlace privado se envía a tu correo electrónico junto con tu boleta oficial de acceso en las próximas horas.
+                  </div>
+                </div>
+
+                {/* Actions */}
+                <div className="mt-6 space-y-2.5">
+                  <a
+                    href={IA_IMPACTO_CONFIG.wompiCheckoutUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-blue-500 via-indigo-500 to-cyan-500 hover:from-blue-400 hover:to-cyan-400 text-white font-poppins font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25 transition-transform hover:scale-[1.02]"
+                  >
+                    <CreditCard className="w-4 h-4 text-white" />
+                    <span>Comprar mi Boleta en Wompi ($199.000)</span>
+                    <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+                  </a>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <a
+                      href={`https://wa.me/${IA_IMPACTO_CONFIG.officialPhone}?text=${encodeURIComponent('¡Hola Expándete! Ya compré mi boleta para IA IMPACTO y deseo validar mi acceso al grupo privado de Telegram.')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="py-3 px-3 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-400/30 text-emerald-300 hover:text-white font-poppins font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors"
+                    >
+                      <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
+                      <span>Ya Compré (Validar)</span>
+                    </a>
+
+                    <button
+                      onClick={() => {
+                        setIsTelegramModalOpen(false);
+                        handleOpenRegister('Preventa ($199.000 COP)');
+                      }}
+                      className="py-3 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-white font-poppins font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                    >
+                      <Ticket className="w-3.5 h-3.5 text-amber-400" />
+                      <span>Inscribirme Primero</span>
+                    </button>
+                  </div>
+
+                  <div className="pt-2 text-center">
+                    <button
+                      onClick={() => setIsTelegramModalOpen(false)}
+                      className="text-[11px] font-mono text-gray-500 hover:text-gray-300 transition-colors cursor-pointer"
+                    >
+                      Cerrar ventana
+                    </button>
+                  </div>
                 </div>
               </motion.div>
             </motion.div>

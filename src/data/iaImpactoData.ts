@@ -370,12 +370,12 @@ export const FAQS = [
     a: "En un auditorio / espacio tecnológico de alta conectividad ubicado en el tradicional y central sector de Prado Colonial, Medellín. La dirección exacta y detalles de acceso se envían directamente por WhatsApp y correo a los participantes confirmados."
   },
   {
-    q: "¿Qué debo llevar a cada sesión?",
-    a: "Solo necesitas tu libreta de notas y muchas ganas de aprender. Todo el material práctico, demostraciones en vivo y herramientas estarán completamente listos en el espacio tecnológico de Prado Colonial."
+    q: "¿Necesito llevar computador o portátil a las sesiones?",
+    a: "No, no necesitas llevar computador ni portátil. El espacio tecnológico en Prado Colonial cuenta con toda la infraestructura, pantallas y herramientas listas para trabajar en vivo. Si deseas tomar notas en tu libreta o dispositivo personal eres bienvenido, pero no es requisito traer portátil."
   },
   {
     q: "¿Cómo funciona la comunidad privada de Telegram?",
-    a: "Una vez completas tu registro, recibes un enlace exclusivo para unirte al grupo privado de IA IMPACTO en Telegram. Allí compartimos los prompts utilizados, grabaciones de soporte, retos prácticos, novedades de IA y sesiones de preguntas y respuestas continuas."
+    a: "La comunidad de Telegram es un espacio privado reservado exclusivamente para los miembros que ya compraron su cupo para IA IMPACTO. Una vez confirmado tu pago (por Wompi o transferencia), recibes el enlace oficial de invitación junto con tu boleta de acceso para acceder a prompts maestros, grabaciones de soporte, retos y soporte directo de los mentores."
   },
   {
     q: "¿Cuáles son los medios de pago disponibles y cómo recibo mi boleta?",
