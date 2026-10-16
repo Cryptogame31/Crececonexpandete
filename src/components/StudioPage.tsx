@@ -26,12 +26,14 @@ import {
   PhoneCall,
   Volume2,
   Maximize2,
-  Filter
+  Filter,
+  TrendingUp
 } from 'lucide-react';
 
 interface StudioPageProps {
   onBackToMain: () => void;
   onNavigateToIaImpacto?: () => void;
+  onNavigateToMarketing?: () => void;
 }
 
 const FLYER_EXAMPLES = [
@@ -366,7 +368,7 @@ const PACKAGE_CARDS = [
   }
 ];
 
-export default function StudioPage({ onBackToMain, onNavigateToIaImpacto }: StudioPageProps) {
+export default function StudioPage({ onBackToMain, onNavigateToIaImpacto, onNavigateToMarketing }: StudioPageProps) {
   const [heroVideo, setHeroVideo] = useState('https://vicflix.expandete.cloud/Expandete_videos/hesh.mp4');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [activeVideoModal, setActiveVideoModal] = useState<string | null>(null);
@@ -566,6 +568,17 @@ export default function StudioPage({ onBackToMain, onNavigateToIaImpacto }: Stud
               >
                 <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
                 <span>IA IMPACTO ($199.000)</span>
+              </button>
+            )}
+
+            {onNavigateToMarketing && (
+              <button
+                onClick={onNavigateToMarketing}
+                className="hidden lg:flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-orange-500/10 hover:bg-orange-500/20 border border-orange-400/40 text-brand-orange font-poppins text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer"
+                title="Conocer servicio de Publicidad y Pauta Digital con IA"
+              >
+                <TrendingUp className="w-3.5 h-3.5 text-brand-orange" />
+                <span>Pauta Digital</span>
               </button>
             )}
 

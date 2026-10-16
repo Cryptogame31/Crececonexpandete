@@ -41,7 +41,8 @@ import {
   Link as LinkIcon,
   Download,
   Info,
-  Lock
+  Lock,
+  TrendingUp
 } from 'lucide-react';
 import { 
   IA_IMPACTO_CONFIG, 
@@ -61,9 +62,10 @@ import {
 interface IaImpactoPageProps {
   onBackToMain: () => void;
   onNavigateToStudio?: () => void;
+  onNavigateToMarketing?: () => void;
 }
 
-export default function IaImpactoPage({ onBackToMain, onNavigateToStudio }: IaImpactoPageProps) {
+export default function IaImpactoPage({ onBackToMain, onNavigateToStudio, onNavigateToMarketing }: IaImpactoPageProps) {
   // Selected session tab
   const [activeSessionTab, setActiveSessionTab] = useState<number>(0);
   
@@ -466,10 +468,20 @@ Genera el prompt final listo para copiar y pegar, junto con una breve explicaci�
             {onNavigateToStudio && (
               <button
                 onClick={onNavigateToStudio}
-                className="hidden xl:flex items-center gap-1.5 text-[11px] font-mono font-bold text-amber-400 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-400/30 px-3 py-1.5 rounded-full transition-all"
+                className="hidden xl:flex items-center gap-1.5 text-[11px] font-mono font-bold text-amber-400 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-400/30 px-3 py-1.5 rounded-full transition-all cursor-pointer"
               >
                 <Sparkles className="w-3 h-3" />
                 <span>Studio Creativo</span>
+              </button>
+            )}
+
+            {onNavigateToMarketing && (
+              <button
+                onClick={onNavigateToMarketing}
+                className="hidden lg:flex items-center gap-1.5 text-[11px] font-mono font-bold text-brand-orange bg-brand-orange/10 hover:bg-brand-orange/20 border border-brand-orange/30 px-3 py-1.5 rounded-full transition-all cursor-pointer"
+              >
+                <TrendingUp className="w-3 h-3" />
+                <span>Pauta Digital</span>
               </button>
             )}
 
@@ -649,7 +661,7 @@ Genera el prompt final listo para copiar y pegar, junto con una breve explicaci�
 
       {/* 2. SECCIÓN DE IMPACTO: ¿QUÉ PODRÍAS CREAR SI APRENDIERAS A TRABAJAR CON IA? */}
       <section className="py-16 px-4 md:px-8 max-w-7xl mx-auto border-t border-white/10 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        <div className="text-center max-w-3xl mx-auto mb-10">
           <span className="font-mono text-xs text-cyan-400 uppercase tracking-[0.2em] font-bold block mb-2">
             // APLICACIÓN REAL & RESULTADOS TANGIBLES
           </span>
@@ -659,6 +671,57 @@ Genera el prompt final listo para copiar y pegar, junto con una breve explicaci�
           <p className="font-sans text-gray-300 text-sm md:text-base mt-4 leading-relaxed">
             No se trata de coleccionar herramientas ni de preguntarle curiosidades a un chatbot. Se trata de dominar las palancas con las que puedes materializar cualquier proyecto digital en horas.
           </p>
+        </div>
+
+        {/* Video Showcase: viexia.mp4 */}
+        <div className="max-w-4xl mx-auto mb-14">
+          <div className="relative rounded-3xl overflow-hidden bg-zinc-950 border border-cyan-500/40 shadow-[0_0_50px_rgba(6,182,212,0.25)] group">
+            {/* Video Header bar */}
+            <div className="px-4 py-2.5 bg-black/80 backdrop-blur-md border-b border-white/10 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="flex h-2 w-2 relative">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+                </span>
+                <span className="font-mono text-xs font-bold text-cyan-300 uppercase tracking-wider">
+                  Showcase de Creación en Vivo con IA
+                </span>
+              </div>
+              <span className="font-mono text-[10px] text-gray-400 font-bold uppercase">
+                1080p HD • Expándete
+              </span>
+            </div>
+
+            {/* Video Player */}
+            <div className="relative aspect-video w-full bg-black">
+              <video
+                src="https://vicflix.expandete.cloud/Expandete_videos/viexia.mp4"
+                controls
+                playsInline
+                preload="metadata"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Bottom Caption */}
+            <div className="p-4 bg-gradient-to-r from-zinc-950 via-zinc-900 to-zinc-950 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+              <div className="space-y-0.5">
+                <strong className="text-white font-poppins font-bold block">
+                  Materializa Ideas en Productos Digitales Reales
+                </strong>
+                <span className="text-gray-400 font-sans block text-[11px]">
+                  Mira cómo un concepto se transforma en código, diseño, video y flujos comerciales en vivo.
+                </span>
+              </div>
+              <a
+                href="#precios"
+                className="px-3.5 py-1.5 rounded-full bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 font-mono text-[11px] font-bold uppercase tracking-wider transition-all shrink-0 flex items-center gap-1 cursor-pointer"
+              >
+                <span>Asegurar mi Entrada</span>
+                <ArrowRight className="w-3 h-3" />
+              </a>
+            </div>
+          </div>
         </div>
 
         {/* 8 Deliverables Grid */}

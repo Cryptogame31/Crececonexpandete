@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { MessageCircle, X } from 'lucide-react';
 
 interface FloatingWhatsAppProps {
-  pageContext?: 'main' | 'studio' | 'ia-impacto';
+  pageContext?: 'main' | 'studio' | 'ia-impacto' | 'marketing' | 'marketing-inteligente';
 }
 
 export default function FloatingWhatsApp({ pageContext = 'main' }: FloatingWhatsAppProps) {
@@ -14,6 +14,8 @@ export default function FloatingWhatsApp({ pageContext = 'main' }: FloatingWhats
     ? '¡Hola Expándete! Deseo información y apartar mi cupo en la experiencia presencial IA IMPACTO en Medellín.'
     : pageContext === 'studio'
     ? '¡Hola Expándete Studio! Quiero información sobre los paquetes de publicidad visual y videos con IA.'
+    : (pageContext === 'marketing' || pageContext === 'marketing-inteligente')
+    ? '¡Hola Expándete! Me interesa el servicio de Publicidad y Pauta Digital (Marketing Inteligente). Deseo estructurar una campaña para mi negocio.'
     : '¡Hola Expándete! Deseo información y asesoría sobre sus servicios de software, automatizaciones y tecnología.';
 
   const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(defaultMessage)}`;

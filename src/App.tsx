@@ -3,6 +3,7 @@ import { useMotionValue, useSpring, useTransform, motion } from 'motion/react';
 import { ArrowRight, Flame, Cpu, Database, Smartphone, TrendingUp, Linkedin, Twitter, Facebook, Youtube, X, Send, CheckCircle, Layers, ArrowLeft, Check, DollarSign, ExternalLink, ShieldCheck, Clock, Sparkles, Briefcase, FolderOpen, Globe, MessageCircle } from 'lucide-react';
 import StudioPage from './components/StudioPage';
 import IaImpactoPage from './components/IaImpactoPage';
+import MarketingInteligentePage from './components/MarketingInteligentePage';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
 
 const SERVICES_DATA = [
@@ -102,24 +103,26 @@ const SERVICES_DATA = [
   {
     id: 5,
     title: "Marketing Inteligente",
-    tagline: "Campañas hiper-segmentadas y embudos de conversión enfocados en el retorno (ROI).",
-    description: "Desterramos el marketing intuitivo y los 'likes' superficiales. Diseñamos embudos digitales basados en analítica de datos duros y comportamiento del consumidor. Estructuramos campañas publicitarias en Meta Ads, Google Ads y TikTok Ads coordinadas con páginas de destino de alta velocidad para maximizar el retorno de tu inversión publicitaria.",
+    tagline: "Publicidad y Pauta Digital • Meta, TikTok y Google. Campañas desde $800.000 COP con Transparencia 100%.",
+    description: "📲 PUBLICIDAD Y PAUTA DIGITAL: También manejamos directamente la publicidad en redes sociales. Nosotros nos encargamos de estructurar y organizar las campañas, segmentar los públicos, crear filtros y optimizar la inversión para buscar la mayor conversión posible con el presupuesto disponible. Trabajamos con una comisión del 30%, más los impuestos correspondientes.",
     icon: "TrendingUp",
     color: "from-brand-orange to-yellow-500",
     themeColor: "text-brand-orange",
     bgAccent: "bg-brand-orange/10",
     borderAccent: "border-brand-orange/30",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+    image: "https://vicflix.expandete.cloud/Expandete_videos/puface1.jpg",
+    badge: "PAUTA & PUBLICIDAD",
+    isMarketingEntry: true,
     realPrice: {
-      range: "Desde $4.800.000 COP / mes (Servicio Mensual)",
-      detail: "Estrategia de embudos de conversión, creación de copys basados en neuro-ventas, diseño de landing pages optimizadas y gestión avanzada de campañas publicitarias parte desde $4.800.000 COP mensuales, variando según la escala de inversión en pauta.",
-      comparison: "Agencias tradicionales cobran fees fijos elevados sin compromisos de conversión. Nuestro enfoque es 100% de crecimiento: optimizar tu CAC (Costo de Adquisición) y escalar tus ventas."
+      range: "Campañas desde $800.000 COP (30% Comisión de Gestión + Impuestos)",
+      detail: "Presupuestos a medida desde $800.000 COP. Por ejemplo, en un presupuesto de $1.000.000 COP: $300.000 COP corresponden al 30% de nuestra gestión estratégica y optimización continua; sobre los $700.000 restantes se contempla el 20% de impuestos de plataformas, y el saldo neto restante se destina directamente a los anuncios en Meta, TikTok o Google.",
+      comparison: "Frente a agencias tradicionales que cobran fees fijos mensuales de millones sin compromisos reales, nuestro modelo es 100% transparente y está enfocado en generar prospectos calificados para WhatsApp y ventas medibles."
     },
     benefits: [
-      "Embudos de Conversión Avanzados: Creación del camino exacto que recorre un usuario desconocido hasta convertirse en un cliente recurrente.",
-      "Páginas de Aterrizaje Ultra-Rápidas: Diseñadas bajo código limpio para cargar en menos de un segundo, evitando la fuga del 40% del tráfico.",
-      "Estrategias de Retargeting Dinámico: Impactamos nuevamente a los usuarios interesados con el mensaje exacto según su nivel de consideración.",
-      "Analítica Web y Atribución Exacta: Paneles interactivos para saber de qué anuncio, plataforma y campaña exacta proviene cada centavo facturado."
+      "Estructuración y Organización de Campañas: Embudos científicos de prospección (TOFU), retargeting (MOFU) y cierre directo (BOFU).",
+      "Segmentación de Públicos con IA: Creación de audiencias Lookalike y exclusión de tráfico basura para maximizar el presupuesto.",
+      "Filtros Anti-Curiosos a WhatsApp: Formularios y preguntas de filtro para que tu equipo solo atienda a compradores con capacidad real.",
+      "Optimización Diaria de Inversión: Monitoreo continuo 24/7 de CPA, CTR y reasignación de dinero al creativo ganador."
     ]
   },
   {
@@ -322,6 +325,7 @@ export default function App() {
   const [projectCategoryFilter, setProjectCategoryFilter] = React.useState('Todos');
   const [isStudioView, setIsStudioView] = React.useState(false);
   const [isIaImpactoView, setIsIaImpactoView] = React.useState(false);
+  const [isMarketingView, setIsMarketingView] = React.useState(false);
 
   React.useEffect(() => {
     const checkUrlRoute = () => {
@@ -329,6 +333,19 @@ export default function App() {
       const hash = window.location.hash.toLowerCase();
       const search = window.location.search.toLowerCase();
       if (
+        path.includes('marketing-inteligente') || 
+        hash.includes('marketing-inteligente') || 
+        search.includes('marketing-inteligente') ||
+        path.includes('pauta') ||
+        hash.includes('pauta') ||
+        search.includes('pauta') ||
+        path.includes('marketing') ||
+        hash.includes('marketing')
+      ) {
+        setIsMarketingView(true);
+        setIsIaImpactoView(false);
+        setIsStudioView(false);
+      } else if (
         path.includes('ia-impacto') || 
         hash.includes('ia-impacto') || 
         search.includes('ia-impacto') || 
@@ -342,12 +359,15 @@ export default function App() {
       ) {
         setIsIaImpactoView(true);
         setIsStudioView(false);
+        setIsMarketingView(false);
       } else if (path.includes('studio') || hash.includes('studio') || search.includes('studio')) {
         setIsStudioView(true);
         setIsIaImpactoView(false);
+        setIsMarketingView(false);
       } else {
         setIsStudioView(false);
         setIsIaImpactoView(false);
+        setIsMarketingView(false);
       }
     };
 
@@ -363,6 +383,7 @@ export default function App() {
   const navigateToIaImpacto = () => {
     setIsIaImpactoView(true);
     setIsStudioView(false);
+    setIsMarketingView(false);
     window.history.pushState({}, '', '/ia-impacto');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -370,13 +391,23 @@ export default function App() {
   const navigateToStudio = () => {
     setIsStudioView(true);
     setIsIaImpactoView(false);
+    setIsMarketingView(false);
     window.history.pushState({}, '', '/studio');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const navigateToMarketing = () => {
+    setIsMarketingView(true);
+    setIsIaImpactoView(false);
+    setIsStudioView(false);
+    window.history.pushState({}, '', '/marketing-inteligente');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const navigateToHome = () => {
     setIsStudioView(false);
     setIsIaImpactoView(false);
+    setIsMarketingView(false);
     window.history.pushState({}, '', '/');
   };
 
@@ -498,7 +529,11 @@ export default function App() {
   if (isIaImpactoView) {
     return (
       <>
-        <IaImpactoPage onBackToMain={navigateToHome} onNavigateToStudio={navigateToStudio} />
+        <IaImpactoPage 
+          onBackToMain={navigateToHome} 
+          onNavigateToStudio={navigateToStudio}
+          onNavigateToMarketing={navigateToMarketing}
+        />
         <FloatingWhatsApp pageContext="ia-impacto" />
       </>
     );
@@ -507,8 +542,25 @@ export default function App() {
   if (isStudioView) {
     return (
       <>
-        <StudioPage onBackToMain={navigateToHome} onNavigateToIaImpacto={navigateToIaImpacto} />
+        <StudioPage 
+          onBackToMain={navigateToHome} 
+          onNavigateToIaImpacto={navigateToIaImpacto}
+          onNavigateToMarketing={navigateToMarketing}
+        />
         <FloatingWhatsApp pageContext="studio" />
+      </>
+    );
+  }
+
+  if (isMarketingView) {
+    return (
+      <>
+        <MarketingInteligentePage 
+          onBackToMain={navigateToHome} 
+          onNavigateToIaImpacto={navigateToIaImpacto}
+          onNavigateToStudio={navigateToStudio}
+        />
+        <FloatingWhatsApp pageContext="marketing" />
       </>
     );
   }
@@ -518,8 +570,22 @@ export default function App() {
       onMouseMove={handleMouseMove}
       className="h-screen w-full overflow-y-scroll snap-y snap-mandatory scroll-smooth bg-black grid-bg selection:bg-tech-cyan selection:text-black relative"
     >
-      {/* Floating Launchers (IA IMPACTO & Expándete Studio) */}
+      {/* Floating Launchers (IA IMPACTO, Expándete Studio & Marketing Inteligente) */}
       <div className="fixed top-5 right-5 z-40 flex items-center gap-2">
+        <motion.button
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={navigateToMarketing}
+          className="bg-gradient-to-r from-brand-orange via-yellow-500 to-brand-orange text-black px-3.5 py-2.5 rounded-full font-poppins font-black text-xs uppercase tracking-wider shadow-[0_0_25px_rgba(242,125,38,0.6)] flex items-center gap-1.5 border border-amber-300 cursor-pointer backdrop-blur-md transition-all duration-300"
+        >
+          <TrendingUp className="w-3.5 h-3.5 text-black" />
+          <span className="hidden sm:inline">Pauta Digital ($800k+)</span>
+          <span className="sm:hidden">Pauta</span>
+          <ArrowRight className="w-3 h-3 text-black" />
+        </motion.button>
+
         <motion.button
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -529,7 +595,7 @@ export default function App() {
           className="bg-gradient-to-r from-cyan-400 via-indigo-500 to-purple-600 text-black px-3.5 py-2.5 rounded-full font-poppins font-black text-xs uppercase tracking-wider shadow-[0_0_25px_rgba(6,182,212,0.6)] flex items-center gap-1.5 border border-cyan-200 cursor-pointer backdrop-blur-md transition-all duration-300"
         >
           <Sparkles className="w-3.5 h-3.5 animate-pulse text-black" />
-          <span className="hidden sm:inline">IA IMPACTO • Presencial ($199.000)</span>
+          <span className="hidden sm:inline">IA IMPACTO ($199.000)</span>
           <span className="sm:hidden">IA Impacto</span>
           <ArrowRight className="w-3 h-3 text-black" />
         </motion.button>
@@ -643,6 +709,8 @@ export default function App() {
                     navigateToIaImpacto();
                   } else if (service.isStudioEntry) {
                     navigateToStudio();
+                  } else if (service.isMarketingEntry) {
+                    navigateToMarketing();
                   } else {
                     setSelectedService(service.id);
                   }
@@ -652,6 +720,8 @@ export default function App() {
                     ? 'border-cyan-400/50 shadow-[0_0_25px_rgba(6,182,212,0.2)] bg-gradient-to-b from-cyan-500/10 via-indigo-500/5 to-zinc-950'
                     : service.isStudioEntry
                     ? 'border-amber-400/50 shadow-[0_0_25px_rgba(245,158,11,0.2)] bg-gradient-to-b from-amber-500/10 to-zinc-950'
+                    : service.isMarketingEntry
+                    ? 'border-brand-orange/60 shadow-[0_0_25px_rgba(242,125,38,0.25)] bg-gradient-to-b from-brand-orange/15 via-yellow-500/5 to-zinc-950 hover:border-brand-orange'
                     : service.badge ? 'border-brand-orange/40 shadow-[0_0_20px_rgba(242,125,38,0.1)]' : ''
                 }`}
               >
@@ -661,6 +731,8 @@ export default function App() {
                       ? 'bg-gradient-to-r from-cyan-400 via-indigo-500 to-purple-600 text-black border-cyan-300 shadow-[0_0_15px_rgba(6,182,212,0.5)]'
                       : service.isStudioEntry 
                       ? 'bg-gradient-to-r from-amber-400 to-yellow-500 text-black border-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.5)]' 
+                      : service.isMarketingEntry
+                      ? 'bg-gradient-to-r from-brand-orange via-yellow-500 to-brand-orange text-black border-yellow-300 shadow-[0_0_15px_rgba(242,125,38,0.6)]'
                       : 'bg-brand-orange text-white border-white/20 shadow-[0_0_15px_rgba(242,125,38,0.5)]'
                   }`}>
                     <Sparkles className="w-2.5 h-2.5 animate-pulse" />
@@ -677,9 +749,9 @@ export default function App() {
                   </p>
                 </div>
                 <div className={`mt-4 flex items-center gap-1.5 font-mono text-[10px] uppercase font-bold tracking-wider transition-colors duration-300 ${
-                  service.isIaImpactoEntry ? 'text-cyan-300 group-hover:text-cyan-200' : service.isStudioEntry ? 'text-amber-300 group-hover:text-yellow-200' : 'text-white/40 group-hover:text-tech-cyan'
+                  service.isIaImpactoEntry ? 'text-cyan-300 group-hover:text-cyan-200' : service.isStudioEntry ? 'text-amber-300 group-hover:text-yellow-200' : service.isMarketingEntry ? 'text-brand-orange group-hover:text-yellow-300 font-bold' : 'text-white/40 group-hover:text-tech-cyan'
                 }`}>
-                  {service.isIaImpactoEntry ? 'Ver Experiencia IA IMPACTO' : service.isStudioEntry ? 'Abrir Expándete Studio' : 'Ver detalles y precios'}
+                  {service.isIaImpactoEntry ? 'Ver Experiencia IA IMPACTO' : service.isStudioEntry ? 'Abrir Expándete Studio' : service.isMarketingEntry ? 'Ver Subpágina & Simulador de Pauta' : 'Ver detalles y precios'}
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </div>
               </motion.div>
@@ -1894,15 +1966,28 @@ export default function App() {
                         Agenda hoy tu diagnóstico y recibe un plan estratégico detallado.
                       </p>
                     </div>
-                    <button
-                      onClick={() => {
-                        setSelectedService(null);
-                        setIsLeadFormOpen(true);
-                      }}
-                      className="w-full md:w-auto px-6 py-4 bg-gradient-to-r from-tech-purple to-tech-cyan rounded-xl text-black font-poppins font-black text-xs tracking-wider uppercase hover:shadow-[0_0_25px_rgba(0,240,255,0.4)] transition-all duration-300 cursor-pointer text-center"
-                    >
-                      Calificar Mi Empresa Ahora
-                    </button>
+                    <div className="flex flex-col sm:flex-row items-center gap-2.5 w-full md:w-auto">
+                      {(service.id === 5 || service.isMarketingEntry) && (
+                        <button
+                          onClick={() => {
+                            setSelectedService(null);
+                            navigateToMarketing();
+                          }}
+                          className="w-full sm:w-auto px-6 py-4 bg-gradient-to-r from-brand-orange to-yellow-500 rounded-xl text-black font-poppins font-black text-xs tracking-wider uppercase hover:shadow-[0_0_25px_rgba(242,125,38,0.5)] transition-all duration-300 cursor-pointer text-center"
+                        >
+                          Abrir Subpágina & Simulador de Pauta
+                        </button>
+                      )}
+                      <button
+                        onClick={() => {
+                          setSelectedService(null);
+                          setIsLeadFormOpen(true);
+                        }}
+                        className="w-full sm:w-auto px-6 py-4 bg-gradient-to-r from-tech-purple to-tech-cyan rounded-xl text-black font-poppins font-black text-xs tracking-wider uppercase hover:shadow-[0_0_25px_rgba(0,240,255,0.4)] transition-all duration-300 cursor-pointer text-center"
+                      >
+                        Calificar Mi Empresa Ahora
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
