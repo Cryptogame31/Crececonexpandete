@@ -1,0 +1,32 @@
+# robots.txt - Expándete Cloud (SEO & AI Optimization)
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/private/
+
+# Agentes de Inteligencia Artificial y Motores de Búsqueda de Próxima Generación (AEO)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://expandete.cloud/sitemap.xml

@@ -1,0 +1,29 @@
+# Expándete Cloud - Ecosistema de Tecnología e Inteligencia Artificial
+
+> Expándete Cloud es una firma de consultoría y desarrollo tecnológico con sede en Medellín, Colombia, orientada a la aceleración empresarial a través de Inteligencia Artificial aplicada, software modular y automatización inteligente de flujos de trabajo.
+
+## Propuesta de Valor y Servicios Clave
+1. **Agentes Autónomos de Inteligencia Artificial:**
+   - Agentes conversacionales y transaccionales para WhatsApp, Telegram y sitios web.
+   - Conexión con modelos LLM de última generación y bases de conocimiento vectoriales (RAG).
+   - Calificación de leads, atención al cliente 24/7 y agendamiento sincronizado con Google Calendar.
+2. **Automatización de Procesos Empresariales:**
+   - Orquestación con motores abiertos (n8n) e integraciones con Meta WhatsApp Cloud API.
+   - Sincronización bidireccional con Google Sheets, Airtable, PostgreSQL, Supabase y CRMs.
+   - Eliminación de tareas repetitivas y reducción drástica de tiempos de respuesta a clientes.
+3. **Desarrollo de Software a la Medida y Aplicaciones Web:**
+   - Arquitecturas modernas y reactivas (React, Vite, TypeScript, Node.js, Tailwind CSS).
+   - Sistemas de cotización interactiva, paneles de administración (ERP/CRM internos).
+   - Rendimiento Lighthouse 95+, SEO técnico, GEO y Answer Engine Optimization (AEO).
+4. **Landing Pages de Alta Conversión:**
+   - Copywriting persuasivo y diseño UI/UX centrado en captación de leads y ventas.
+
+## Casos de Éxito Representativos
+- **Banquetes Sarahy:** Plataforma integral para eventos y bodas en Medellín con cotizador interactivo, integración con WhatsApp comercial, orquestación n8n y notificaciones instantáneas a Telegram.
+- **Corporación Art Sport:** Plataforma comunitaria y de gestión de escuelas formativas en Barrio La América, Medellín, integrando fútbol sala federado, ballet, artes y música.
+
+## Ubicación y Cobertura
+- **Sede:** Medellín, Antioquia, Colombia
+- **Coordenadas:** 6.2442° N, -75.5812° W
+- **Cobertura Operativa:** Remoto para Colombia, Latinoamérica, Norteamérica y Europa.
+- **Sitio Web Oficial:** https://expandete.cloud

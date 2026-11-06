@@ -1111,7 +1111,7 @@ export default function ServiceSubpage({
       {/* ============================================================== */}
       {/* ⚡ GANCHO DOPAMÍNICO DE CAPTURA DE CORREO (LEAD MAGNET) */}
       {/* ============================================================== */}
-      <section className="py-12 md:py-16 px-6 md:px-12 relative overflow-hidden bg-gradient-to-b from-zinc-950 via-black to-zinc-950 border-b border-white/10">
+      <section id="lead-magnet-capture" className="py-12 md:py-16 px-6 md:px-12 relative overflow-hidden bg-gradient-to-b from-zinc-950 via-black to-zinc-950 border-b border-white/10">
         <div className="max-w-5xl mx-auto relative rounded-3xl p-8 md:p-12 border border-tech-cyan/40 bg-gradient-to-br from-cyan-950/30 via-black to-purple-950/20 shadow-[0_0_60px_rgba(0,240,255,0.15)] overflow-hidden">
           {/* Adorno visual */}
           <div className="absolute top-0 right-0 p-6 opacity-10 pointer-events-none">
@@ -1272,6 +1272,22 @@ export default function ServiceSubpage({
                     <span className="leading-tight">{item}</span>
                   </div>
                 ))}
+
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const el = document.getElementById('lead-magnet-capture');
+                    if (el) {
+                      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    } else {
+                      onOpenLeadModal(`${service.title} - Etapa ${step.number}: ${step.title}`);
+                    }
+                  }}
+                  className="mt-3 w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-tech-cyan/15 to-tech-purple/15 hover:from-tech-cyan hover:to-tech-purple text-tech-cyan hover:text-black border border-tech-cyan/30 font-poppins font-black text-[10px] uppercase tracking-wider transition-all duration-300 flex items-center justify-between cursor-pointer group/btn"
+                >
+                  <span>⚡ Recibir Plantilla Etapa {step.number}</span>
+                  <ArrowRight className="w-3 h-3 group-hover/btn:translate-x-1 transition-transform" />
+                </button>
               </div>
             </div>
           ))}

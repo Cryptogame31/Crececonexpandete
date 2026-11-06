@@ -1,6 +1,6 @@
 import React from 'react';
-import { useMotionValue, useSpring, useTransform, motion } from 'motion/react';
-import { ArrowRight, Flame, Cpu, Database, Smartphone, TrendingUp, Linkedin, Twitter, Facebook, Youtube, X, Send, CheckCircle, Layers, ArrowLeft, Check, DollarSign, ExternalLink, ShieldCheck, Clock, Sparkles, Briefcase, FolderOpen, Globe, MessageCircle } from 'lucide-react';
+import { useMotionValue, useSpring, useTransform, motion, AnimatePresence } from 'motion/react';
+import { ArrowRight, Flame, Cpu, Database, Smartphone, TrendingUp, Linkedin, Twitter, Facebook, Youtube, X, Send, CheckCircle, Layers, ArrowLeft, Check, DollarSign, ExternalLink, ShieldCheck, Clock, Sparkles, Briefcase, FolderOpen, Globe, MessageCircle, Gift } from 'lucide-react';
 import StudioPage from './components/StudioPage';
 import IaImpactoPage from './components/IaImpactoPage';
 import MarketingInteligentePage from './components/MarketingInteligentePage';
@@ -327,12 +327,42 @@ export default function App() {
   const [isStudioView, setIsStudioView] = React.useState(false);
   const [isIaImpactoView, setIsIaImpactoView] = React.useState(false);
   const [isMarketingView, setIsMarketingView] = React.useState(false);
+  const [activeServiceSubpageId, setActiveServiceSubpageId] = React.useState<number | null>(null);
+  const [solucionesEmail, setSolucionesEmail] = React.useState('');
+  const [solucionesNombre, setSolucionesNombre] = React.useState('');
+  const [solucionesSubmitting, setSolucionesSubmitting] = React.useState(false);
+  const [solucionesSubmitted, setSolucionesSubmitted] = React.useState(false);
 
   React.useEffect(() => {
     const checkUrlRoute = () => {
       const path = window.location.pathname.toLowerCase();
       const hash = window.location.hash.toLowerCase();
       const search = window.location.search.toLowerCase();
+
+      const serviceRouteMap: Record<string, number> = {
+        'apps-moviles-web': 1,
+        'apps-moviles': 1,
+        'landing-pages-elite': 2,
+        'landing-pages': 2,
+        'agentes-inteligencia-artificial': 3,
+        'agentes-ia': 3,
+        'automatizaciones-n8n': 4,
+        'automatizaciones': 4,
+        'consultoria-tecnologica': 6,
+        'consultoria': 6,
+        'transformacion-digital': 7,
+      };
+
+      for (const [slugKey, sId] of Object.entries(serviceRouteMap)) {
+        if (path.includes(slugKey) || hash.includes(slugKey) || search.includes(slugKey)) {
+          setActiveServiceSubpageId(sId);
+          setIsMarketingView(false);
+          setIsIaImpactoView(false);
+          setIsStudioView(false);
+          return;
+        }
+      }
+
       if (
         path.includes('marketing-inteligente') || 
         hash.includes('marketing-inteligente') || 
@@ -382,6 +412,7 @@ export default function App() {
   }, []);
 
   const navigateToIaImpacto = () => {
+    setActiveServiceSubpageId(null);
     setIsIaImpactoView(true);
     setIsStudioView(false);
     setIsMarketingView(false);
@@ -390,6 +421,7 @@ export default function App() {
   };
 
   const navigateToStudio = () => {
+    setActiveServiceSubpageId(null);
     setIsStudioView(true);
     setIsIaImpactoView(false);
     setIsMarketingView(false);
@@ -398,6 +430,7 @@ export default function App() {
   };
 
   const navigateToMarketing = () => {
+    setActiveServiceSubpageId(null);
     setIsMarketingView(true);
     setIsIaImpactoView(false);
     setIsStudioView(false);
@@ -405,11 +438,24 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const navigateToService = (serviceId: number) => {
+    setIsStudioView(false);
+    setIsIaImpactoView(false);
+    setIsMarketingView(false);
+    setSelectedService(null);
+    setActiveServiceSubpageId(serviceId);
+    const slug = SERVICES_SUBPAGES_DATA[serviceId]?.slug || `servicio-${serviceId}`;
+    window.history.pushState({}, '', '/' + slug);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const navigateToHome = () => {
+    setActiveServiceSubpageId(null);
     setIsStudioView(false);
     setIsIaImpactoView(false);
     setIsMarketingView(false);
     window.history.pushState({}, '', '/');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   React.useEffect(() => {
@@ -462,7 +508,7 @@ export default function App() {
         },
         body: JSON.stringify({
           email: solucionesEmail,
-          nombre: 'Lead Soluciones Home',
+          nombre: solucionesNombre || 'Lead Soluciones Home',
           unidad: 'remarketing_soluciones_home',
           servicio: 'Diagnóstico Tecnológico 2026',
           recurso_solicitado: 'Blueprint Tecnológico 2026 + Auditoría Express',
@@ -591,6 +637,26 @@ export default function App() {
           onNavigateToStudio={navigateToStudio}
         />
         <FloatingWhatsApp pageContext="marketing" />
+      </>
+    );
+  }
+
+  if (activeServiceSubpageId !== null) {
+    return (
+      <>
+        <ServiceSubpage
+          serviceId={activeServiceSubpageId}
+          onBackToMain={navigateToHome}
+          onSelectService={(id) => navigateToService(id)}
+          onNavigateToStudio={navigateToStudio}
+          onNavigateToIaImpacto={navigateToIaImpacto}
+          onNavigateToMarketing={navigateToMarketing}
+          onOpenLeadModal={(serviceTitle) => {
+            setFormData(prev => ({ ...prev, obstaculo: `Subpágina: ${serviceTitle}` }));
+            setIsLeadFormOpen(true);
+          }}
+        />
+        <FloatingWhatsApp pageContext="service" />
       </>
     );
   }
@@ -742,7 +808,7 @@ export default function App() {
                   } else if (service.isMarketingEntry) {
                     navigateToMarketing();
                   } else {
-                    setSelectedService(service.id);
+                    navigateToService(service.id);
                   }
                 }}
                 className={`glass-card p-8 flex flex-col justify-between min-h-[240px] cursor-pointer group hover:border-tech-cyan/50 hover:shadow-[0_0_30px_rgba(0,240,255,0.15)] hover:-translate-y-1 transition-all duration-300 relative ${
@@ -778,15 +844,132 @@ export default function App() {
                     {service.tagline}
                   </p>
                 </div>
-                <div className={`mt-4 flex items-center gap-1.5 font-mono text-[10px] uppercase font-bold tracking-wider transition-colors duration-300 ${
-                  service.isIaImpactoEntry ? 'text-cyan-300 group-hover:text-cyan-200' : service.isStudioEntry ? 'text-amber-300 group-hover:text-yellow-200' : service.isMarketingEntry ? 'text-brand-orange group-hover:text-yellow-300 font-bold' : 'text-white/40 group-hover:text-tech-cyan'
-                }`}>
-                  {service.isIaImpactoEntry ? 'Ver Experiencia IA IMPACTO' : service.isStudioEntry ? 'Abrir Expándete Studio' : service.isMarketingEntry ? 'Ver Subpágina & Simulador de Pauta' : 'Explorar Subpágina Explicativa'}
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                <div className="mt-5 pt-3 border-t border-white/10 flex flex-col gap-2">
+                  <div className="flex items-center justify-between text-[9px] font-mono">
+                    <span className="text-emerald-400 font-bold flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                      🎁 Incluye Guía + Precios
+                    </span>
+                    <span className="text-brand-orange font-bold uppercase">
+                      ⚡ Cupos Limitados
+                    </span>
+                  </div>
+                  <div className={`w-full py-2.5 px-3 rounded-xl flex items-center justify-between font-poppins text-[11px] uppercase font-black tracking-wider transition-all duration-300 ${
+                    service.isIaImpactoEntry
+                      ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 group-hover:bg-cyan-400 group-hover:text-black'
+                      : service.isStudioEntry
+                      ? 'bg-amber-500/20 text-amber-300 border border-amber-400/40 group-hover:bg-amber-400 group-hover:text-black'
+                      : service.isMarketingEntry
+                      ? 'bg-brand-orange/20 text-brand-orange border border-brand-orange/40 group-hover:bg-brand-orange group-hover:text-black'
+                      : 'bg-white/5 text-tech-cyan border border-tech-cyan/30 group-hover:bg-gradient-to-r group-hover:from-tech-cyan group-hover:to-tech-purple group-hover:text-black group-hover:border-transparent shadow-[0_0_15px_rgba(0,240,255,0.1)]'
+                  }`}>
+                    <span>
+                      {service.isIaImpactoEntry ? 'Abrir Subpágina IA IMPACTO' : service.isStudioEntry ? 'Abrir Subpágina Studio' : service.isMarketingEntry ? 'Abrir Subpágina & Simulador' : 'Abrir Subpágina Explicativa'}
+                    </span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  </div>
                 </div>
               </motion.div>
             ))}
           </div>
+
+          {/* ========================================================= */}
+          {/* ⚡ BLOQUE DOPAMÍNICO DE CAPTURA DE CORREO PARA REMARKETING */}
+          {/* ========================================================= */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-10 p-6 md:p-8 rounded-3xl bg-gradient-to-r from-zinc-950 via-cyan-950/30 to-purple-950/30 border-2 border-tech-cyan/50 shadow-[0_0_50px_rgba(0,240,255,0.2)] flex flex-col lg:flex-row items-center justify-between gap-8 relative overflow-hidden"
+          >
+            <div className="absolute -top-12 -right-12 w-56 h-56 bg-tech-cyan/20 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-12 -left-12 w-56 h-56 bg-brand-orange/15 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="flex-1 flex flex-col gap-3 text-left relative z-10">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand-orange/20 border border-brand-orange/50 text-brand-orange font-mono text-[10px] font-black uppercase tracking-wider w-fit shadow-[0_0_15px_rgba(242,125,38,0.3)]">
+                <Flame className="w-3.5 h-3.5 animate-pulse" />
+                <span>URGENTE: SOLO 3 DIAGNÓSTICOS BONIFICADOS DISPONIBLES ESTA SEMANA</span>
+              </div>
+
+              <h3 className="font-poppins font-black text-xl md:text-3xl text-white uppercase tracking-tight leading-tight">
+                🎁 ¿No sabes por cuál solución empezar? Recibe nuestro <span className="text-transparent bg-clip-text bg-gradient-to-r from-tech-cyan to-brand-orange">Blueprint Tecnológico 2026 + Auditoría Express</span>
+              </h3>
+
+              <p className="font-sans text-xs md:text-sm text-white/80 leading-relaxed max-w-2xl">
+                Deja tu correo corporativo y en menos de 2 minutos desbloquearás nuestra matriz comparativa de precios, retorno de inversión (ROI) y casos reales para que tomes la mejor decisión sin gastar de más.
+              </p>
+            </div>
+
+            <div className="w-full lg:w-[420px] flex-shrink-0 relative z-10 bg-black/85 backdrop-blur-xl p-5 rounded-2xl border border-white/15 shadow-2xl">
+              <AnimatePresence mode="wait">
+                {!solucionesSubmitted ? (
+                  <form onSubmit={handleSolucionesLeadSubmit} className="flex flex-col gap-2.5">
+                    <div className="flex items-center justify-between text-[10px] font-mono mb-0.5">
+                      <span className="text-tech-cyan font-bold uppercase">⚡ Entrega Instantánea al Correo</span>
+                      <span className="text-emerald-400 font-bold">100% GRATIS</span>
+                    </div>
+                    <input
+                      type="text"
+                      value={solucionesNombre}
+                      onChange={(e) => setSolucionesNombre(e.target.value)}
+                      placeholder="Tu nombre o empresa"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/15 text-white placeholder-white/40 text-xs focus:outline-none focus:border-tech-cyan transition-colors"
+                    />
+                    <input
+                      type="email"
+                      required
+                      value={solucionesEmail}
+                      onChange={(e) => setSolucionesEmail(e.target.value)}
+                      placeholder="Tu correo electrónico para enviarte el Blueprint *"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/20 text-white placeholder-white/40 text-xs focus:outline-none focus:border-tech-cyan transition-colors"
+                    />
+                    <button
+                      type="submit"
+                      disabled={solucionesSubmitting}
+                      className="w-full py-3.5 px-5 rounded-xl bg-gradient-to-r from-brand-orange via-yellow-500 to-tech-cyan text-black font-poppins font-black text-xs uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all shadow-[0_0_25px_rgba(242,125,38,0.4)] cursor-pointer flex items-center justify-center gap-2"
+                    >
+                      {solucionesSubmitting ? (
+                        <span>Desbloqueando Acceso...</span>
+                      ) : (
+                        <>
+                          <Send className="w-3.5 h-3.5 text-black" />
+                          <span>Recibir Blueprint + Precios Ahora 🚀</span>
+                        </>
+                      )}
+                    </button>
+                  </form>
+                ) : (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="p-4 rounded-2xl bg-emerald-500/15 border border-emerald-500/40 flex flex-col gap-3 text-center"
+                  >
+                    <div className="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto">
+                      <Check className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <span className="font-poppins font-black text-sm text-white uppercase block">
+                        ¡Blueprint Desbloqueado con Éxito!
+                      </span>
+                      <span className="font-sans text-xs text-white/75 block mt-1">
+                        Hemos registrado <strong className="text-tech-cyan">{solucionesEmail}</strong> para tu envío prioritario.
+                      </span>
+                    </div>
+                    <button
+                      onClick={() => setIsLeadFormOpen(true)}
+                      className="w-full py-2.5 rounded-xl bg-emerald-500 text-black font-poppins font-black text-xs uppercase tracking-wider hover:brightness-110 transition-all cursor-pointer"
+                    >
+                      Agendar mi Diagnóstico de 15 Minutos ➜
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              <div className="flex items-center justify-between text-[9px] font-mono text-white/40 mt-2 px-1">
+                <span>🔥 +140 empresas diagnosticadas</span>
+                <span>🔒 Cero Spam Garantizado</span>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -836,13 +1019,28 @@ export default function App() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-zinc-950/80 backdrop-blur-md border border-white/15 p-8 rounded-3xl relative overflow-hidden group hover:border-tech-cyan/50 transition-all duration-300"
+              className="bg-zinc-950/80 backdrop-blur-md border border-white/15 p-8 rounded-3xl relative overflow-hidden group hover:border-tech-cyan/50 transition-all duration-300 flex flex-col justify-between"
             >
-              <div className="absolute top-4 right-6 font-poppins font-black text-5xl text-white/5 group-hover:text-tech-cyan/10 transition-colors">01</div>
-              <h3 className="font-poppins font-black text-xl text-tech-cyan uppercase mb-3">Descubrimos</h3>
-              <p className="font-poppins text-sm text-gray-300 leading-relaxed font-bold">
-                Analizamos cómo funciona tu negocio. Detectamos cuellos de botella, pérdidas de dinero y oportunidades reales de crecimiento.
-              </p>
+              <div>
+                <div className="absolute top-4 right-6 font-poppins font-black text-5xl text-white/5 group-hover:text-tech-cyan/10 transition-colors">01</div>
+                <span className="inline-block font-mono text-[9px] text-tech-cyan bg-tech-cyan/10 border border-tech-cyan/30 px-2.5 py-0.5 rounded-full uppercase font-bold mb-2">
+                  ⚡ Diagnóstico sin costo
+                </span>
+                <h3 className="font-poppins font-black text-xl text-tech-cyan uppercase mb-3">Descubrimos</h3>
+                <p className="font-poppins text-sm text-gray-300 leading-relaxed font-bold">
+                  Analizamos cómo funciona tu negocio. Detectamos cuellos de botella, pérdidas de dinero y oportunidades reales de crecimiento.
+                </p>
+              </div>
+              <button
+                onClick={() => {
+                  setFormData(prev => ({ ...prev, obstaculo: 'Fase 01: Auditoría de Cuellos de Botella y Fugas de Dinero' }));
+                  setIsLeadFormOpen(true);
+                }}
+                className="mt-6 w-full py-2.5 px-3 rounded-xl bg-tech-cyan/15 hover:bg-tech-cyan text-tech-cyan hover:text-black border border-tech-cyan/40 font-poppins font-black text-[10px] uppercase tracking-wider transition-all duration-300 flex items-center justify-between cursor-pointer"
+              >
+                <span>Detectar Fugas en mi Empresa</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
             </motion.div>
 
             {/* Paso 2: Diseñamos */}
@@ -850,13 +1048,28 @@ export default function App() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-zinc-950/80 backdrop-blur-md border border-white/15 p-8 rounded-3xl relative overflow-hidden group hover:border-brand-orange/50 transition-all duration-300"
+              className="bg-zinc-950/80 backdrop-blur-md border border-white/15 p-8 rounded-3xl relative overflow-hidden group hover:border-brand-orange/50 transition-all duration-300 flex flex-col justify-between"
             >
-              <div className="absolute top-4 right-6 font-poppins font-black text-5xl text-white/5 group-hover:text-brand-orange/10 transition-colors">02</div>
-              <h3 className="font-poppins font-black text-xl text-brand-orange uppercase mb-3">Diseñamos</h3>
-              <p className="font-poppins text-sm text-gray-300 leading-relaxed font-bold">
-                Creamos una estrategia tecnológica completamente personalizada para tu modelo. Nada de soluciones genéricas ni plantillas obsoletas.
-              </p>
+              <div>
+                <div className="absolute top-4 right-6 font-poppins font-black text-5xl text-white/5 group-hover:text-brand-orange/10 transition-colors">02</div>
+                <span className="inline-block font-mono text-[9px] text-brand-orange bg-brand-orange/10 border border-brand-orange/30 px-2.5 py-0.5 rounded-full uppercase font-bold mb-2">
+                  🎁 Incluye Roadmap PDF
+                </span>
+                <h3 className="font-poppins font-black text-xl text-brand-orange uppercase mb-3">Diseñamos</h3>
+                <p className="font-poppins text-sm text-gray-300 leading-relaxed font-bold">
+                  Creamos una estrategia tecnológica completamente personalizada para tu modelo. Nada de soluciones genéricas ni plantillas obsoletas.
+                </p>
+              </div>
+              <button
+                onClick={() => {
+                  setFormData(prev => ({ ...prev, obstaculo: 'Fase 02: Diseño de Estrategia y Roadmap Personalizado' }));
+                  setIsLeadFormOpen(true);
+                }}
+                className="mt-6 w-full py-2.5 px-3 rounded-xl bg-brand-orange/15 hover:bg-brand-orange text-brand-orange hover:text-black border border-brand-orange/40 font-poppins font-black text-[10px] uppercase tracking-wider transition-all duration-300 flex items-center justify-between cursor-pointer"
+              >
+                <span>Solicitar Mi Roadmap al Correo</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
             </motion.div>
 
             {/* Paso 3: Construimos */}
@@ -864,13 +1077,28 @@ export default function App() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="bg-zinc-950/80 backdrop-blur-md border border-white/15 p-8 rounded-3xl relative overflow-hidden group hover:border-tech-purple/50 transition-all duration-300"
+              className="bg-zinc-950/80 backdrop-blur-md border border-white/15 p-8 rounded-3xl relative overflow-hidden group hover:border-tech-purple/50 transition-all duration-300 flex flex-col justify-between"
             >
-              <div className="absolute top-4 right-6 font-poppins font-black text-5xl text-white/5 group-hover:text-tech-purple/10 transition-colors">03</div>
-              <h3 className="font-poppins font-black text-xl text-tech-purple uppercase mb-3">Construimos</h3>
-              <p className="font-poppins text-sm text-gray-300 leading-relaxed font-bold">
-                Desarrollamos aplicaciones robustas, automatizaciones integrales y agentes cognitivos de IA listos para producir resultados medibles.
-              </p>
+              <div>
+                <div className="absolute top-4 right-6 font-poppins font-black text-5xl text-white/5 group-hover:text-tech-purple/10 transition-colors">03</div>
+                <span className="inline-block font-mono text-[9px] text-tech-purple bg-tech-purple/10 border border-tech-purple/30 px-2.5 py-0.5 rounded-full uppercase font-bold mb-2">
+                  🔥 Sprints desde 5 días
+                </span>
+                <h3 className="font-poppins font-black text-xl text-tech-purple uppercase mb-3">Construimos</h3>
+                <p className="font-poppins text-sm text-gray-300 leading-relaxed font-bold">
+                  Desarrollamos aplicaciones robustas, automatizaciones integrales y agentes cognitivos de IA listos para producir resultados medibles.
+                </p>
+              </div>
+              <button
+                onClick={() => {
+                  setFormData(prev => ({ ...prev, obstaculo: 'Fase 03: Desarrollo de App, Landing o Agente IA' }));
+                  setIsLeadFormOpen(true);
+                }}
+                className="mt-6 w-full py-2.5 px-3 rounded-xl bg-tech-purple/15 hover:bg-tech-purple text-tech-purple hover:text-black border border-tech-purple/40 font-poppins font-black text-[10px] uppercase tracking-wider transition-all duration-300 flex items-center justify-between cursor-pointer"
+              >
+                <span>Cotizar Mi Desarrollo Ahora</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
             </motion.div>
 
             {/* Paso 4: Escalamos */}
@@ -878,13 +1106,28 @@ export default function App() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="bg-zinc-950/80 backdrop-blur-md border border-white/15 p-8 rounded-3xl relative overflow-hidden group hover:border-white/40 transition-all duration-300"
+              className="bg-zinc-950/80 backdrop-blur-md border border-white/15 p-8 rounded-3xl relative overflow-hidden group hover:border-emerald-400/50 transition-all duration-300 flex flex-col justify-between"
             >
-              <div className="absolute top-4 right-6 font-poppins font-black text-5xl text-white/5 group-hover:text-white/10 transition-colors">04</div>
-              <h3 className="font-poppins font-black text-xl text-white uppercase mb-3">Escalamos</h3>
-              <p className="font-poppins text-sm text-gray-300 leading-relaxed font-bold">
-                Medimos absolutamente todo. Realizamos optimización constante, capturando más clientes, más ventas y multiplicando tu rentabilidad.
-              </p>
+              <div>
+                <div className="absolute top-4 right-6 font-poppins font-black text-5xl text-white/5 group-hover:text-white/10 transition-colors">04</div>
+                <span className="inline-block font-mono text-[9px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-0.5 rounded-full uppercase font-bold mb-2">
+                  🚀 Crecimiento Exponencial
+                </span>
+                <h3 className="font-poppins font-black text-xl text-white uppercase mb-3">Escalamos</h3>
+                <p className="font-poppins text-sm text-gray-300 leading-relaxed font-bold">
+                  Medimos absolutamente todo. Realizamos optimización constante, capturando más clientes, más ventas y multiplicando tu rentabilidad.
+                </p>
+              </div>
+              <button
+                onClick={() => {
+                  setFormData(prev => ({ ...prev, obstaculo: 'Fase 04: Escalamiento Comercial y Pauta de Alta Conversión' }));
+                  setIsLeadFormOpen(true);
+                }}
+                className="mt-6 w-full py-2.5 px-3 rounded-xl bg-emerald-500/15 hover:bg-emerald-400 text-emerald-400 hover:text-black border border-emerald-500/40 font-poppins font-black text-[10px] uppercase tracking-wider transition-all duration-300 flex items-center justify-between cursor-pointer"
+              >
+                <span>Recibir Plan de Escala</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
             </motion.div>
 
           </div>
