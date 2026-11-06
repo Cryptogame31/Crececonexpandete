@@ -5,6 +5,7 @@ import StudioPage from './components/StudioPage';
 import IaImpactoPage from './components/IaImpactoPage';
 import MarketingInteligentePage from './components/MarketingInteligentePage';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
+import ServiceSubpage, { SERVICES_SUBPAGES_DATA } from './components/ServiceSubpage';
 
 const SERVICES_DATA = [
   {
@@ -448,6 +449,35 @@ export default function App() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const handleSolucionesLeadSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!solucionesEmail || !solucionesEmail.includes('@')) return;
+
+    setSolucionesSubmitting(true);
+    try {
+      await fetch('https://n8nok-n8n.uah3tl.easypanel.host/webhook/d61883cc-a3a0-4c64-bc20-308f50dceac1', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8',
+        },
+        body: JSON.stringify({
+          email: solucionesEmail,
+          nombre: 'Lead Soluciones Home',
+          unidad: 'remarketing_soluciones_home',
+          servicio: 'Diagnóstico Tecnológico 2026',
+          recurso_solicitado: 'Blueprint Tecnológico 2026 + Auditoría Express',
+          fecha: new Date().toISOString(),
+          fuente: 'Expandete Cloud — Sección Soluciones Sin Intermediarios'
+        }),
+      });
+    } catch (err) {
+      console.error('Error al capturar lead de soluciones:', err);
+    } finally {
+      setSolucionesSubmitting(false);
+      setSolucionesSubmitted(true);
+    }
+  };
+
   const handleNextStep = async (e: React.FormEvent) => {
     e.preventDefault();
     if (formStep === 1) {
@@ -751,7 +781,7 @@ export default function App() {
                 <div className={`mt-4 flex items-center gap-1.5 font-mono text-[10px] uppercase font-bold tracking-wider transition-colors duration-300 ${
                   service.isIaImpactoEntry ? 'text-cyan-300 group-hover:text-cyan-200' : service.isStudioEntry ? 'text-amber-300 group-hover:text-yellow-200' : service.isMarketingEntry ? 'text-brand-orange group-hover:text-yellow-300 font-bold' : 'text-white/40 group-hover:text-tech-cyan'
                 }`}>
-                  {service.isIaImpactoEntry ? 'Ver Experiencia IA IMPACTO' : service.isStudioEntry ? 'Abrir Expándete Studio' : service.isMarketingEntry ? 'Ver Subpágina & Simulador de Pauta' : 'Ver detalles y precios'}
+                  {service.isIaImpactoEntry ? 'Ver Experiencia IA IMPACTO' : service.isStudioEntry ? 'Abrir Expándete Studio' : service.isMarketingEntry ? 'Ver Subpágina & Simulador de Pauta' : 'Explorar Subpágina Explicativa'}
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </div>
               </motion.div>
