@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>⚡ Las 10 Automatizaciones Esenciales para Escalar | Expándete Cloud (ET-LM-004)</title>
+  <meta name="description" content="Los 10 flujos automatizados en n8n que toda empresa que facture más de $20M COP al mes debe implementar para ahorrar hasta 25 horas semanales y eliminar el error humano." />
+  <meta name="robots" content="index, follow" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap');
+    :root {
+      --bg-dark: #07090e;
+      --card-bg: #0f1420;
+      --accent: #9d4edd;
+      --purple: #9d4edd;
+      --orange: #f97316;
+      --emerald: #10b981;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: rgba(255, 255, 255, 0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.65;
+      padding-bottom: 80px;
+    }
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 9, 14, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .code-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(0, 240, 255, 0.12);
+      color: #00f0ff;
+      border: 1px solid rgba(0, 240, 255, 0.3);
+    }
+    .toolbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 10px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      transition: all 0.2s ease;
+    }
+    .btn-print {
+      background: linear-gradient(90deg, #00f0ff, #9d4edd);
+      color: #000;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+    }
+    .btn-print:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    .btn-wa {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+    .btn-wa:hover { background: #10b981; color: #000; }
+    .btn-back {
+      background: rgba(255, 255, 255, 0.06);
+      color: #e2e8f0;
+      border: 1px solid var(--border);
+    }
+    .container {
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 0 24px;
+    }
+    .hero-card {
+      background: radial-gradient(circle at top right, rgba(0, 240, 255, 0.14), rgba(157, 78, 221, 0.08), var(--card-bg));
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      border-radius: 24px;
+      padding: 40px;
+      margin-bottom: 36px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    }
+    .badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(249, 115, 22, 0.15);
+      color: #fb923c;
+      border: 1px solid rgba(249, 115, 22, 0.4);
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 34px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 14px;
+      letter-spacing: -0.02em;
+    }
+    .subtitle {
+      font-size: 16px;
+      color: #cbd5e1;
+      margin-bottom: 24px;
+    }
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .section {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 28px;
+    }
+    h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #00f0ff;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+    }
+    h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #f8fafc;
+      margin: 20px 0 10px;
+    }
+    p {
+      color: #cbd5e1;
+      font-size: 14.5px;
+      margin-bottom: 14px;
+    }
+    ul, ol {
+      padding-left: 22px;
+      margin-bottom: 16px;
+      color: #cbd5e1;
+      font-size: 14.5px;
+    }
+    li { margin-bottom: 8px; }
+    li strong { color: #fff; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0;
+      font-size: 13.5px;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      text-align: left;
+    }
+    th {
+      background: rgba(0, 240, 255, 0.08);
+      color: #00f0ff;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 11.5px;
+      letter-spacing: 0.05em;
+    }
+    tr:nth-child(even) td { background: rgba(255, 255, 255, 0.02); }
+    .callout {
+      background: rgba(249, 115, 22, 0.1);
+      border-left: 4px solid #f97316;
+      padding: 16px 20px;
+      border-radius: 10px;
+      margin: 18px 0;
+      font-size: 14px;
+      color: #fed7aa;
+    }
+    .prompt-box {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      background: #05070b;
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: 12px;
+      padding: 18px;
+      color: #a5f3fc;
+      white-space: pre-wrap;
+      margin: 16px 0;
+    }
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      margin-bottom: 10px;
+    }
+    .checkbox {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      border: 2px solid #00f0ff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #00f0ff;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .cta-footer {
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.15), rgba(157, 78, 221, 0.18), rgba(249, 115, 22, 0.15));
+      border: 2px solid rgba(0, 240, 255, 0.45);
+      border-radius: 24px;
+      padding: 36px;
+      text-align: center;
+      margin-top: 40px;
+    }
+    @media print {
+      body { background: #fff; color: #0f172a; padding: 0; }
+      .toolbar { display: none; }
+      .hero-card, .section, .cta-footer {
+        background: #fff !important;
+        color: #0f172a !important;
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+      }
+      h1, h2, h3, li strong { color: #0f172a !important; }
+      p, li, td, .subtitle { color: #334155 !important; }
+      th { background: #f1f5f9 !important; color: #0f172a !important; }
+      .prompt-box { background: #f8fafc !important; color: #0f172a !important; border: 1px solid #94a3b8 !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <span class="code-pill">ET-LM-004</span>
+      <strong style="font-size:13px;">EXPÁNDETE CLOUD // DOCUMENTO EJECUTIVO OFICIAL</strong>
+    </div>
+    <div class="toolbar-actions">
+      <a href="https://www.expandete.cloud" class="btn btn-back">← Volver a Expándete</a>
+      <a href="https://wa.me/573045751648?text=%C2%A1Hola%20Exp%C3%A1ndete!%20Acabo%20de%20descargar%20el%20documento%20%E2%9A%A1%20Las%2010%20Automatizaciones%20Esenciales%20para%20Escalar%20(ET-LM-004)%20y%20quiero%20agendar%20mi%20diagn%C3%B3stico%20estrat%C3%A9gico." target="_blank" rel="noopener noreferrer" class="btn btn-wa">💬 Agendar Diagnóstico WhatsApp</a>
+      <button onclick="window.print()" class="btn btn-print">🖨️ Descargar / Guardar PDF</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="hero-card">
+      <span class="badge">⚡ EFICIENCIA INVISIBLE • ARQUITECTURA N8N & WEBHOOKS</span>
+      <h1>⚡ Las 10 Automatizaciones Esenciales para Escalar</h1>
+      <p class="subtitle">Los 10 flujos automatizados en n8n que toda empresa que facture más de $20M COP al mes debe implementar para ahorrar hasta 25 horas semanales y eliminar el error humano.</p>
+      <div class="meta-row">
+        <span>🏢 Autor: Expándete Cloud (Medellín, CO)</span>
+        <span>⏱️ Lectura: 8 min</span>
+        <span>🎯 Unidad: Automatizaciones de Procesos y Flujos n8n (/automatizaciones-n8n)</span>
+        <span>🌐 www.expandete.cloud</span>
+      </div>
+    </div>
+
+    
+    <div class="section">
+      <h2>¿Por qué n8n es el Motor Secreto de las Empresas Más Rentables?</h2>
+      <p>En lugar de contratar digitadores para copiar datos de WhatsApp a Excel o pagar miles de dólares anuales en licencias de Zapier, en <strong>Expándete Cloud</strong> implementamos flujos sobre <strong>n8n</strong> que operan en milisegundos sin errores humanos.</p>
+    </div>
+
+    <div class="section">
+      <h2>Mapa de las 10 Automatizaciones Esenciales</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Flujo Automatizado</th>
+            <th>Disparador (Trigger)</th>
+            <th>Acción Automática en Milisegundos</th>
+            <th>Ahorro</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>01</strong></td>
+            <td><strong>Captura & Alerta Instantánea</strong></td>
+            <td>Formulario Web / Meta Lead</td>
+            <td>Registra en Google Sheets + Notifica en Telegram + Abre WhatsApp al cliente.</td>
+            <td>25h/mes</td>
+          </tr>
+          <tr>
+            <td><strong>02</strong></td>
+            <td><strong>Embudo de 7 Correos (Remarketing)</strong></td>
+            <td>Nuevo Lead Capturado</td>
+            <td>Clasifica el perfil del cliente y envía 7 emails persuasivos en 30 días vía Amazon SES.</td>
+            <td>40h/mes</td>
+          </tr>
+          <tr>
+            <td><strong>03</strong></td>
+            <td><strong>Generador de Cotizaciones PDF</strong></td>
+            <td>Datos en Cotizador</td>
+            <td>Calcula precios, arma PDF corporativo y lo entrega en el correo y WhatsApp del cliente.</td>
+            <td>30h/mes</td>
+          </tr>
+          <tr>
+            <td><strong>04</strong></td>
+            <td><strong>Conciliación Wompi / Stripe</strong></td>
+            <td>Webhook Pago Aprobado</td>
+            <td>Marca pedido como pagado, descuenta stock, emite factura y activa entrega.</td>
+            <td>20h/mes</td>
+          </tr>
+          <tr>
+            <td><strong>05</strong></td>
+            <td><strong>Round-Robin Comercial + Alerta SLA</strong></td>
+            <td>Lead Calificado</td>
+            <td>Asigna vendedor en turno; si no contesta en 15 min, alerta a gerencia y reasigna.</td>
+            <td>18h/mes</td>
+          </tr>
+          <tr>
+            <td><strong>06</strong></td>
+            <td><strong>Guardián Anti-Inasistencia</strong></td>
+            <td>Cita en Google Calendar</td>
+            <td>Envía confirmación 24h y 2h antes por WhatsApp reduciendo ausencias en un 70%.</td>
+            <td>15h/mes</td>
+          </tr>
+          <tr>
+            <td><strong>07</strong></td>
+            <td><strong>Cobranza y Cartera Preventiva</strong></td>
+            <td>Fecha de Vencimiento</td>
+            <td>Envía recordatorio cordial con link de pago PSE/Nequi 3 días antes y el día de corte.</td>
+            <td>22h/mes</td>
+          </tr>
+          <tr>
+            <td><strong>08</strong></td>
+            <td><strong>Onboarding en 1 Clic</strong></td>
+            <td>Cierre de Venta</td>
+            <td>Crea estructura de carpetas en Google Drive, contrato y accesos del cliente.</td>
+            <td>12h/mes</td>
+          </tr>
+          <tr>
+            <td><strong>09</strong></td>
+            <td><strong>Rescate de Prospectos Fríos</strong></td>
+            <td>Inactividad &gt; 15 días</td>
+            <td>Detecta cotizaciones abiertas y dispara incentivo de cierre con urgencia.</td>
+            <td>16h/mes</td>
+          </tr>
+          <tr>
+            <td><strong>10</strong></td>
+            <td><strong>Reporte Gerencial Nocturno (7 PM)</strong></td>
+            <td>Cron Diario Automático</td>
+            <td>Envía al teléfono del gerente el resumen de ventas, leads y métricas del día.</td>
+            <td>20h/mes</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout">
+        <strong>⚡ Inversión Oficial Expándete:</strong> Flujos iniciales desde <strong>$2.000.000 COP</strong> (entrega en 5 a 7 días) y Arquitecturas Corporativas n8n Dedicadas desde <strong>$4.500.000 a $14.000.000 COP</strong>.
+      </div>
+    </div>
+
+    <div class="cta-footer">
+      <span class="badge">⚡ SPRINT ACTIVO • CUPOS LIMITADOS</span>
+      <h2 style="justify-content: center; margin-top: 8px;">¿Listo para implementar esta arquitectura en tu empresa?</h2>
+      <p style="max-width: 640px; margin: 0 auto 24px;">
+        Agenda hoy tu sesión de diagnóstico estratégico de 15 minutos con nuestro equipo de ingeniería y recibe un presupuesto exacto llave en mano sin costo.
+      </p>
+      <div style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap;">
+        <a href="https://wa.me/573045751648?text=%C2%A1Hola%20Exp%C3%A1ndete!%20Le%C3%AD%20el%20documento%20%22%E2%9A%A1%20Las%2010%20Automatizaciones%20Esenciales%20para%20Escalar%22%20y%20quiero%20agendar%20mi%20diagn%C3%B3stico%20estrat%C3%A9gico%20para%20mi%20empresa." target="_blank" rel="noopener noreferrer" class="btn btn-print" style="padding:14px 28px; font-size:13px;">
+          🚀 Solicitar Mi Diagnóstico por WhatsApp (+57 304 575 1648)
+        </a>
+        <a href="https://www.expandete.cloud" class="btn btn-back" style="padding:14px 24px; font-size:13px;">
+          Explorar Ecosistema en expandete.cloud
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

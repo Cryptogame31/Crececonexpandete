@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🤖 Blueprint de Agentes Autónomos para Empresas | Expándete Cloud (ET-LM-003)</title>
+  <meta name="description" content="Los casos de uso más rentables de IA conversacional y transaccional en WhatsApp, arquitectura RAG privada y el Prompt Maestro de Calificación Comercial de Expándete." />
+  <meta name="robots" content="index, follow" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap');
+    :root {
+      --bg-dark: #07090e;
+      --card-bg: #0f1420;
+      --accent: #00f0ff;
+      --purple: #9d4edd;
+      --orange: #f97316;
+      --emerald: #10b981;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: rgba(255, 255, 255, 0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.65;
+      padding-bottom: 80px;
+    }
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 9, 14, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .code-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(0, 240, 255, 0.12);
+      color: #00f0ff;
+      border: 1px solid rgba(0, 240, 255, 0.3);
+    }
+    .toolbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 10px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      transition: all 0.2s ease;
+    }
+    .btn-print {
+      background: linear-gradient(90deg, #00f0ff, #9d4edd);
+      color: #000;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+    }
+    .btn-print:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    .btn-wa {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+    .btn-wa:hover { background: #10b981; color: #000; }
+    .btn-back {
+      background: rgba(255, 255, 255, 0.06);
+      color: #e2e8f0;
+      border: 1px solid var(--border);
+    }
+    .container {
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 0 24px;
+    }
+    .hero-card {
+      background: radial-gradient(circle at top right, rgba(0, 240, 255, 0.14), rgba(157, 78, 221, 0.08), var(--card-bg));
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      border-radius: 24px;
+      padding: 40px;
+      margin-bottom: 36px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    }
+    .badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(249, 115, 22, 0.15);
+      color: #fb923c;
+      border: 1px solid rgba(249, 115, 22, 0.4);
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 34px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 14px;
+      letter-spacing: -0.02em;
+    }
+    .subtitle {
+      font-size: 16px;
+      color: #cbd5e1;
+      margin-bottom: 24px;
+    }
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .section {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 28px;
+    }
+    h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #00f0ff;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+    }
+    h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #f8fafc;
+      margin: 20px 0 10px;
+    }
+    p {
+      color: #cbd5e1;
+      font-size: 14.5px;
+      margin-bottom: 14px;
+    }
+    ul, ol {
+      padding-left: 22px;
+      margin-bottom: 16px;
+      color: #cbd5e1;
+      font-size: 14.5px;
+    }
+    li { margin-bottom: 8px; }
+    li strong { color: #fff; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0;
+      font-size: 13.5px;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      text-align: left;
+    }
+    th {
+      background: rgba(0, 240, 255, 0.08);
+      color: #00f0ff;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 11.5px;
+      letter-spacing: 0.05em;
+    }
+    tr:nth-child(even) td { background: rgba(255, 255, 255, 0.02); }
+    .callout {
+      background: rgba(249, 115, 22, 0.1);
+      border-left: 4px solid #f97316;
+      padding: 16px 20px;
+      border-radius: 10px;
+      margin: 18px 0;
+      font-size: 14px;
+      color: #fed7aa;
+    }
+    .prompt-box {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      background: #05070b;
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: 12px;
+      padding: 18px;
+      color: #a5f3fc;
+      white-space: pre-wrap;
+      margin: 16px 0;
+    }
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      margin-bottom: 10px;
+    }
+    .checkbox {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      border: 2px solid #00f0ff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #00f0ff;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .cta-footer {
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.15), rgba(157, 78, 221, 0.18), rgba(249, 115, 22, 0.15));
+      border: 2px solid rgba(0, 240, 255, 0.45);
+      border-radius: 24px;
+      padding: 36px;
+      text-align: center;
+      margin-top: 40px;
+    }
+    @media print {
+      body { background: #fff; color: #0f172a; padding: 0; }
+      .toolbar { display: none; }
+      .hero-card, .section, .cta-footer {
+        background: #fff !important;
+        color: #0f172a !important;
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+      }
+      h1, h2, h3, li strong { color: #0f172a !important; }
+      p, li, td, .subtitle { color: #334155 !important; }
+      th { background: #f1f5f9 !important; color: #0f172a !important; }
+      .prompt-box { background: #f8fafc !important; color: #0f172a !important; border: 1px solid #94a3b8 !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <span class="code-pill">ET-LM-003</span>
+      <strong style="font-size:13px;">EXPÁNDETE CLOUD // DOCUMENTO EJECUTIVO OFICIAL</strong>
+    </div>
+    <div class="toolbar-actions">
+      <a href="https://www.expandete.cloud" class="btn btn-back">← Volver a Expándete</a>
+      <a href="https://wa.me/573045751648?text=%C2%A1Hola%20Exp%C3%A1ndete!%20Acabo%20de%20descargar%20el%20documento%20%F0%9F%A4%96%20Blueprint%20de%20Agentes%20Aut%C3%B3nomos%20para%20Empresas%20(ET-LM-003)%20y%20quiero%20agendar%20mi%20diagn%C3%B3stico%20estrat%C3%A9gico." target="_blank" rel="noopener noreferrer" class="btn btn-wa">💬 Agendar Diagnóstico WhatsApp</a>
+      <button onclick="window.print()" class="btn btn-print">🖨️ Descargar / Guardar PDF</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="hero-card">
+      <span class="badge">🤖 INTELIGENCIA ARTIFICIAL 24/7 • RAG & WHATSAPP API</span>
+      <h1>🤖 Blueprint de Agentes Autónomos para Empresas</h1>
+      <p class="subtitle">Los casos de uso más rentables de IA conversacional y transaccional en WhatsApp, arquitectura RAG privada y el Prompt Maestro de Calificación Comercial de Expándete.</p>
+      <div class="meta-row">
+        <span>🏢 Autor: Expándete Cloud (Medellín, CO)</span>
+        <span>⏱️ Lectura: 9 min</span>
+        <span>🎯 Unidad: Inteligencia Artificial y Agentes Autónomos (/agentes-inteligencia-artificial)</span>
+        <span>🌐 www.expandete.cloud</span>
+      </div>
+    </div>
+
+    
+    <div class="section">
+      <h2>1. Chatbot Antiguo vs. Agente Autónomo con RAG</h2>
+      <p>Los chatbots tradicionales de botones ("Digita 1 para ventas") frustran al comprador moderno. Un <strong>Agente Autónomo Expándete</strong> conecta modelos LLM de última generación con tu propia base de datos documental (<strong>RAG Privado</strong>) y herramientas de acción (Google Calendar, CRM, Google Sheets y pasarelas de pago):</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Dimensión</th>
+            <th>Operador Humano / Call Center</th>
+            <th>Agente Autónomo IA Expándete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Tiempo de Respuesta</strong></td>
+            <td>15 minutos a 4 horas (pierde el 60% de leads nocturnos)</td>
+            <td><strong>Menos de 3 segundos (24/7, domingos y festivos)</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Capacidad Simultánea</strong></td>
+            <td>1 a 3 chats al mismo tiempo</td>
+            <td><strong>Ilimitada (100+ conversaciones simultáneas)</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Costo Anualizado</strong></td>
+            <td>~$42.000.000 COP / año por turno</td>
+            <td><strong>Desde $3.200.000 COP (Desarrollo único)</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>2. Casos de Uso de Retorno Inmediato</h2>
+      <ul>
+        <li><strong>Agendamiento Médico, Estético y Consultivo:</strong> El agente responde dudas del procedimiento, verifica disponibilidad real en Google Calendar y bloquea la cita automáticamente.</li>
+        <li><strong>Cotizador Interactivo en Vivo:</strong> Calcula presupuestos según variables del cliente, genera el PDF formal, lo envía por correo/WhatsApp y notifica al vendedor por Telegram.</li>
+        <li><strong>Calificador Anti-Curiosos B2B:</strong> Filtra capacidad de inversión y urgencia antes de pasar el contacto al equipo comercial humano.</li>
+        <li><strong>Comprensión de Notas de Voz:</strong> Transcribe e interpreta audios de WhatsApp enviados por clientes ocupados y responde con precisión total.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>3. Plantilla: El Prompt Maestro de Calificación Expándete</h2>
+      <p>Puedes usar esta estructura base para diseñar el comportamiento comercial de tu agente autónomo:</p>
+      <div class="prompt-box">ROL Y OBJETIVO:
+Eres el Consultor Ejecutivo de [NOMBRE EMPRESA]. Tu misión es brindar una atención ágil, empática y experta basándote EXCLUSIVAMENTE en la Base de Conocimiento Oficial (RAG), calificar al prospecto y agendar su sesión o pedido.
+
+REGLAS DE CONTENCIÓN Y NEURO-VENTAS:
+1. CERO INVENCIONES: Si el dato no está en el catálogo oficial, ofrece escalar la consulta a un especialista humano.
+2. CONVERSACIÓN FLUIDA: Mensajes cortos (máximo 3 líneas por burbuja) y una sola pregunta por turno.
+3. FLUJO DE 3 PASOS:
+   - Paso 1: Resolver la duda puntual con autoridad + preguntar para qué tipo de proyecto/fecha lo necesita.
+   - Paso 2:Presentar el rango de inversión transparente y validar cuál opción se ajusta mejor.
+   - Paso 3: Capturar correo electrónico para enviar el resumen formal y confirmar día/hora de cita.</div>
+    </div>
+
+    <div class="cta-footer">
+      <span class="badge">⚡ SPRINT ACTIVO • CUPOS LIMITADOS</span>
+      <h2 style="justify-content: center; margin-top: 8px;">¿Listo para implementar esta arquitectura en tu empresa?</h2>
+      <p style="max-width: 640px; margin: 0 auto 24px;">
+        Agenda hoy tu sesión de diagnóstico estratégico de 15 minutos con nuestro equipo de ingeniería y recibe un presupuesto exacto llave en mano sin costo.
+      </p>
+      <div style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap;">
+        <a href="https://wa.me/573045751648?text=%C2%A1Hola%20Exp%C3%A1ndete!%20Le%C3%AD%20el%20documento%20%22%F0%9F%A4%96%20Blueprint%20de%20Agentes%20Aut%C3%B3nomos%20para%20Empresas%22%20y%20quiero%20agendar%20mi%20diagn%C3%B3stico%20estrat%C3%A9gico%20para%20mi%20empresa." target="_blank" rel="noopener noreferrer" class="btn btn-print" style="padding:14px 28px; font-size:13px;">
+          🚀 Solicitar Mi Diagnóstico por WhatsApp (+57 304 575 1648)
+        </a>
+        <a href="https://www.expandete.cloud" class="btn btn-back" style="padding:14px 24px; font-size:13px;">
+          Explorar Ecosistema en expandete.cloud
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

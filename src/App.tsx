@@ -952,12 +952,20 @@ export default function App() {
                         ¡Blueprint Desbloqueado con Éxito!
                       </span>
                       <span className="font-sans text-xs text-white/75 block mt-1">
-                        Hemos registrado <strong className="text-tech-cyan">{solucionesEmail}</strong> para tu envío prioritario.
+                        Hemos registrado <strong className="text-tech-cyan">{solucionesEmail}</strong>. Ya puedes abrir el documento oficial:
                       </span>
                     </div>
+                    <a
+                      href="/recursos/blueprint-tecnologico-2026-auditoria-express.html"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full py-3 rounded-xl bg-gradient-to-r from-tech-cyan to-tech-purple text-black font-poppins font-black text-xs uppercase tracking-wider hover:brightness-110 transition-all text-center shadow-[0_0_20px_rgba(0,240,255,0.3)]"
+                    >
+                      📥 Abrir Blueprint Tecnológico 2026 (PDF) ➜
+                    </a>
                     <button
                       onClick={() => setIsLeadFormOpen(true)}
-                      className="w-full py-2.5 rounded-xl bg-emerald-500 text-black font-poppins font-black text-xs uppercase tracking-wider hover:brightness-110 transition-all cursor-pointer"
+                      className="w-full py-2.5 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500 hover:text-black font-poppins font-black text-xs uppercase tracking-wider transition-all cursor-pointer"
                     >
                       Agendar mi Diagnóstico de 15 Minutos ➜
                     </button>

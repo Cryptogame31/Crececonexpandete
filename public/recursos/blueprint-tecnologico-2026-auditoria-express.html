@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>💎 Blueprint Tecnológico 2026 + Auditoría Express | Expándete Cloud (ET-LM-007)</title>
+  <meta name="description" content="El mapa estratégico completo de soluciones sin intermediarios, tabla oficial de precios 2026, tiempos de entrega y árbol de decisión para elegir la inversión de mayor retorno para tu empresa." />
+  <meta name="robots" content="index, follow" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap');
+    :root {
+      --bg-dark: #07090e;
+      --card-bg: #0f1420;
+      --accent: #00f0ff;
+      --purple: #9d4edd;
+      --orange: #f97316;
+      --emerald: #10b981;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: rgba(255, 255, 255, 0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.65;
+      padding-bottom: 80px;
+    }
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 9, 14, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .code-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(0, 240, 255, 0.12);
+      color: #00f0ff;
+      border: 1px solid rgba(0, 240, 255, 0.3);
+    }
+    .toolbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 10px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      transition: all 0.2s ease;
+    }
+    .btn-print {
+      background: linear-gradient(90deg, #00f0ff, #9d4edd);
+      color: #000;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+    }
+    .btn-print:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    .btn-wa {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+    .btn-wa:hover { background: #10b981; color: #000; }
+    .btn-back {
+      background: rgba(255, 255, 255, 0.06);
+      color: #e2e8f0;
+      border: 1px solid var(--border);
+    }
+    .container {
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 0 24px;
+    }
+    .hero-card {
+      background: radial-gradient(circle at top right, rgba(0, 240, 255, 0.14), rgba(157, 78, 221, 0.08), var(--card-bg));
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      border-radius: 24px;
+      padding: 40px;
+      margin-bottom: 36px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    }
+    .badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(249, 115, 22, 0.15);
+      color: #fb923c;
+      border: 1px solid rgba(249, 115, 22, 0.4);
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 34px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 14px;
+      letter-spacing: -0.02em;
+    }
+    .subtitle {
+      font-size: 16px;
+      color: #cbd5e1;
+      margin-bottom: 24px;
+    }
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .section {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 28px;
+    }
+    h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #00f0ff;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+    }
+    h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #f8fafc;
+      margin: 20px 0 10px;
+    }
+    p {
+      color: #cbd5e1;
+      font-size: 14.5px;
+      margin-bottom: 14px;
+    }
+    ul, ol {
+      padding-left: 22px;
+      margin-bottom: 16px;
+      color: #cbd5e1;
+      font-size: 14.5px;
+    }
+    li { margin-bottom: 8px; }
+    li strong { color: #fff; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0;
+      font-size: 13.5px;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      text-align: left;
+    }
+    th {
+      background: rgba(0, 240, 255, 0.08);
+      color: #00f0ff;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 11.5px;
+      letter-spacing: 0.05em;
+    }
+    tr:nth-child(even) td { background: rgba(255, 255, 255, 0.02); }
+    .callout {
+      background: rgba(249, 115, 22, 0.1);
+      border-left: 4px solid #f97316;
+      padding: 16px 20px;
+      border-radius: 10px;
+      margin: 18px 0;
+      font-size: 14px;
+      color: #fed7aa;
+    }
+    .prompt-box {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      background: #05070b;
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: 12px;
+      padding: 18px;
+      color: #a5f3fc;
+      white-space: pre-wrap;
+      margin: 16px 0;
+    }
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      margin-bottom: 10px;
+    }
+    .checkbox {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      border: 2px solid #00f0ff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #00f0ff;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .cta-footer {
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.15), rgba(157, 78, 221, 0.18), rgba(249, 115, 22, 0.15));
+      border: 2px solid rgba(0, 240, 255, 0.45);
+      border-radius: 24px;
+      padding: 36px;
+      text-align: center;
+      margin-top: 40px;
+    }
+    @media print {
+      body { background: #fff; color: #0f172a; padding: 0; }
+      .toolbar { display: none; }
+      .hero-card, .section, .cta-footer {
+        background: #fff !important;
+        color: #0f172a !important;
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+      }
+      h1, h2, h3, li strong { color: #0f172a !important; }
+      p, li, td, .subtitle { color: #334155 !important; }
+      th { background: #f1f5f9 !important; color: #0f172a !important; }
+      .prompt-box { background: #f8fafc !important; color: #0f172a !important; border: 1px solid #94a3b8 !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <span class="code-pill">ET-LM-007</span>
+      <strong style="font-size:13px;">EXPÁNDETE CLOUD // DOCUMENTO EJECUTIVO OFICIAL</strong>
+    </div>
+    <div class="toolbar-actions">
+      <a href="https://www.expandete.cloud" class="btn btn-back">← Volver a Expándete</a>
+      <a href="https://wa.me/573045751648?text=%C2%A1Hola%20Exp%C3%A1ndete!%20Acabo%20de%20descargar%20el%20documento%20%F0%9F%92%8E%20Blueprint%20Tecnol%C3%B3gico%202026%20%2B%20Auditor%C3%ADa%20Express%20(ET-LM-007)%20y%20quiero%20agendar%20mi%20diagn%C3%B3stico%20estrat%C3%A9gico." target="_blank" rel="noopener noreferrer" class="btn btn-wa">💬 Agendar Diagnóstico WhatsApp</a>
+      <button onclick="window.print()" class="btn btn-print">🖨️ Descargar / Guardar PDF</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="hero-card">
+      <span class="badge">💎 DOCUMENTO MAESTRO 2026 • ECOSISTEMA EXPÁNDETE CLOUD</span>
+      <h1>💎 Blueprint Tecnológico 2026 + Auditoría Express</h1>
+      <p class="subtitle">El mapa estratégico completo de soluciones sin intermediarios, tabla oficial de precios 2026, tiempos de entrega y árbol de decisión para elegir la inversión de mayor retorno para tu empresa.</p>
+      <div class="meta-row">
+        <span>🏢 Autor: Expándete Cloud (Medellín, CO)</span>
+        <span>⏱️ Lectura: 10 min</span>
+        <span>🎯 Unidad: Ecosistema Completo Expándete Cloud (/)</span>
+        <span>🌐 www.expandete.cloud</span>
+      </div>
+    </div>
+
+    
+    <div class="section">
+      <h2>1. Matriz Maestra de Decisión 2026: ¿Por dónde empezar?</h2>
+      <p>Identifica en la columna izquierda el obstáculo principal que hoy frena tu facturación y conoce la solución exacta, el tiempo de entrega y el presupuesto transparente en <strong>Expándete Cloud</strong>:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Tu Obstáculo o Meta Principal Hoy</th>
+            <th>Solución Expándete</th>
+            <th>Entrega</th>
+            <th>Inversión Oficial</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Necesito flyers o video spots de calidad de agencia para mis anuncios</td>
+            <td><strong>Expándete Studio (/studio)</strong></td>
+            <td>24 - 48 Horas</td>
+            <td><strong>$34.900 a $149.900 COP</strong></td>
+          </tr>
+          <tr>
+            <td>Quiero dominar la IA de forma práctica y presencial en Medellín</td>
+            <td><strong>IA IMPACTO (/ia-impacto)</strong></td>
+            <td>3 Sesiones (6h)</td>
+            <td><strong>$199.000 COP (Preventa)</strong></td>
+          </tr>
+          <tr>
+            <td>Quiero campañas en Meta, TikTok o Google que filtren compradores reales</td>
+            <td><strong>Marketing Inteligente (/marketing-inteligente)</strong></td>
+            <td>3 - 5 Días</td>
+            <td><strong>Desde $800.000 COP</strong></td>
+          </tr>
+          <tr>
+            <td>Necesito una página web ultra-rápida (&lt;0.8s) que convierta visitas en leads</td>
+            <td><strong>Landing Page de Élite (/landing-pages-elite)</strong></td>
+            <td>5 Días Hábiles</td>
+            <td><strong>$1.800.000 COP</strong></td>
+          </tr>
+          <tr>
+            <td>Quiero eliminar el copiado manual en Excel y automatizar cotizaciones/alertas</td>
+            <td><strong>Automatizaciones n8n (/automatizaciones-n8n)</strong></td>
+            <td>5 - 10 Días</td>
+            <td><strong>Desde $2.000.000 COP</strong></td>
+          </tr>
+          <tr>
+            <td>Necesito un empleado virtual con IA que atienda y agende citas 24/7 en WhatsApp</td>
+            <td><strong>Agentes de IA (/agentes-inteligencia-artificial)</strong></td>
+            <td>2 - 3 Semanas</td>
+            <td><strong>Desde $3.200.000 COP</strong></td>
+          </tr>
+          <tr>
+            <td>Quiero auditar mi tecnología o validar un proyecto antes de invertir millones</td>
+            <td><strong>Consultoría & CTO (/consultoria-tecnologica)</strong></td>
+            <td>Sesión 90 Min</td>
+            <td><strong>$1.200.000 COP</strong></td>
+          </tr>
+          <tr>
+            <td>Quiero desarrollar una App Móvil (iOS/Android) o plataforma web propia</td>
+            <td><strong>Desarrollo de Apps (/apps-moviles-web)</strong></td>
+            <td>4 Semanas (MVP)</td>
+            <td><strong>Desde $6.000.000 COP</strong></td>
+          </tr>
+          <tr>
+            <td>Quiero unificar ventas, inventario y finanzas de mi empresa en la nube</td>
+            <td><strong>Transformación Digital (/transformacion-digital)</strong></td>
+            <td>6 - 8 Semanas</td>
+            <td><strong>Desde $16.000.000 COP</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>2. Protocolo de Auditoría Express en 15 Minutos (Sin Costo)</h2>
+      <p>Por haber desbloqueado este Blueprint, tienes derecho a una <strong>Sesión de Diagnóstico Express de 15 minutos</strong> con nuestro equipo donde revisaremos en vivo:</p>
+      <div class="checklist-item"><span class="checkbox">01</span><div><strong>Fugas de Conversión Actuales:</strong> Por qué se están enfriando tus prospectos en WhatsApp o en tu sitio web.</div></div>
+      <div class="checklist-item"><span class="checkbox">02</span><div><strong>Cálculo de Retorno (ROI):</strong> Cuántas horas y millones ahorrarás en los primeros 60 días al automatizar tu flujo crítico.</div></div>
+      <div class="checklist-item"><span class="checkbox">03</span><div><strong>Cotización Cerrada Llave en Mano:</strong> Presupuesto fijo y cronograma por escrito sin costos ocultos.</div></div>
+    </div>
+
+    <div class="cta-footer">
+      <span class="badge">⚡ SPRINT ACTIVO • CUPOS LIMITADOS</span>
+      <h2 style="justify-content: center; margin-top: 8px;">¿Listo para implementar esta arquitectura en tu empresa?</h2>
+      <p style="max-width: 640px; margin: 0 auto 24px;">
+        Agenda hoy tu sesión de diagnóstico estratégico de 15 minutos con nuestro equipo de ingeniería y recibe un presupuesto exacto llave en mano sin costo.
+      </p>
+      <div style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap;">
+        <a href="https://wa.me/573045751648?text=%C2%A1Hola%20Exp%C3%A1ndete!%20Le%C3%AD%20el%20documento%20%22%F0%9F%92%8E%20Blueprint%20Tecnol%C3%B3gico%202026%20%2B%20Auditor%C3%ADa%20Express%22%20y%20quiero%20agendar%20mi%20diagn%C3%B3stico%20estrat%C3%A9gico%20para%20mi%20empresa." target="_blank" rel="noopener noreferrer" class="btn btn-print" style="padding:14px 28px; font-size:13px;">
+          🚀 Solicitar Mi Diagnóstico por WhatsApp (+57 304 575 1648)
+        </a>
+        <a href="https://www.expandete.cloud" class="btn btn-back" style="padding:14px 24px; font-size:13px;">
+          Explorar Ecosistema en expandete.cloud
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

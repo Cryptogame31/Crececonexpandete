@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🔥 Checklist de Neuro-Ventas: Las 12 Reglas de Oro | Expándete Cloud (ET-LM-002)</title>
+  <meta name="description" content="El protocolo científico exacto para auditar tu página web, eliminar las fugas de presupuesto publicitario y triplicar tu tasa de conversión en Meta Ads y Google Ads." />
+  <meta name="robots" content="index, follow" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap');
+    :root {
+      --bg-dark: #07090e;
+      --card-bg: #0f1420;
+      --accent: #f97316;
+      --purple: #9d4edd;
+      --orange: #f97316;
+      --emerald: #10b981;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: rgba(255, 255, 255, 0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.65;
+      padding-bottom: 80px;
+    }
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 9, 14, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .code-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(0, 240, 255, 0.12);
+      color: #00f0ff;
+      border: 1px solid rgba(0, 240, 255, 0.3);
+    }
+    .toolbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 10px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      transition: all 0.2s ease;
+    }
+    .btn-print {
+      background: linear-gradient(90deg, #00f0ff, #9d4edd);
+      color: #000;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+    }
+    .btn-print:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    .btn-wa {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+    .btn-wa:hover { background: #10b981; color: #000; }
+    .btn-back {
+      background: rgba(255, 255, 255, 0.06);
+      color: #e2e8f0;
+      border: 1px solid var(--border);
+    }
+    .container {
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 0 24px;
+    }
+    .hero-card {
+      background: radial-gradient(circle at top right, rgba(0, 240, 255, 0.14), rgba(157, 78, 221, 0.08), var(--card-bg));
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      border-radius: 24px;
+      padding: 40px;
+      margin-bottom: 36px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    }
+    .badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(249, 115, 22, 0.15);
+      color: #fb923c;
+      border: 1px solid rgba(249, 115, 22, 0.4);
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 34px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 14px;
+      letter-spacing: -0.02em;
+    }
+    .subtitle {
+      font-size: 16px;
+      color: #cbd5e1;
+      margin-bottom: 24px;
+    }
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .section {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 28px;
+    }
+    h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #00f0ff;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+    }
+    h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #f8fafc;
+      margin: 20px 0 10px;
+    }
+    p {
+      color: #cbd5e1;
+      font-size: 14.5px;
+      margin-bottom: 14px;
+    }
+    ul, ol {
+      padding-left: 22px;
+      margin-bottom: 16px;
+      color: #cbd5e1;
+      font-size: 14.5px;
+    }
+    li { margin-bottom: 8px; }
+    li strong { color: #fff; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0;
+      font-size: 13.5px;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      text-align: left;
+    }
+    th {
+      background: rgba(0, 240, 255, 0.08);
+      color: #00f0ff;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 11.5px;
+      letter-spacing: 0.05em;
+    }
+    tr:nth-child(even) td { background: rgba(255, 255, 255, 0.02); }
+    .callout {
+      background: rgba(249, 115, 22, 0.1);
+      border-left: 4px solid #f97316;
+      padding: 16px 20px;
+      border-radius: 10px;
+      margin: 18px 0;
+      font-size: 14px;
+      color: #fed7aa;
+    }
+    .prompt-box {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      background: #05070b;
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: 12px;
+      padding: 18px;
+      color: #a5f3fc;
+      white-space: pre-wrap;
+      margin: 16px 0;
+    }
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      margin-bottom: 10px;
+    }
+    .checkbox {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      border: 2px solid #00f0ff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #00f0ff;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .cta-footer {
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.15), rgba(157, 78, 221, 0.18), rgba(249, 115, 22, 0.15));
+      border: 2px solid rgba(0, 240, 255, 0.45);
+      border-radius: 24px;
+      padding: 36px;
+      text-align: center;
+      margin-top: 40px;
+    }
+    @media print {
+      body { background: #fff; color: #0f172a; padding: 0; }
+      .toolbar { display: none; }
+      .hero-card, .section, .cta-footer {
+        background: #fff !important;
+        color: #0f172a !important;
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+      }
+      h1, h2, h3, li strong { color: #0f172a !important; }
+      p, li, td, .subtitle { color: #334155 !important; }
+      th { background: #f1f5f9 !important; color: #0f172a !important; }
+      .prompt-box { background: #f8fafc !important; color: #0f172a !important; border: 1px solid #94a3b8 !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <span class="code-pill">ET-LM-002</span>
+      <strong style="font-size:13px;">EXPÁNDETE CLOUD // DOCUMENTO EJECUTIVO OFICIAL</strong>
+    </div>
+    <div class="toolbar-actions">
+      <a href="https://www.expandete.cloud" class="btn btn-back">← Volver a Expándete</a>
+      <a href="https://wa.me/573045751648?text=%C2%A1Hola%20Exp%C3%A1ndete!%20Acabo%20de%20descargar%20el%20documento%20%F0%9F%94%A5%20Checklist%20de%20Neuro-Ventas%3A%20Las%2012%20Reglas%20de%20Oro%20(ET-LM-002)%20y%20quiero%20agendar%20mi%20diagn%C3%B3stico%20estrat%C3%A9gico." target="_blank" rel="noopener noreferrer" class="btn btn-wa">💬 Agendar Diagnóstico WhatsApp</a>
+      <button onclick="window.print()" class="btn btn-print">🖨️ Descargar / Guardar PDF</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="hero-card">
+      <span class="badge">🔥 CONVERSIÓN EXTREMA • LANDING PAGES DE ÉLITE</span>
+      <h1>🔥 Checklist de Neuro-Ventas: Las 12 Reglas de Oro</h1>
+      <p class="subtitle">El protocolo científico exacto para auditar tu página web, eliminar las fugas de presupuesto publicitario y triplicar tu tasa de conversión en Meta Ads y Google Ads.</p>
+      <div class="meta-row">
+        <span>🏢 Autor: Expándete Cloud (Medellín, CO)</span>
+        <span>⏱️ Lectura: 7 min</span>
+        <span>🎯 Unidad: Landing Pages de Élite (/landing-pages-elite)</span>
+        <span>🌐 www.expandete.cloud</span>
+      </div>
+    </div>
+
+    
+    <div class="section">
+      <h2>¿Por qué el 90% de las Webs Queman tu Presupuesto de Pauta?</h2>
+      <p>Enviar tráfico pagado de Meta Ads o Google Ads a una página lenta en WordPress (que tarda 4 a 7 segundos en abrir en celular) es tirar el 70% de tu inversión a la basura. En <strong>Expándete Cloud</strong> programamos Landing Pages en código puro (React / Vite) que cargan en <strong>menos de 0.8 segundos</strong> y aplican las 12 reglas científicas de neuro-conversión:</p>
+    </div>
+
+    <div class="section">
+      <h2>Bloque I: Los Primeros 3 Segundos (Above the Fold)</h2>
+      <div class="checklist-item"><span class="checkbox">01</span><div><strong>Velocidad Sub-Segundo (&lt; 0.8s):</strong> Código limpio sin constructores pesados. Score mayor a 95/100 en Google PageSpeed Mobile.</div></div>
+      <div class="checklist-item"><span class="checkbox">02</span><div><strong>Titular H1 con Fórmula Resultado + Tiempo -Objeción:</strong> El visitante debe entender en 3 segundos qué vendes, para quién es y qué gana hoy.</div></div>
+      <div class="checklist-item"><span class="checkbox">03</span><div><strong>Micro-Insignia de Escasez o Autoridad:</strong> Anclar disponibilidad real (ej. "Entrega en 5 días hábiles • 3 cupos semanales").</div></div>
+      <div class="checklist-item"><span class="checkbox">04</span><div><strong>Botón Dopamínico en Primera Persona:</strong> Alto contraste visual con beneficio explícito ("Cotizar Mi Proyecto Ahora ➜").</div></div>
+    </div>
+
+    <div class="section">
+      <h2>Bloque II: Persuasión Matemática y Confianza (MOFU)</h2>
+      <div class="checklist-item"><span class="checkbox">05</span><div><strong>Contraste Costo del Problema vs. Solución:</strong> Demostrar cuánto dinero pierde el cliente cada semana por no actuar.</div></div>
+      <div class="checklist-item"><span class="checkbox">06</span><div><strong>Filtro de Precios Transparente:</strong> Mostrar desde qué valor parten tus soluciones para atraer compradores calificados y alejar curiosos.</div></div>
+      <div class="checklist-item"><span class="checkbox">07</span><div><strong>Prueba Social Específica:</strong> Casos reales con métricas verificables (tiempos de carga, incremento de leads, clientes activos).</div></div>
+      <div class="checklist-item"><span class="checkbox">08</span><div><strong>Proceso en 4 Etapas Claras:</strong> Reducir la incertidumbre cognitiva explicando qué ocurre en el Día 1, Día 2, Día 3 y Día 5.</div></div>
+    </div>
+
+    <div class="section">
+      <h2>Bloque III: Captura Instantánea y Remarketing (BOFU)</h2>
+      <div class="checklist-item"><span class="checkbox">09</span><div><strong>Formulario Anti-Fricción:</strong> Capturar Nombre, WhatsApp, Email y Nivel de Inversión en menos de 20 segundos.</div></div>
+      <div class="checklist-item"><span class="checkbox">10</span><div><strong>Conexión en Milisegundos a WhatsApp y Sheets:</strong> El lead viaja por Webhook a tu teléfono y base de datos sin intervención manual.</div></div>
+      <div class="checklist-item"><span class="checkbox">11</span><div><strong>Gancho de Remarketing (Lead Magnet):</strong> Capturar el correo de quienes aún están comparando para nutrirlos con una secuencia automática de 7 emails.</div></div>
+      <div class="checklist-item"><span class="checkbox">12</span><div><strong>SEO + GEO + AEO + Pixel Listo:</strong> Schema.org JSON-LD y eventos de conversión activos desde el primer día.</div></div>
+      <div class="callout">
+        <strong>💡 Oferta Oficial Expándete:</strong> Construimos y entregamos tu <strong>Landing Page Aceleradora</strong> cumpliendo las 12 reglas en solo <strong>5 días hábiles por $1.800.000 COP</strong> (o Embudos Multipágina desde $3.200.000 COP).
+      </div>
+    </div>
+
+    <div class="cta-footer">
+      <span class="badge">⚡ SPRINT ACTIVO • CUPOS LIMITADOS</span>
+      <h2 style="justify-content: center; margin-top: 8px;">¿Listo para implementar esta arquitectura en tu empresa?</h2>
+      <p style="max-width: 640px; margin: 0 auto 24px;">
+        Agenda hoy tu sesión de diagnóstico estratégico de 15 minutos con nuestro equipo de ingeniería y recibe un presupuesto exacto llave en mano sin costo.
+      </p>
+      <div style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap;">
+        <a href="https://wa.me/573045751648?text=%C2%A1Hola%20Exp%C3%A1ndete!%20Le%C3%AD%20el%20documento%20%22%F0%9F%94%A5%20Checklist%20de%20Neuro-Ventas%3A%20Las%2012%20Reglas%20de%20Oro%22%20y%20quiero%20agendar%20mi%20diagn%C3%B3stico%20estrat%C3%A9gico%20para%20mi%20empresa." target="_blank" rel="noopener noreferrer" class="btn btn-print" style="padding:14px 28px; font-size:13px;">
+          🚀 Solicitar Mi Diagnóstico por WhatsApp (+57 304 575 1648)
+        </a>
+        <a href="https://www.expandete.cloud" class="btn btn-back" style="padding:14px 24px; font-size:13px;">
+          Explorar Ecosistema en expandete.cloud
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

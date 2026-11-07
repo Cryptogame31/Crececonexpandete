@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📘 Blueprint de Arquitectura de Software 2026 | Expándete Cloud (ET-LM-001)</title>
+  <meta name="description" content="Cómo cotizar, diseñar, validar y lanzar un MVP o Aplicación Corporativa en 4 semanas ahorrando hasta un 65% frente a agencias tradicionales." />
+  <meta name="robots" content="index, follow" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap');
+    :root {
+      --bg-dark: #07090e;
+      --card-bg: #0f1420;
+      --accent: #00f0ff;
+      --purple: #9d4edd;
+      --orange: #f97316;
+      --emerald: #10b981;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: rgba(255, 255, 255, 0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.65;
+      padding-bottom: 80px;
+    }
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 9, 14, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .code-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(0, 240, 255, 0.12);
+      color: #00f0ff;
+      border: 1px solid rgba(0, 240, 255, 0.3);
+    }
+    .toolbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 10px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      transition: all 0.2s ease;
+    }
+    .btn-print {
+      background: linear-gradient(90deg, #00f0ff, #9d4edd);
+      color: #000;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+    }
+    .btn-print:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    .btn-wa {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+    .btn-wa:hover { background: #10b981; color: #000; }
+    .btn-back {
+      background: rgba(255, 255, 255, 0.06);
+      color: #e2e8f0;
+      border: 1px solid var(--border);
+    }
+    .container {
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 0 24px;
+    }
+    .hero-card {
+      background: radial-gradient(circle at top right, rgba(0, 240, 255, 0.14), rgba(157, 78, 221, 0.08), var(--card-bg));
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      border-radius: 24px;
+      padding: 40px;
+      margin-bottom: 36px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    }
+    .badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(249, 115, 22, 0.15);
+      color: #fb923c;
+      border: 1px solid rgba(249, 115, 22, 0.4);
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 34px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 14px;
+      letter-spacing: -0.02em;
+    }
+    .subtitle {
+      font-size: 16px;
+      color: #cbd5e1;
+      margin-bottom: 24px;
+    }
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .section {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 28px;
+    }
+    h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #00f0ff;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+    }
+    h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #f8fafc;
+      margin: 20px 0 10px;
+    }
+    p {
+      color: #cbd5e1;
+      font-size: 14.5px;
+      margin-bottom: 14px;
+    }
+    ul, ol {
+      padding-left: 22px;
+      margin-bottom: 16px;
+      color: #cbd5e1;
+      font-size: 14.5px;
+    }
+    li { margin-bottom: 8px; }
+    li strong { color: #fff; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0;
+      font-size: 13.5px;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      text-align: left;
+    }
+    th {
+      background: rgba(0, 240, 255, 0.08);
+      color: #00f0ff;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 11.5px;
+      letter-spacing: 0.05em;
+    }
+    tr:nth-child(even) td { background: rgba(255, 255, 255, 0.02); }
+    .callout {
+      background: rgba(249, 115, 22, 0.1);
+      border-left: 4px solid #f97316;
+      padding: 16px 20px;
+      border-radius: 10px;
+      margin: 18px 0;
+      font-size: 14px;
+      color: #fed7aa;
+    }
+    .prompt-box {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      background: #05070b;
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: 12px;
+      padding: 18px;
+      color: #a5f3fc;
+      white-space: pre-wrap;
+      margin: 16px 0;
+    }
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      margin-bottom: 10px;
+    }
+    .checkbox {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      border: 2px solid #00f0ff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #00f0ff;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .cta-footer {
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.15), rgba(157, 78, 221, 0.18), rgba(249, 115, 22, 0.15));
+      border: 2px solid rgba(0, 240, 255, 0.45);
+      border-radius: 24px;
+      padding: 36px;
+      text-align: center;
+      margin-top: 40px;
+    }
+    @media print {
+      body { background: #fff; color: #0f172a; padding: 0; }
+      .toolbar { display: none; }
+      .hero-card, .section, .cta-footer {
+        background: #fff !important;
+        color: #0f172a !important;
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+      }
+      h1, h2, h3, li strong { color: #0f172a !important; }
+      p, li, td, .subtitle { color: #334155 !important; }
+      th { background: #f1f5f9 !important; color: #0f172a !important; }
+      .prompt-box { background: #f8fafc !important; color: #0f172a !important; border: 1px solid #94a3b8 !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <span class="code-pill">ET-LM-001</span>
+      <strong style="font-size:13px;">EXPÁNDETE CLOUD // DOCUMENTO EJECUTIVO OFICIAL</strong>
+    </div>
+    <div class="toolbar-actions">
+      <a href="https://www.expandete.cloud" class="btn btn-back">← Volver a Expándete</a>
+      <a href="https://wa.me/573045751648?text=%C2%A1Hola%20Exp%C3%A1ndete!%20Acabo%20de%20descargar%20el%20documento%20%F0%9F%93%98%20Blueprint%20de%20Arquitectura%20de%20Software%202026%20(ET-LM-001)%20y%20quiero%20agendar%20mi%20diagn%C3%B3stico%20estrat%C3%A9gico." target="_blank" rel="noopener noreferrer" class="btn btn-wa">💬 Agendar Diagnóstico WhatsApp</a>
+      <button onclick="window.print()" class="btn btn-print">🖨️ Descargar / Guardar PDF</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="hero-card">
+      <span class="badge">📘 GUÍA TÉCNICA & FINANCIERA • APPS Y SAAS</span>
+      <h1>📘 Blueprint de Arquitectura de Software 2026</h1>
+      <p class="subtitle">Cómo cotizar, diseñar, validar y lanzar un MVP o Aplicación Corporativa en 4 semanas ahorrando hasta un 65% frente a agencias tradicionales.</p>
+      <div class="meta-row">
+        <span>🏢 Autor: Expándete Cloud (Medellín, CO)</span>
+        <span>⏱️ Lectura: 8 min</span>
+        <span>🎯 Unidad: Desarrollo de Apps Móviles y Web (/apps-moviles-web)</span>
+        <span>🌐 www.expandete.cloud</span>
+      </div>
+    </div>
+
+    
+    <div class="section">
+      <h2>1. El Error de los $50.000.000 COP en Desarrollo</h2>
+      <p>El 78% de las empresas que contratan software a medida pierden meses y decenas de millones por tres fallas estructurales que en <strong>Expándete Cloud</strong> eliminamos de raíz:</p>
+      <ul>
+        <li><strong>Sobredimensionar la Versión 1.0:</strong> Intentar programar 40 módulos secundarios antes de salir a vender. Nuestro enfoque construye un <strong>MVP Transaccional en 4 semanas</strong> enfocado en el flujo de caja.</li>
+        <li><strong>Pagar Doble Desarrollo (iOS y Android separados):</strong> Con arquitecturas modernas (React Native / Flutter / PWA) compartes hasta el 95% del código con rendimiento nativo, ahorrando el 50% en desarrollo y mantenimiento.</li>
+        <li><strong>Secuestro Tecnológico:</strong> Agencias que te cobran arriendo eterno sin entregarte el código fuente. En Expándete el repositorio Git y la base de datos son <strong>100% propiedad de tu empresa</strong>.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>2. Stack Tecnológico Recomendado 2026</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Capa Técnica</th>
+            <th>Tecnología Estándar Expándete</th>
+            <th>Ventaja Competitiva y Financiera</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Frontend Web / PWA</strong></td>
+            <td>React 19 + TypeScript + Vite + Tailwind</td>
+            <td>Respuesta en menos de 200ms, instalable en celular y escritorio.</td>
+          </tr>
+          <tr>
+            <td><strong>App Móvil iOS/Android</strong></td>
+            <td>React Native / Flutter</td>
+            <td>Un solo código para App Store y Google Play (50% de ahorro).</td>
+          </tr>
+          <tr>
+            <td><strong>Base de Datos & Auth</strong></td>
+            <td>PostgreSQL (Supabase / Neon) + RLS</td>
+            <td>Seguridad bancaria por roles, backups automáticos diarios.</td>
+          </tr>
+          <tr>
+            <td><strong>Pagos e Integraciones</strong></td>
+            <td>Wompi, Bold, Stripe + Webhooks n8n</td>
+            <td>Cobros por Nequi, PSE y Tarjetas con conciliación automática.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>3. Tabla Oficial de Presupuestos y Tiempos (2026)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Nivel de Solución</th>
+            <th>Alcance y Entregables</th>
+            <th>Tiempo</th>
+            <th>Inversión Expándete</th>
+            <th>Agencia Tradicional</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>MVP / Sistema Inicial</strong></td>
+            <td>PWA veloz, autenticación, base de datos PostgreSQL, 1 pasarela de pago y panel admin.</td>
+            <td>3 - 4 Semanas</td>
+            <td><strong>$6.000.000 - $14.000.000 COP</strong></td>
+            <td>$28.000.000+ COP</td>
+          </tr>
+          <tr>
+            <td><strong>Plataforma SaaS / App Híbrida</strong></td>
+            <td>App iOS y Android, portal administrativo, notificaciones Push, múltiples roles y alertas WhatsApp.</td>
+            <td>6 - 8 Semanas</td>
+            <td><strong>$14.000.000 - $28.000.000 COP</strong></td>
+            <td>$55.000.000+ COP</td>
+          </tr>
+          <tr>
+            <td><strong>Ecosistema Corporativo</strong></td>
+            <td>Microservicios, integración SAP/ERP, agentes IA embebidos, auditoría de carga y SLA 24/7.</td>
+            <td>Por Sprints</td>
+            <td><strong>$30.000.000 - $60.000.000+ COP</strong></td>
+            <td>$120.000.000+ COP</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>4. Checklist de Auditoría antes de Contratar</h2>
+      <div class="checklist-item"><span class="checkbox">✓</span><div><strong>Propiedad Intelectual Total:</strong> Exige por escrito la entrega del repositorio Git y credenciales maestras al finalizar.</div></div>
+      <div class="checklist-item"><span class="checkbox">✓</span><div><strong>Validación en Figma en Semana 2:</strong> Nunca permitas que programen a ciegas sin aprobar antes el prototipo interactivo.</div></div>
+      <div class="checklist-item"><span class="checkbox">✓</span><div><strong>Infraestructura Serverless:</strong> Asegúrate de que el servidor escale bajo demanda sin cobrarte cientos de dólares mensuales cuando estás empezando.</div></div>
+      <div class="checklist-item"><span class="checkbox">✓</span><div><strong>Conexión Comercial Instantánea:</strong> Todo usuario registrado o compra debe disparar notificaciones en vivo a tu WhatsApp o CRM.</div></div>
+    </div>
+
+    <div class="cta-footer">
+      <span class="badge">⚡ SPRINT ACTIVO • CUPOS LIMITADOS</span>
+      <h2 style="justify-content: center; margin-top: 8px;">¿Listo para implementar esta arquitectura en tu empresa?</h2>
+      <p style="max-width: 640px; margin: 0 auto 24px;">
+        Agenda hoy tu sesión de diagnóstico estratégico de 15 minutos con nuestro equipo de ingeniería y recibe un presupuesto exacto llave en mano sin costo.
+      </p>
+      <div style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap;">
+        <a href="https://wa.me/573045751648?text=%C2%A1Hola%20Exp%C3%A1ndete!%20Le%C3%AD%20el%20documento%20%22%F0%9F%93%98%20Blueprint%20de%20Arquitectura%20de%20Software%202026%22%20y%20quiero%20agendar%20mi%20diagn%C3%B3stico%20estrat%C3%A9gico%20para%20mi%20empresa." target="_blank" rel="noopener noreferrer" class="btn btn-print" style="padding:14px 28px; font-size:13px;">
+          🚀 Solicitar Mi Diagnóstico por WhatsApp (+57 304 575 1648)
+        </a>
+        <a href="https://www.expandete.cloud" class="btn btn-back" style="padding:14px 24px; font-size:13px;">
+          Explorar Ecosistema en expandete.cloud
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

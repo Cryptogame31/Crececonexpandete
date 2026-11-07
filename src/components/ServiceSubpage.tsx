@@ -819,6 +819,16 @@ export default function ServiceSubpage({
   // Calculate urgency seats
   const seatsRemaining = Math.max(1, (service.id * 3) % 4 + 1);
 
+  const RESOURCE_URLS: Record<number, string> = {
+    1: '/recursos/blueprint-arquitectura-software-2026.html',
+    2: '/recursos/checklist-neuro-ventas-12-reglas.html',
+    3: '/recursos/blueprint-agentes-autonomos-ia.html',
+    4: '/recursos/10-automatizaciones-esenciales-n8n.html',
+    6: '/recursos/test-madurez-tecnologica-fuga-dinero.html',
+    7: '/recursos/matriz-transformacion-empresarial-nube.html',
+  };
+  const resourceUrl = RESOURCE_URLS[service.id] || '/recursos/blueprint-tecnologico-2026-auditoria-express.html';
+
   const handleLeadCapture = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!emailInput || !emailInput.includes('@')) return;
@@ -833,10 +843,12 @@ export default function ServiceSubpage({
         body: JSON.stringify({
           email: emailInput,
           nombre: nameInput || 'Lead Subpágina',
-          unidad: 'remarketing_subpagina_servicio',
+          unidad: 'b2b_escala',
+          obstaculo: `${service.title} (${service.leadMagnet.title})`,
           servicio: service.title,
           servicio_slug: service.slug,
           recurso_solicitado: service.leadMagnet.title,
+          url_recurso: `https://www.expandete.cloud${resourceUrl}`,
           fecha: new Date().toISOString(),
           fuente: `Subpágina ${service.title} — Remarketing Dopamínico`
         }),
@@ -1198,15 +1210,24 @@ export default function ServiceSubpage({
                       ¡Acceso Desbloqueado!
                     </h4>
                     <p className="font-sans text-xs text-white/70 leading-relaxed">
-                      Hemos registrado tu correo <strong className="text-white">{emailInput}</strong>. Te enviamos el material de inmediato.
+                      Hemos registrado tu correo <strong className="text-white">{emailInput}</strong>. Ya puedes abrir y descargar el documento oficial:
                     </p>
+                    <a
+                      href={resourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full py-3 px-3 rounded-xl bg-gradient-to-r from-tech-cyan to-tech-purple text-black font-poppins font-black text-xs uppercase tracking-wider hover:brightness-110 transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(0,240,255,0.3)]"
+                    >
+                      <FileText className="w-3.5 h-3.5 text-black" />
+                      <span>📥 Abrir / Descargar Documento (PDF)</span>
+                    </a>
                     <a
                       href={getWhatsAppServiceLink()}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full py-2.5 px-3 rounded-xl bg-emerald-500 text-black font-poppins font-black text-xs uppercase tracking-wider hover:brightness-110 transition-all flex items-center justify-center gap-2 mt-1"
+                      className="w-full py-2.5 px-3 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500 hover:text-black font-poppins font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2"
                     >
-                      <MessageCircle className="w-3.5 h-3.5 text-black" />
+                      <MessageCircle className="w-3.5 h-3.5" />
                       <span>Agilizar por WhatsApp</span>
                     </a>
                   </motion.div>
