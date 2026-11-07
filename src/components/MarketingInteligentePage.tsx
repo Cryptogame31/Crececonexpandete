@@ -66,6 +66,7 @@ export default function MarketingInteligentePage({
     nombre: '',
     empresa: '',
     whatsapp: '',
+    email: '',
     rubro: '',
     presupuesto: '$1.000.000 COP',
     notas: ''
@@ -141,13 +142,38 @@ export default function MarketingInteligentePage({
     setIsMuted(!isMuted);
   };
 
-  const handleLeadSubmit = (e: React.FormEvent) => {
+  const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    try {
+      await fetch('https://n8nok-n8n.uah3tl.easypanel.host/webhook/d61883cc-a3a0-4c64-bc20-308f50dceac1', {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          nombre: leadForm.nombre,
+          empresa: leadForm.empresa || 'Negocio Pauta Digital',
+          whatsapp: leadForm.whatsapp,
+          email: leadForm.email,
+          presupuesto: leadForm.presupuesto,
+          obstaculo: `Marketing Inteligente & Pauta Digital (${leadForm.presupuesto})`,
+          notas: `[Rubro: ${leadForm.rubro || 'General'}] ${leadForm.notas || 'Sin notas adicionales'}`,
+          unidad: 'marketing_inteligente',
+          servicio: 'Marketing Inteligente & Pauta Digital',
+          servicio_slug: 'marketing-inteligente',
+          recurso_solicitado: '🔥 Checklist de Neuro-Ventas: Las 12 Reglas de Oro',
+          url_recurso: 'https://www.expandete.cloud/recursos/checklist-neuro-ventas-12-reglas.html',
+          fecha: new Date().toISOString(),
+          fuente: 'Subpágina Marketing Inteligente (/marketing-inteligente)'
+        })
+      });
+    } catch (err) {
+      console.error('Error enviando lead de Marketing Inteligente a n8n:', err);
+    }
+
     const message = `¡Hola Expándete! Deseo cotizar el servicio de Marketing Inteligente & Pauta Digital:
 • Nombre: ${leadForm.nombre}
 • Empresa: ${leadForm.empresa || 'No especificada'}
 • WhatsApp: ${leadForm.whatsapp}
-• Rubro/Servicio: ${leadForm.rubro || 'General'}
+• Correo: ${leadForm.email || 'No especificado'}
 • Presupuesto Estimado: ${leadForm.presupuesto}
 • Notas: ${leadForm.notas || 'Sin notas adicionales'}
 
@@ -1325,6 +1351,18 @@ Por ejemplo, si manejas un presupuesto total de $1.000.000 COP:
                       className="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-brand-orange transition-colors"
                     />
                   </div>
+                </div>
+
+                <div>
+                  <label className="block text-gray-300 font-mono text-[11px] mb-1">Correo Electrónico (recibe Propuesta + Checklist Neuro-Ventas PDF) *</label>
+                  <input
+                    type="email"
+                    required
+                    value={leadForm.email}
+                    onChange={(e) => setLeadForm({ ...leadForm, email: e.target.value })}
+                    placeholder="tu-correo@empresa.com"
+                    className="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-brand-orange transition-colors"
+                  />
                 </div>
 
                 <div>

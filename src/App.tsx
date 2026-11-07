@@ -512,6 +512,7 @@ export default function App() {
           unidad: 'remarketing_soluciones_home',
           servicio: 'Diagnóstico Tecnológico 2026',
           recurso_solicitado: 'Blueprint Tecnológico 2026 + Auditoría Express',
+          url_recurso: 'https://www.expandete.cloud/recursos/blueprint-tecnologico-2026-auditoria-express.html',
           fecha: new Date().toISOString(),
           fuente: 'Expandete Cloud — Sección Soluciones Sin Intermediarios'
         }),
@@ -652,6 +653,7 @@ export default function App() {
           onNavigateToIaImpacto={navigateToIaImpacto}
           onNavigateToMarketing={navigateToMarketing}
           onOpenLeadModal={(serviceTitle) => {
+            setActiveServiceSubpageId(null);
             setFormData(prev => ({ ...prev, obstaculo: `Subpágina: ${serviceTitle}` }));
             setIsLeadFormOpen(true);
           }}

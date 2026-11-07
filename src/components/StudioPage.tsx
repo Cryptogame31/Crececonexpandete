@@ -381,6 +381,7 @@ export default function StudioPage({ onBackToMain, onNavigateToIaImpacto, onNavi
   const [orderForm, setOrderForm] = useState({
     nombre: '',
     whatsapp: '',
+    email: '',
     producto: '',
     categoria: 'Moda y Accesorios',
     detalles: '',
@@ -440,9 +441,35 @@ export default function StudioPage({ onBackToMain, onNavigateToIaImpacto, onNavi
     return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
   };
 
-  const handleOrderSubmit = (e: React.FormEvent) => {
+  const handleOrderSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const currentPack = PACKAGE_CARDS.find(p => p.id === orderForm.selectedPack) || PACKAGE_CARDS[1];
+
+    try {
+      await fetch('https://n8nok-n8n.uah3tl.easypanel.host/webhook/d61883cc-a3a0-4c64-bc20-308f50dceac1', {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          nombre: orderForm.nombre,
+          whatsapp: orderForm.whatsapp,
+          email: orderForm.email,
+          empresa: orderForm.producto,
+          paquete: `${currentPack.title} (${currentPack.price} ${currentPack.unit})`,
+          precioPaquete: `${currentPack.price} ${currentPack.unit}`,
+          obstaculo: `Pedido Expándete Studio: ${currentPack.title} (${currentPack.price} ${currentPack.unit})`,
+          notas: `[Categoría: ${orderForm.categoria}] ${orderForm.detalles || 'Sin observaciones'} | Método Pago: ${paymentMethod}`,
+          unidad: 'expandete_studio',
+          servicio: 'Expándete Studio (Publicidad Visual IA)',
+          servicio_slug: 'studio',
+          recurso_solicitado: '🔥 Checklist de Neuro-Ventas: Las 12 Reglas de Oro',
+          url_recurso: 'https://www.expandete.cloud/recursos/checklist-neuro-ventas-12-reglas.html',
+          fecha: new Date().toISOString(),
+          fuente: 'Subpágina Expándete Studio (/studio)'
+        })
+      });
+    } catch (err) {
+      console.error('Error enviando pedido de Studio a n8n:', err);
+    }
     
     if (paymentMethod === 'wompi' && currentPack.wompiUrl) {
       // Direct to Wompi checkout link provided by user
@@ -455,6 +482,7 @@ export default function StudioPage({ onBackToMain, onNavigateToIaImpacto, onNavi
       `📦 *Paquete:* ${currentPack.title} (${currentPack.price} ${currentPack.unit})\n` +
       `👤 *Cliente:* ${orderForm.nombre}\n` +
       `📱 *WhatsApp:* ${orderForm.whatsapp}\n` +
+      `📧 *Correo:* ${orderForm.email || 'No especificado'}\n` +
       `🛍️ *Producto a promocionar:* ${orderForm.producto}\n` +
       `🏷️ *Categoría:* ${orderForm.categoria}\n` +
       `📝 *Detalles o ideas:* ${orderForm.detalles || 'Sin observaciones iniciales'}\n\n` +
@@ -1554,6 +1582,21 @@ export default function StudioPage({ onBackToMain, onNavigateToIaImpacto, onNavi
                       className="w-full bg-black/60 border border-white/15 px-3.5 py-2.5 rounded-xl text-white text-xs font-poppins focus:border-amber-400 focus:outline-none"
                     />
                   </div>
+                </div>
+
+                {/* Email for confirmation & Lead Magnet */}
+                <div>
+                  <label className="block text-xs font-mono font-bold text-gray-300 uppercase mb-1">
+                    Correo Electrónico (para confirmación y entrega HD):
+                  </label>
+                  <input 
+                    type="email" 
+                    required
+                    placeholder="Ej. contacto@tumarca.com"
+                    value={orderForm.email}
+                    onChange={(e) => setOrderForm(prev => ({ ...prev, email: e.target.value }))}
+                    className="w-full bg-black/60 border border-white/15 px-3.5 py-2.5 rounded-xl text-white text-xs font-poppins focus:border-amber-400 focus:outline-none"
+                  />
                 </div>
 
                 {/* Product Name & Category */}

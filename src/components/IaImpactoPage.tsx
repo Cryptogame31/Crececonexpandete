@@ -305,8 +305,34 @@ Genera el prompt final listo para copiar y pegar, junto con una breve explicaci�
     setRegistrationSuccess(false);
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    try {
+      await fetch('https://n8nok-n8n.uah3tl.easypanel.host/webhook/d61883cc-a3a0-4c64-bc20-308f50dceac1', {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          nombre: formData.nombre,
+          whatsapp: formData.whatsapp,
+          email: formData.email,
+          empresa: formData.queTeGustariaCrear || 'Participante IA IMPACTO Medellín',
+          faseSeleccionada: formData.faseSeleccionada,
+          obstaculo: `IA IMPACTO Medellín: ${formData.interesPrincipal} (${formData.faseSeleccionada})`,
+          interesPrincipal: formData.interesPrincipal,
+          notas: `Nivel IA: ${formData.nivelIa} | Idea: ${formData.queTeGustariaCrear || 'Aprender y aplicar'} | Pago: ${paymentMethod}`,
+          unidad: 'ia_impacto',
+          servicio: 'IA IMPACTO • Experiencia Presencial Medellín',
+          servicio_slug: 'ia-impacto',
+          recurso_solicitado: '🤖 Blueprint de Agentes Autónomos para Empresas',
+          url_recurso: 'https://www.expandete.cloud/recursos/blueprint-agentes-autonomos-ia.html',
+          fecha: new Date().toISOString(),
+          fuente: 'Subpágina IA IMPACTO Medellín (/ia-impacto)'
+        })
+      });
+    } catch (err) {
+      console.error('Error enviando registro de IA IMPACTO a n8n:', err);
+    }
     
     // Official WhatsApp phone: +57 304 575 1648
     const phone = IA_IMPACTO_CONFIG.officialPhone;
